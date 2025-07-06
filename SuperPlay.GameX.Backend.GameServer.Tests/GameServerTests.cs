@@ -15,9 +15,9 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         {
             var gameServer = await StartGameServer();
 
-            var loginResult = await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
+            var loginResponse = await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
 
-            Assert.IsType<Ok<LoginResult>>(loginResult);
+            Assert.IsType<Ok<LoginResult>>(loginResponse);
         }
 
 
@@ -27,10 +27,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var gameServer = await StartGameServer();
             await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
 
-            var loginResult = await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
+            var loginResponse = await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
 
-            Assert.IsType<NotOk<LoginResult>>(loginResult);
-            Assert.IsType<AlreadyConnectedException>(loginResult.GetException());
+            Assert.IsType<NotOk<LoginResult>>(loginResponse);
+            Assert.IsType<AlreadyConnectedException>(loginResponse.GetException());
         }
 
 
@@ -42,10 +42,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var loggedInContext = new PlayerLoggedInContext(player1);
             await gameServer.ExecuteAsync(new LogoutCommand(loggedInContext));
 
-            var updateResourcesResult = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, ResourceType.Coin, new ResourceValue(1)));
+            var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, ResourceType.Coin, new ResourceValue(1)));
 
-            Assert.IsType<NotOk<UpdateResourcesResult>>(updateResourcesResult);
-            Assert.IsType<PlayerNotConnectedException>(updateResourcesResult.GetException());
+            Assert.IsType<NotOk<UpdateResourcesResult>>(updateResourcesResponse);
+            Assert.IsType<PlayerNotConnectedException>(updateResourcesResponse.GetException());
         }
 
         [Theory]
@@ -58,10 +58,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var loggedInContext = new PlayerLoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(1)));
-            var updateResourcesResult = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(2)));
+            var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(2)));
 
-            Assert.IsType<Ok<UpdateResourcesResult>>(updateResourcesResult);
-            Assert.Equal(new ResourceValue(3), updateResourcesResult.GetResult().NewResourceValue);
+            Assert.IsType<Ok<UpdateResourcesResult>>(updateResourcesResponse);
+            Assert.Equal(new ResourceValue(3), updateResourcesResponse.GetResult().NewResourceValue);
         }
 
         [Theory]
@@ -74,10 +74,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var loggedInContext = new PlayerLoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(3)));
-            var updateResourcesResult2 = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(-2)));
+            var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(-2)));
 
-            Assert.IsType<Ok<UpdateResourcesResult>>(updateResourcesResult2);
-            Assert.Equal(new ResourceValue(1), updateResourcesResult2.GetResult().NewResourceValue);
+            Assert.IsType<Ok<UpdateResourcesResult>>(updateResourcesResponse);
+            Assert.Equal(new ResourceValue(1), updateResourcesResponse.GetResult().NewResourceValue);
         }
 
         [Theory]
@@ -93,10 +93,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player2Context, resourceType, new ResourceValue(10)));
 
-            var sendGiftResult = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player2, resourceType, new ResourceValue(3)));
+            var sendGiftResponse = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player2, resourceType, new ResourceValue(3)));
 
-            Assert.IsType<Ok<SendGiftResult>>(sendGiftResult);
-            Assert.Equal(new ResourceValue(7), sendGiftResult.GetResult().NewResourceValue);
+            Assert.IsType<Ok<SendGiftResult>>(sendGiftResponse);
+            Assert.Equal(new ResourceValue(7), sendGiftResponse.GetResult().NewResourceValue);
 
             var playerData1 = await gameServer.ExecuteAsync(new GetMyPlayerQuery(player1Context));
             var playerData2 = await gameServer.ExecuteAsync(new GetMyPlayerQuery(player2Context));
@@ -117,10 +117,10 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var player1Context = new PlayerLoggedInContext(player1);
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
 
-            var sendGiftResult = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player2, resourceType, new ResourceValue(11)));
+            var sendGiftResponse = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player2, resourceType, new ResourceValue(11)));
 
-            Assert.IsType<NotOk<SendGiftResult>>(sendGiftResult);
-            Assert.IsType<NotEnoughResourcesException>(sendGiftResult.GetException());
+            Assert.IsType<NotOk<SendGiftResult>>(sendGiftResponse);
+            Assert.IsType<NotEnoughResourcesException>(sendGiftResponse.GetException());
         }
 
         [Theory]
@@ -134,9 +134,9 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
 
-            var sendGiftResult = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player1, resourceType, new ResourceValue(1)));
-            Assert.IsType<NotOk<SendGiftResult>>(sendGiftResult);
-            Assert.IsType<GenericRequestException>(sendGiftResult.GetException());
+            var sendGiftResponse = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player1, resourceType, new ResourceValue(1)));
+            Assert.IsType<NotOk<SendGiftResult>>(sendGiftResponse);
+            Assert.IsType<GenericRequestException>(sendGiftResponse.GetException());
         }
 
         [Fact]
