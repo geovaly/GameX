@@ -1,0 +1,39 @@
+﻿using RequestResponseFramework.Backend;
+using RequestResponseFramework.Shared;
+using SuperPlay.GameX.Backend.GameServer.DomainLayer;
+using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork;
+using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
+using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
+
+namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors
+{
+    internal class EnsurePlayerIsLoggedInMiddlewareExecutor(GameService gameService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : IMiddlewareExecutor
+    {
+        public async Task<Response<TResult>> ExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextExecute<TRequest, TResult> nextExecute)
+            where TRequest : Request<TResult> where TResult : RequestResult
+        {
+            if (request is LoginCommand) return await nextExecute(request);
+            var loggedInRequest = (ILoggedInRequest)request;
+            var playerId = loggedInRequest.Context.PlayerId;
+
+            var onlinePlayer = gameService.GetOnlinePlayer(playerId);
+            if (onlinePlayer == null)
+            {
+                return new NotOk<TResult>(new PlayerNotConnectedException());
+            }
+
+            if (onlinePlayer.IsConnectionMismatch(clientConnectionProvider))
+            {
+                return new NotOk<TResult>(new ConnectionMismatchException());
+            }
+
+            var player = await unitOfWork.PlayerRepository.LoadMaybeAsync(playerId);
+            if (player == null)
+            {
+                return new NotOk<TResult>(new PlayerNotFoundException(playerId));
+            }
+
+            return await nextExecute(request);
+        }
+    }
+}

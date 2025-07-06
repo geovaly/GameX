@@ -1,0 +1,20 @@
+﻿using RequestResponseFramework.Shared;
+
+namespace RequestResponseFramework.Backend;
+
+public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequest : Request<TResult> where TResult : RequestResult
+{
+    TRequest Request { get; }
+
+    void SetClientConnection(IClientConnection clientConnection);
+
+    IRequestHandler<TRequest, TResult> GetRequestHandler();
+
+    IEnumerable<IMiddlewareExecutor> GetMiddlewareExecutors();
+}
+
+
+public interface IRequestScopeFactory
+{
+    IRequestScope<TRequest, TResult> CreateRequestScope<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult;
+}
