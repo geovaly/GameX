@@ -5,7 +5,7 @@ Dear Reviewer,
 
 I’m impressed by the person who created this exercise. That's why my goal was to create the best solution you had and you'll ever review: clean, creative, flexible, and decoupled in both code and architecture. I hope you enjoy reviewing it as much as I enjoyed building it!
 
-# FRAMEWORK
+# Framework
 
 No SignalR, no MediatR, no external libraries? No problem! I built my own amazing framework named RequestResponseFramework. 
 
@@ -29,7 +29,7 @@ Solution Features:
 
 - Handling concurrency issues using Semaphores, ConcurrentDictionary, and TaskCompletionSource.
 
-# ARCHITECTURE
+# Architecture
 
 Methodology: Domain-Driven Design (DDD)
 
@@ -41,7 +41,7 @@ Structure:
 
 I like to have a GenericLayer to encapsulate generic, non-business logic housed within the same component. The RequestResponseFramework began in this layer but evolved into a standalone framework, justifying its own dedicated component.
 
-# GAME
+# Game
 
 Name: GameX
 
@@ -61,7 +61,7 @@ Solution Features:
 
 - Handling concurrency issues using locks and UnitOfWorkConcurrencyMiddlewareExecutor (  retry logic to handle concurrency issues during entity updates )
 
-# TESTING
+# Testing
 
 3 ways:
 
@@ -74,7 +74,7 @@ I find cluster tests at the application level more valuable and flexible than is
 ## Why DSL Tests?
 Domain-specifc language tests leverage the business domain language directly, remaining independent of the software interface. Though these tests require additional foundational code (GameServer.DslTests.Base), they enhance readability and maintainability. You can experiment with these tests in GameServer.DslTests > PlaygroundDslTests.cs.
 
-# CONCLUSION
+# Conclusion
 
 Software development is inherently subjective, with multiple valid approaches to solving the same problems. The solution presented reflects my best judgment in the absence of predefined team agreements.
 
