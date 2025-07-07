@@ -114,7 +114,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         {
             if (result is Ok<LoginResult> okLogin)
             {
-                _loggedInContext = new PlayerLoggedInContext(okLogin.Value.PlayerId);
+                _loggedInContext = new PlayerLoggedInContext(okLogin.Result.PlayerId);
             }
             else if (result is Ok<LogoutResult>)
             {

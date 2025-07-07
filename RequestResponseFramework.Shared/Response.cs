@@ -55,7 +55,7 @@
         {
             return this switch
             {
-                Ok<T> ok => ok.Value,
+                Ok<T> ok => ok.Result,
                 NotOk<T> notOk => throw new RequestSystemException(notOk.Exception),
                 _ => throw new InvalidOperationException()
             };
@@ -71,7 +71,7 @@
         }
     }
 
-    public sealed record Ok<T>(T Value) : Response<T> where T : RequestResult
+    public sealed record Ok<T>(T Result) : Response<T> where T : RequestResult
     {
     }
 
