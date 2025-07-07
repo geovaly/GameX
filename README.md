@@ -21,8 +21,6 @@ Solution Features:
 
 - Client Connection support, essential for game servers.
 
-- Context Passing support, such as a LoggedInContext for storing authentication data.
-
 - Implementation of both WebSocketServer and WebSocketClient based on RequestExecutor.
 
 - Logging Abstractions for decoupling Serilog.
