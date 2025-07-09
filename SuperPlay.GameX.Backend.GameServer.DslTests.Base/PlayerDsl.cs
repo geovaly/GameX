@@ -70,4 +70,9 @@ internal class ClientConnection : IClientConnection
     {
         _receivedRequests.Add(request);
     }
+
+    public void RemoveConnection()
+    {
+        ConnectionRemoved?.Invoke();
+    }
 }

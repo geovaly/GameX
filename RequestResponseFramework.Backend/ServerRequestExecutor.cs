@@ -41,7 +41,7 @@ namespace RequestResponseFramework.Backend
                 {
                     requestScope.SetClientConnection(clientConnection);
                 }
-                var requestHandler = requestScope.GetRequestHandler();
+                var requestHandler = requestScope.RequestHandler;
                 var middlewareExecutors = GetOrderedMiddlewareExecutors(requestScope);
 
                 MiddlewareNextTryExecuteAsync<TRequest, TResult> currentTryExecuteAsync = requestHandler.HandleAsync;
@@ -59,7 +59,7 @@ namespace RequestResponseFramework.Backend
             private List<IMiddlewareExecutor> GetOrderedMiddlewareExecutors<TRequest, TResult>(IRequestScope<TRequest, TResult> requestScope) where TResult : RequestResult
                 where TRequest : Request<TResult>
             {
-                var middlewareExecutorsByType = requestScope.GetMiddlewareExecutors().ToDictionary(x => x.GetType(), x => x);
+                var middlewareExecutorsByType = requestScope.MiddlewareExecutors.ToDictionary(x => x.GetType(), x => x);
                 var middlewareExecutors = middlewareExecutorTypes.Select(x => middlewareExecutorsByType[x]).ToList();
                 return middlewareExecutors;
             }
