@@ -2,7 +2,7 @@
 
 namespace RequestResponseFramework.Backend
 {
-    public interface IApplicationRequestExecutor
+    public interface IServerRequestExecutor
     {
         Task<Response> TryExecuteAsync(Request request, IClientConnection? clientConnection = null);
 
@@ -10,14 +10,14 @@ namespace RequestResponseFramework.Backend
     }
 
 
-    public static class ApplicationRequestExecutorExtensions
+    public static class ServerRequestExecutorExtensions
     {
-        public static async Task<RequestResult> ExecuteAsync(this IApplicationRequestExecutor executor, Request request, IClientConnection? clientConnection = null)
+        public static async Task<RequestResult> ExecuteAsync(this IServerRequestExecutor executor, Request request, IClientConnection? clientConnection = null)
         {
             var result = await executor.TryExecuteAsync(request, clientConnection);
             return result.GetResult();
         }
-        public static async Task<TResult> ExecuteAsync<TResult>(this IApplicationRequestExecutor executor, Request<TResult> request, IClientConnection? clientConnection = null) where TResult : RequestResult
+        public static async Task<TResult> ExecuteAsync<TResult>(this IServerRequestExecutor executor, Request<TResult> request, IClientConnection? clientConnection = null) where TResult : RequestResult
         {
             var result = await executor.TryExecuteAsync(request, clientConnection);
             return result.GetResult();

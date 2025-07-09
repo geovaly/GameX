@@ -8,7 +8,7 @@ namespace RequestResponseFramework.Backend.UsingWebSockets;
 
 public class WebSocketServer(
     IRequestResponseLogger logger,
-    IApplicationRequestExecutor requestExecutor,
+    IServerRequestExecutor serverRequestExecutor,
     JsonSerializerOptions jsonSerializerOptions,
     string prefix)
 {
@@ -88,7 +88,7 @@ public class WebSocketServer(
                         var request = JsonSerializer.Deserialize<Request>(message.Data, jsonSerializerOptions)!;
                         var requestJson = JsonSerializer.Serialize(request, jsonSerializerOptions);
                         logger.Debug("[Server] Received Request: {RequestJson}", requestJson);
-                        var result = await requestExecutor.TryExecuteAsync(request, clientConnection);
+                        var result = await serverRequestExecutor.TryExecuteAsync(request, clientConnection);
                         var resultData = result.ToData();
                         var responseMsg = JsonSerializer.Serialize(
                             RequestResponseMessage.CreateResponse(resultData, message.RequestId, jsonSerializerOptions),

@@ -6,7 +6,7 @@ using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecut
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
 {
-    public interface IGameServer : IApplicationRequestExecutor
+    public interface IGameServer : IServerRequestExecutor
     {
         bool IsRunning { get; }
         Task StartAsync();
@@ -17,7 +17,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
         private static readonly IReadOnlyList<Type> InOrderMiddlewareExecutorTypes = [
             typeof(HandleSystemExceptionMiddlewareExecutor), typeof(UnitOfWorkConcurrencyMiddlewareExecutor), typeof(EnsurePlayerIsLoggedInMiddlewareExecutor)];
 
-        private readonly IRequestExecutor _requestExecutor = new RequestExecutor(requestScopeFactory, InOrderMiddlewareExecutorTypes);
+        private readonly IServerRequestExecutor _serverRequestExecutor = new ServerRequestExecutor(requestScopeFactory, InOrderMiddlewareExecutorTypes);
 
         public bool IsRunning { get; private set; }
 
@@ -29,7 +29,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
             }
 
 
-            var result = await _requestExecutor.TryExecuteAsync(request, clientConnection);
+            var result = await _serverRequestExecutor.TryExecuteAsync(request, clientConnection);
             return result;
         }
 

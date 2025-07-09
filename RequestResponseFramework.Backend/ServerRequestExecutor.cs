@@ -3,25 +3,25 @@
 namespace RequestResponseFramework.Backend
 {
 
-    public class RequestExecutor(
-        IRequestScopeFactory requestScopeFactory, IEnumerable<Type> middlewareExecutorTypes) : IRequestExecutor
+    public class ServerRequestExecutor(
+        IRequestScopeFactory requestScopeFactory, IEnumerable<Type> middlewareExecutorTypes) : IServerRequestExecutor
     {
         public IReadOnlyList<Type> MiddlewareExecutorTypes { get; } = middlewareExecutorTypes.ToList();
 
-        public async Task<Response> TryExecuteAsync(Request request, IRequestContext? context = null)
+        public async Task<Response> TryExecuteAsync(Request request, IClientConnection? clientConnection = null)
         {
-            var visitor = new RequestVisitor(requestScopeFactory, MiddlewareExecutorTypes, context);
+            var visitor = new RequestVisitor(requestScopeFactory, MiddlewareExecutorTypes, clientConnection);
             request.Accept(visitor);
             var result = await visitor.GetHandleRequestTask();
             return result;
         }
 
-        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IRequestContext? context = null) where TResult : RequestResult
+        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection? clientConnection = null) where TResult : RequestResult
         {
-            return (await TryExecuteAsync(request as Request, context) as Response<TResult>)!;
+            return (await TryExecuteAsync(request as Request, clientConnection) as Response<TResult>)!;
         }
 
-        private class RequestVisitor(IRequestScopeFactory requestScopeFactory, IReadOnlyList<Type> middlewareExecutorTypes, IRequestContext? scope) : IRequestVisitor
+        private class RequestVisitor(IRequestScopeFactory requestScopeFactory, IReadOnlyList<Type> middlewareExecutorTypes, IClientConnection? clientConnection) : IRequestVisitor
         {
             private Task<Response>? _handleRequestTask;
 
@@ -36,7 +36,7 @@ namespace RequestResponseFramework.Backend
             private async Task<Response> HandleRequestAsync<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
                 await using var requestScope = requestScopeFactory.CreateRequestScope<TRequest, TResult>(request);
-                if (scope is IClientConnection clientConnection)
+                if (clientConnection != null)
                 {
                     requestScope.SetClientConnection(clientConnection);
                 }

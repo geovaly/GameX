@@ -37,7 +37,7 @@ public class WebSocketGameClient : IGameClient
 
     private class ClientRequestExecutor(WebSocketGameClient client) : IRequestExecutor
     {
-        public Task<Response> TryExecuteAsync(Request request, IRequestContext? context = null)
+        public Task<Response> TryExecuteAsync(Request request)
         {
             if (request is Event e)
             {
@@ -50,9 +50,9 @@ public class WebSocketGameClient : IGameClient
             }
         }
 
-        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IRequestContext? context = null) where TResult : RequestResult
+        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request) where TResult : RequestResult
         {
-            return (await TryExecuteAsync(request as Request, context) as Response<TResult>)!;
+            return (await TryExecuteAsync(request as Request) as Response<TResult>)!;
         }
     }
 }

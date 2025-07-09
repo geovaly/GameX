@@ -45,7 +45,7 @@ public class WebSocketClient(
         _ = Task.Run(ReceiveLoopAsync);
     }
 
-    public async Task<Response> TryExecuteAsync(Request request, IRequestContext? context = null)
+    public async Task<Response> TryExecuteAsync(Request request)
     {
         var message = RequestResponseMessage.CreateRequest(request, jsonSerializerOptions);
         var messageJson = JsonSerializer.Serialize(message, jsonSerializerOptions);
@@ -58,9 +58,9 @@ public class WebSocketClient(
         return result;
     }
 
-    public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IRequestContext? context = null)
+    public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request)
         where TResult : RequestResult
-        => (await TryExecuteAsync(request as Request, context) as Response<TResult>)!;
+        => (await TryExecuteAsync(request as Request) as Response<TResult>)!;
 
     private async Task ReceiveLoopAsync()
     {

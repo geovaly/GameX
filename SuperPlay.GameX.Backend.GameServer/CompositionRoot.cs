@@ -42,7 +42,7 @@ namespace SuperPlay.GameX.Backend.GameServer
                 .AddSingleton<IRequestScopeFactory, RequestScopeFactory>()
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
-                .AddSingleton<IApplicationRequestExecutor>(x =>
+                .AddSingleton<IServerRequestExecutor>(x =>
                     (ApplicationLayer.GameServer)x.GetRequiredService<IGameServer>())
                 .AddSingleton<WebSocketGameServer>()
                 .AddSingleton<GameService>()
