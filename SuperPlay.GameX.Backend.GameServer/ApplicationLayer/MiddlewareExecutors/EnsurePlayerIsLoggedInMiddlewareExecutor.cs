@@ -9,10 +9,10 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutor
 {
     internal class EnsurePlayerIsLoggedInMiddlewareExecutor(GameService gameService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : IMiddlewareExecutor
     {
-        public async Task<Response<TResult>> ExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextExecute<TRequest, TResult> nextExecute)
+        public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync)
             where TRequest : Request<TResult> where TResult : RequestResult
         {
-            if (request is LoginCommand) return await nextExecute(request);
+            if (request is LoginCommand) return await nextTryExecuteAsync(request);
             var loggedInRequest = (ILoggedInRequest)request;
             var playerId = loggedInRequest.Context.PlayerId;
 
@@ -33,7 +33,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutor
                 return new NotOk<TResult>(new PlayerNotFoundException(playerId));
             }
 
-            return await nextExecute(request);
+            return await nextTryExecuteAsync(request);
         }
     }
 }

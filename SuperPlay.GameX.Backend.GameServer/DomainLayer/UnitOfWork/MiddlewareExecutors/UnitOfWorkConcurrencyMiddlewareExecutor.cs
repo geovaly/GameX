@@ -9,14 +9,14 @@ namespace SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareEx
     {
         private const int RetryMaxCount = 10;
 
-        public async Task<Response<TResult>> ExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextExecute<TRequest, TResult> nextExecute)
+        public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync)
             where TRequest : Request<TResult> where TResult : RequestResult
         {
             for (var i = 0; i <= RetryMaxCount; i++)
             {
                 try
                 {
-                    return await nextExecute(request);
+                    return await nextTryExecuteAsync(request);
                 }
                 catch (UnitOfWorkConcurrencyException e)
                 {

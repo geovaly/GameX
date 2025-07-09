@@ -4,11 +4,11 @@ namespace RequestResponseFramework.Backend.MiddlewareExecutors
 {
     public class HandleSystemExceptionMiddlewareExecutor : IMiddlewareExecutor
     {
-        public async Task<Response<TResult>> ExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextExecute<TRequest, TResult> nextExecute) where TRequest : Request<TResult> where TResult : RequestResult
+        public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync) where TRequest : Request<TResult> where TResult : RequestResult
         {
             try
             {
-                return await nextExecute(request);
+                return await nextTryExecuteAsync(request);
             }
             catch (RequestSystemException e)
             {

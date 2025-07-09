@@ -43,15 +43,15 @@ namespace RequestResponseFramework.Backend
                 var requestHandler = requestScope.GetRequestHandler();
                 var middlewareExecutors = GetOrderedMiddlewareExecutors(requestScope);
 
-                MiddlewareNextExecute<TRequest, TResult> currentExecute = requestHandler.HandleAsync;
+                MiddlewareNextTryExecuteAsync<TRequest, TResult> currentTryExecuteAsync = requestHandler.HandleAsync;
 
                 foreach (var middlewareExecutor in middlewareExecutors.AsEnumerable().Reverse())
                 {
-                    var next = currentExecute;
-                    currentExecute = (r) => middlewareExecutor.ExecuteAsync(r, next);
+                    var next = currentTryExecuteAsync;
+                    currentTryExecuteAsync = (r) => middlewareExecutor.TryExecuteAsync(r, next);
                 }
 
-                var response = await currentExecute(request);
+                var response = await currentTryExecuteAsync(request);
                 return response;
             }
 
