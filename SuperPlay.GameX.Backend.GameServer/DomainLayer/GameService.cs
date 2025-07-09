@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.ClientServer;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 using SuperPlay.GameX.Shared.GenericLayer.Logging;
 

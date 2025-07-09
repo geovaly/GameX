@@ -1,6 +1,4 @@
-﻿using RequestResponseFramework.Shared;
-
-namespace RequestResponseFramework.Backend;
+﻿namespace RequestResponseFramework.Shared.ClientServer;
 
 public delegate void ConnectionRemovedHandler();
 

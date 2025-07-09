@@ -1,6 +1,7 @@
 ﻿using RequestResponseFramework.Backend;
 using RequestResponseFramework.Backend.MiddlewareExecutors;
 using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.ClientServer;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecutors;
 

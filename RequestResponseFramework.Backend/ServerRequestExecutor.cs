@@ -1,4 +1,5 @@
 ﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.ClientServer;
 
 namespace RequestResponseFramework.Backend
 {

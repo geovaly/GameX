@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestResponseFramework.Backend\RequestResponseFramework.Backend.csproj" />
     <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
   </ItemGroup>
 

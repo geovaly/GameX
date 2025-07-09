@@ -1,4 +1,5 @@
 ﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.ClientServer;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;
