@@ -11,7 +11,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task Login_IsOk()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player = await GivenOldPlayer();
             await Login(player);
         }
@@ -19,7 +19,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task CheckDefaultStateForNewPlayer()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player = await GivenOldPlayer();
             await Login(player);
             player.ShouldHaveCoins(0);
@@ -30,7 +30,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task Login_MakeSureThePlayerIsNotConnectedAlready()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player1 = await GivenOldPlayer();
             await Login(player1);
 
@@ -41,7 +41,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task UpdateResources_MakeSureThePlayerIsConnected()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player = await GivenOldPlayer();
             await UpdateResourcesShouldThrow<PlayerNotConnectedException>(player, ResourceType.Coin, 1);
         }
@@ -49,7 +49,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task UpdateResources_IsOk()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player = await GivenOldPlayer();
             await Login(player);
             await UpdateResources(player, ResourceType.Coin, 1);
@@ -70,7 +70,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task SendGift_IsOk()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);
@@ -86,7 +86,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task SendGift_MakeSureThePlayerHasEnoughResources()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);
@@ -103,7 +103,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task SendGift_IfFriendIsOnlineThenSendAGiftEvent()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);
@@ -122,7 +122,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         [Fact]
         public async Task SendGift_IfFriendIsOfflineThenDoNotSendAGiftEvent()
         {
-            await StartTheGameServer();
+            await GivenGameServer();
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);

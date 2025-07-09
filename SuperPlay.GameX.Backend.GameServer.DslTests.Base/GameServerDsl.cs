@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         private IGameServer? _gameServer;
         private readonly List<PlayerDsl> _loggedInPlayers = new();
 
-        public async Task StartTheGameServer()
+        public async Task GivenGameServer()
         {
             _gameServer = new CompositionRoot().GetGameServer();
             await _gameServer.StartAsync();
