@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task Login_IsOk()
         {
             await StartTheGameServer();
-            var player = await CreateNewPlayer();
+            var player = await GivenOldPlayer();
             await Login(player);
         }
 
@@ -20,7 +20,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task CheckDefaultStateForNewPlayer()
         {
             await StartTheGameServer();
-            var player = await CreateNewPlayer();
+            var player = await GivenOldPlayer();
             await Login(player);
             player.ShouldHaveCoins(0);
             player.ShouldHaveRolls(0);
@@ -31,10 +31,10 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task Login_MakeSureThePlayerIsNotConnectedAlready()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
             await Login(player1);
 
-            var player2 = await CreateNewPlayer(player1.DeviceId, isFirstTime: true);
+            var player2 = await GivenNewPlayer(player1.DeviceId);
             await LoginShouldThrow<AlreadyConnectedException>(player2);
         }
 
@@ -42,7 +42,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task UpdateResources_MakeSureThePlayerIsConnected()
         {
             await StartTheGameServer();
-            var player = await CreateNewPlayer();
+            var player = await GivenOldPlayer();
             await UpdateResourcesShouldThrow<PlayerNotConnectedException>(player, ResourceType.Coin, 1);
         }
 
@@ -50,7 +50,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task UpdateResources_IsOk()
         {
             await StartTheGameServer();
-            var player = await CreateNewPlayer();
+            var player = await GivenOldPlayer();
             await Login(player);
             await UpdateResources(player, ResourceType.Coin, 1);
             await UpdateResources(player, ResourceType.Roll, 2);
@@ -71,8 +71,8 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task SendGift_IsOk()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
-            var player2 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
             await Login(player1);
             await Login(player2);
             await UpdateResources(player1, ResourceType.Coin, 10);
@@ -87,8 +87,8 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task SendGift_MakeSureThePlayerHasEnoughResources()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
-            var player2 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
             await Login(player1);
             await Login(player2);
 
@@ -104,8 +104,8 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task SendGift_IfFriendIsOnlineThenSendAGiftEvent()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
-            var player2 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
             await Login(player1);
             await Login(player2);
 
@@ -123,8 +123,8 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task SendGift_IfFriendIsOfflineThenDoNotSendAGiftEvent()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
-            var player2 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
             await Login(player1);
 
             await UpdateResources(player1, ResourceType.Coin, 1);

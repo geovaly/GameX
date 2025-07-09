@@ -12,9 +12,9 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task Playground1()
         {
             await StartTheGameServer();
-            var player1 = await CreateNewPlayer();
-            var player2 = await CreateNewPlayer();
-            var player3 = await CreateNewPlayer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
+            var player3 = await GivenOldPlayer();
 
             await Login(player1);
             await Login(player2);
