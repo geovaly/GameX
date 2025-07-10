@@ -12,8 +12,8 @@ namespace RequestResponseFramework.Backend
         {
             var visitor = new RequestVisitor(requestScopeFactory, MiddlewareExecutorTypes, clientConnection);
             request.Accept(visitor);
-            var result = await visitor.GetHandleRequestTask();
-            return result;
+            var response = await visitor.GetResponseTask();
+            return response;
         }
 
         public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection? clientConnection = null) where TResult : RequestResult
@@ -23,14 +23,14 @@ namespace RequestResponseFramework.Backend
 
         private class RequestVisitor(IRequestScopeFactory requestScopeFactory, IReadOnlyList<Type> middlewareExecutorTypes, IClientConnection? clientConnection) : IRequestVisitor
         {
-            private Task<Response>? _handleRequestTask;
+            private Task<Response>? _responseTask;
 
-            public Task<Response> GetHandleRequestTask() =>
-                _handleRequestTask ?? throw new InvalidOperationException();
+            public Task<Response> GetResponseTask() =>
+                _responseTask ?? throw new InvalidOperationException();
 
             public void Visit<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
-                _handleRequestTask = HandleRequestAsync<TRequest, TResult>(request);
+                _responseTask = HandleRequestAsync<TRequest, TResult>(request);
             }
 
             private async Task<Response> HandleRequestAsync<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
