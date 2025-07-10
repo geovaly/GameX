@@ -1,4 +1,5 @@
 ﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.SystemExceptions;
 
 namespace RequestResponseFramework.Backend.MiddlewareExecutors
 {

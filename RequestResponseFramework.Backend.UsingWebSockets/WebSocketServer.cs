@@ -1,5 +1,6 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Json;
+using RequestResponseFramework.Shared.SystemExceptions;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;

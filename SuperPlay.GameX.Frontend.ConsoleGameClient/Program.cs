@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework.Shared.SystemExceptions;
 using Serilog;
 using SuperPlay.GameX.Frontend.GameClient.ApiLayer.UsingWebSockets;
 using SuperPlay.GameX.Shared.ApiLayer;

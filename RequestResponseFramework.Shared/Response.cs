@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using RequestResponseFramework.Shared.SystemExceptions;
+using System.Diagnostics;
 
 namespace RequestResponseFramework.Shared
 {

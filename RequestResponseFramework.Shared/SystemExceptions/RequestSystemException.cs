@@ -1,4 +1,4 @@
-﻿namespace RequestResponseFramework.Shared
+﻿namespace RequestResponseFramework.Shared.SystemExceptions
 {
     public class RequestSystemException(RequestException requestException) : Exception
     {

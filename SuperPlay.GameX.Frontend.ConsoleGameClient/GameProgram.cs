@@ -1,5 +1,6 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Requests;
+using RequestResponseFramework.Shared.SystemExceptions;
 using SuperPlay.GameX.Shared.ApiLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
