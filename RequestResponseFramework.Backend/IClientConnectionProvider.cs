@@ -1,6 +1,4 @@
-﻿using RequestResponseFramework.Shared.ClientServer;
-
-namespace RequestResponseFramework.Backend;
+﻿namespace RequestResponseFramework.Backend;
 
 public interface IClientConnectionProvider
 {

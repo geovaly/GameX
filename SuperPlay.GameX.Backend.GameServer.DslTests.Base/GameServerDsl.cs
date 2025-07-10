@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Shared.ClientServer;
+﻿using RequestResponseFramework.Backend;
+using RequestResponseFramework.Shared;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
@@ -96,14 +96,14 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
             }
         }
 
-        private async Task<TResult> ExecuteAsync<TResult>(Request<TResult> request, RequestResponseFramework.Shared.ClientServer.IClientConnection clientConnection) where TResult : RequestResult
+        private async Task<TResult> ExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection) where TResult : RequestResult
         {
             var response = await _gameServer!.ExecuteAsync(request, clientConnection);
             await RefreshPlayers();
             return response;
         }
 
-        private async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, RequestResponseFramework.Shared.ClientServer.IClientConnection clientConnection) where TResult : RequestResult
+        private async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection) where TResult : RequestResult
         {
             var response = await _gameServer!.TryExecuteAsync(request, clientConnection);
             await RefreshPlayers();

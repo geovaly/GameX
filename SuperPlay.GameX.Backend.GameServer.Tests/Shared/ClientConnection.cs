@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Shared.ClientServer;
+﻿using RequestResponseFramework.Backend;
+using RequestResponseFramework.Shared;
 
 namespace SuperPlay.GameX.Backend.GameServer.Tests.Shared
 {
