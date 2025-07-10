@@ -19,5 +19,5 @@ public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequ
 
 public interface IRequestScopeFactory
 {
-    IRequestScope<TRequest, TResult> CreateRequestScope<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult;
+    IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult;
 }

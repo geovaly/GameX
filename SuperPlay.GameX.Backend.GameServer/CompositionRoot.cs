@@ -72,7 +72,7 @@ namespace SuperPlay.GameX.Backend.GameServer
 
         private class RequestScopeFactory(IServiceProvider serviceProvider) : IRequestScopeFactory
         {
-            public IRequestScope<TRequest, TResult> CreateRequestScope<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
+            public IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
                 return new RequestScopeImpl<TRequest, TResult>(request, serviceProvider.CreateAsyncScope());
             }

@@ -36,7 +36,7 @@ namespace RequestResponseFramework.Backend
 
             private async Task<Response> HandleRequestAsync<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
-                await using var requestScope = requestScopeFactory.CreateRequestScope<TRequest, TResult>(request);
+                await using var requestScope = requestScopeFactory.Create<TRequest, TResult>(request);
                 if (clientConnection != null)
                 {
                     requestScope.SetClientConnection(clientConnection);
