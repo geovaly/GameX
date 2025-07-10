@@ -1,11 +1,9 @@
 ﻿namespace RequestResponseFramework.Shared
 {
-
-
     public abstract record Response
     {
-        public abstract bool GetIsOk();
-        public abstract bool GetIsNotOk();
+        public abstract bool IsOk { get; }
+        public abstract bool IsNotOk { get; }
         public abstract RequestResult GetResult();
         public abstract RequestException GetException();
 
@@ -13,8 +11,9 @@
 
     public abstract record Response<T> : Response where T : RequestResult
     {
-        public override bool GetIsOk() => this is Ok<T>;
-        public override bool GetIsNotOk() => this is NotOk<T>;
+        public override bool IsOk => this is Ok<T>;
+
+        public override bool IsNotOk => this is NotOk<T>;
 
         public override T GetResult()
         {

@@ -8,11 +8,11 @@ namespace RequestResponseFramework.Shared.Json
 
         public static ResponseData FromResponse(Response response)
         {
-            if (response.GetIsOk())
+            if (response.IsOk)
             {
                 return new OkData(response.GetResult());
             }
-            if (response.GetIsNotOk())
+            if (response.IsNotOk)
             {
                 return new NotOkData(response.GetException());
             }
