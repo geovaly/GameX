@@ -49,7 +49,7 @@ namespace SuperPlay.GameX.Backend.GameServer
                 .AddSingleton<GameService>()
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()
-                .AddScoped<IClientConnectionProvider, ClientConnectionProvider>()
+                .AddScoped<IClientConnectionProvider, ClientConnectionProviderImpl>()
                 .AddScoped<IUnitOfWork, UnitOfWork>();
 
             AddScopedGenericTypesUsingReflection(serviceCollection, typeof(CompositionRoot).Assembly, typeof(IRequestHandler<,>));
@@ -74,24 +74,20 @@ namespace SuperPlay.GameX.Backend.GameServer
         {
             public IRequestScope<TRequest, TResult> CreateRequestScope<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
-                return new RequestScope<TRequest, TResult>(request, serviceProvider.CreateAsyncScope());
+                return new RequestScopeImpl<TRequest, TResult>(request, serviceProvider.CreateAsyncScope());
             }
         }
 
-        private record RequestScope<TRequest, TResult> : IRequestScope<TRequest, TResult> where TRequest : Request<TResult> where TResult : RequestResult
+        private record RequestScopeImpl<TRequest, TResult> : IRequestScope<TRequest, TResult> where TRequest : Request<TResult> where TResult : RequestResult
         {
 
-            public RequestScope(TRequest request, AsyncServiceScope serviceScope)
+            public RequestScopeImpl(TRequest request, AsyncServiceScope serviceScope)
             {
                 Request = request;
                 ServiceScope = serviceScope;
-                RequestHandler = ServiceScope.ServiceProvider
-                    .GetRequiredService<IRequestHandler<TRequest, TResult>>();
-                ClientConnectionProvider =
-                    (ClientConnectionProvider)ServiceScope.ServiceProvider
-                        .GetRequiredService<IClientConnectionProvider>();
-                MiddlewareExecutors =
-                    ServiceScope.ServiceProvider.GetRequiredService<IEnumerable<IMiddlewareExecutor>>();
+                RequestHandler = ServiceScope.ServiceProvider.GetRequiredService<IRequestHandler<TRequest, TResult>>();
+                ClientConnectionProvider = ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
+                MiddlewareExecutors = ServiceScope.ServiceProvider.GetRequiredService<IEnumerable<IMiddlewareExecutor>>();
 
             }
             public ValueTask DisposeAsync() => ServiceScope.DisposeAsync();
@@ -99,17 +95,15 @@ namespace SuperPlay.GameX.Backend.GameServer
             private AsyncServiceScope ServiceScope { get; }
             public void SetClientConnection(IClientConnection clientConnection)
             {
-                ClientConnectionProvider.ClientConnection = clientConnection;
+                ((ClientConnectionProviderImpl)ClientConnectionProvider).ClientConnection = clientConnection;
             }
 
-            private ClientConnectionProvider ClientConnectionProvider { get; }
+            public IClientConnectionProvider ClientConnectionProvider { get; }
             public IRequestHandler<TRequest, TResult> RequestHandler { get; }
-
-
             public IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
         }
 
-        private class ClientConnectionProvider : IClientConnectionProvider
+        private class ClientConnectionProviderImpl : IClientConnectionProvider
         {
             public IClientConnection? ClientConnection { get; set; }
         }

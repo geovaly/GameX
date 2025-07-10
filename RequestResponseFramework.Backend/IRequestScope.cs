@@ -9,6 +9,8 @@ public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequ
 
     void SetClientConnection(IClientConnection clientConnection);
 
+    IClientConnectionProvider ClientConnectionProvider { get; }
+
     IRequestHandler<TRequest, TResult> RequestHandler { get; }
 
     IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
