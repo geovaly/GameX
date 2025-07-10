@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace RequestResponseFramework.Shared
+namespace RequestResponseFramework.Shared.Json
 {
 
     public abstract record ResponseData
