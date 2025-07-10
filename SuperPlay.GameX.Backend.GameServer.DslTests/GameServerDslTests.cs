@@ -20,7 +20,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task CheckDefaultStateForNewPlayer()
         {
             await GivenGameServer();
-            var player = await GivenOldPlayer();
+            var player = await GivenNewPlayer();
             await Login(player);
             player.ShouldHaveCoins(0);
             player.ShouldHaveRolls(0);
