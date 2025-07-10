@@ -17,6 +17,7 @@ namespace SuperPlay.GameX.Backend.GameServer
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly string _databaseName = Guid.NewGuid().ToString();
+
         public CompositionRoot()
         {
 
@@ -46,10 +47,12 @@ namespace SuperPlay.GameX.Backend.GameServer
                     (ApplicationLayer.GameServer)x.GetRequiredService<IGameServer>())
                 .AddSingleton<WebSocketGameServer>()
                 .AddSingleton<GameService>()
+                .AddSingleton<IRequestResponseLogger>(_ => new RequestResponseLoggerAdapter(Log.Logger))
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()
                 .AddScoped<IClientConnectionProvider, ClientConnectionProviderImpl>()
                 .AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             AddScopedGenericTypesUsingReflection(serviceCollection, typeof(CompositionRoot).Assembly, typeof(IRequestHandler<,>));
             AddScopedTypesUsingReflection(serviceCollection, typeof(CompositionRoot).Assembly, typeof(IMiddlewareExecutor));
