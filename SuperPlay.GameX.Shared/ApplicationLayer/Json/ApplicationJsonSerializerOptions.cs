@@ -1,9 +1,9 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Json;
-using SuperPlay.GameX.Shared.DomainLayer;
+using SuperPlay.GameX.Shared.DomainLayer.Json;
 using System.Text.Json;
 
-namespace SuperPlay.GameX.Shared.ApplicationLayer
+namespace SuperPlay.GameX.Shared.ApplicationLayer.Json
 {
     public static class ApplicationJsonSerializerOptions
     {

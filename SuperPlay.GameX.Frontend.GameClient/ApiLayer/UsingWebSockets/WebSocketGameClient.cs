@@ -2,7 +2,7 @@
 using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Requests;
 using SuperPlay.GameX.Shared.ApiLayer;
-using SuperPlay.GameX.Shared.ApplicationLayer;
+using SuperPlay.GameX.Shared.ApplicationLayer.Json;
 using SuperPlay.GameX.Shared.GenericLayer.Logging;
 
 namespace SuperPlay.GameX.Frontend.GameClient.ApiLayer.UsingWebSockets;

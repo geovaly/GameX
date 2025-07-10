@@ -2,7 +2,7 @@
 using SuperPlay.GameX.Shared.GenericLayer.Json;
 using System.Text.Json;
 
-namespace SuperPlay.GameX.Shared.DomainLayer
+namespace SuperPlay.GameX.Shared.DomainLayer.Json
 {
     public class DomainJsonSerializerOptions
     {

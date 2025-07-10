@@ -1,6 +1,6 @@
 ﻿using RequestResponseFramework.Backend.UsingWebSockets;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
-using SuperPlay.GameX.Shared.ApplicationLayer;
+using SuperPlay.GameX.Shared.ApplicationLayer.Json;
 using SuperPlay.GameX.Shared.GenericLayer.Logging;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApiLayer.UsingWebSockets

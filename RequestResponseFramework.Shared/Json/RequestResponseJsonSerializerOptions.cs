@@ -1,6 +1,4 @@
-﻿using RequestResponseFramework.Shared.Json;
-
-namespace RequestResponseFramework.Shared
+﻿namespace RequestResponseFramework.Shared.Json
 {
     public static class RequestResponseJsonSerializerOptions
     {
