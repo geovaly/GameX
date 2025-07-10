@@ -1,5 +1,4 @@
 ﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Shared.ClientServer;
 using RequestResponseFramework.Shared.Json;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
