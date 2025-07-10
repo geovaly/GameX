@@ -1,4 +1,6 @@
-﻿namespace RequestResponseFramework.Shared
+﻿using System.Diagnostics;
+
+namespace RequestResponseFramework.Shared
 {
     public abstract record Response
     {
@@ -21,7 +23,7 @@
             {
                 Ok<T> ok => ok.Result,
                 NotOk<T> notOk => throw new RequestSystemException(notOk.Exception),
-                _ => throw new InvalidOperationException()
+                _ => throw new UnreachableException()
             };
         }
 
@@ -29,8 +31,9 @@
         {
             return this switch
             {
-                NotOk<T> ok => ok.Exception,
-                _ => throw new InvalidOperationException()
+                NotOk<T> notOk => notOk.Exception,
+                Ok<T> ok => throw new InvalidOperationException(),
+                _ => throw new UnreachableException()
             };
         }
     }
