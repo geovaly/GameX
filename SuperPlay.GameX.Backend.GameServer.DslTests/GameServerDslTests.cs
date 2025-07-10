@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         public async Task Login_IsOk()
         {
             await GivenGameServer();
-            var player = await GivenOldPlayer();
+            var player = await GivenNewPlayer();
             await Login(player);
         }
 
