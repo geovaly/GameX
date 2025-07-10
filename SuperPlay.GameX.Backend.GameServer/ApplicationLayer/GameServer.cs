@@ -6,12 +6,6 @@ using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecut
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
 {
-    public interface IGameServer : IServerRequestExecutor
-    {
-        bool IsRunning { get; }
-        Task StartAsync();
-    }
-
     internal class GameServer(IRequestScopeFactory requestScopeFactory) : IGameServer
     {
         private static readonly IReadOnlyList<Type> InOrderMiddlewareExecutorTypes = [

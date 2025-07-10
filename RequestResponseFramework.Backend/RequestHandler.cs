@@ -3,11 +3,6 @@ using RequestResponseFramework.Shared.Requests;
 
 namespace RequestResponseFramework.Backend
 {
-    public interface IRequestHandler<in TRequest, TResult> where TRequest : Request<TResult> where TResult : RequestResult
-    {
-        Task<Response<TResult>> HandleAsync(TRequest request);
-    }
-
     public abstract class RequestHandler<TRequest, TResult> : IRequestHandler<TRequest, TResult> where TRequest : Request<TResult> where TResult : RequestResult
     {
         public abstract Task<Response<TResult>> HandleAsync(TRequest command);
