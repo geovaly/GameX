@@ -10,7 +10,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 {
     public class GameProgram(IGameClient client)
     {
-        private PlayerLoggedInContext? _loggedInContext;
+        private LoggedInContext? _loggedInContext;
 
         public async Task Run()
         {
@@ -104,7 +104,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             WriteLineRequestResult(result);
         }
 
-        private PlayerLoggedInContext GetLoggedInContext() => _loggedInContext ?? throw new InvalidOperationException();
+        private LoggedInContext GetLoggedInContext() => _loggedInContext ?? throw new InvalidOperationException();
 
         private void EventsReceived(object? sender, Event e)
         {
@@ -115,7 +115,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         {
             if (result is Ok<LoginResult> okLogin)
             {
-                _loggedInContext = new PlayerLoggedInContext(okLogin.Result.PlayerId);
+                _loggedInContext = new LoggedInContext(okLogin.Result.PlayerId);
             }
             else if (result is Ok<LogoutResult>)
             {

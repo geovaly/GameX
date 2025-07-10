@@ -21,9 +21,9 @@ public class PlayerDsl
 
     public PlayerId PlayerId => PlayerIdMaybe!.Value;
 
-    internal PlayerLoggedInContext GetContext()
+    internal LoggedInContext GetContext()
     {
-        return new PlayerLoggedInContext(PlayerIdMaybe!.Value);
+        return new LoggedInContext(PlayerIdMaybe!.Value);
     }
 
     public void ShouldHaveCoins(ResourceValue value)

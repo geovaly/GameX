@@ -8,7 +8,7 @@ namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
     {
     }
 
-    public record GetMyPlayerQuery(PlayerLoggedInContext Context) : LoggedInQuery<GetMyPlayerResult>(Context)
+    public record GetMyPlayerQuery(LoggedInContext Context) : LoggedInQuery<GetMyPlayerResult>(Context)
     {
         public override void Accept(IRequestVisitor visitor) => visitor.Visit<GetMyPlayerQuery, GetMyPlayerResult>(this);
     }

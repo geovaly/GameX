@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
     {
     }
 
-    public record SendGiftCommand(PlayerLoggedInContext Context, PlayerId FriendPlayerId, ResourceType ResourceType, ResourceValue ResourceValue)
+    public record SendGiftCommand(LoggedInContext Context, PlayerId FriendPlayerId, ResourceType ResourceType, ResourceValue ResourceValue)
         : LoggedInCommand<SendGiftResult>(Context)
     {
         public override void Accept(IRequestVisitor visitor) => visitor.Visit<SendGiftCommand, SendGiftResult>(this);

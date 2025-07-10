@@ -39,7 +39,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var loggedInContext = new PlayerLoggedInContext(player1);
+            var loggedInContext = new LoggedInContext(player1);
             await gameServer.ExecuteAsync(new LogoutCommand(loggedInContext));
 
             var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, ResourceType.Coin, new ResourceValue(1)));
@@ -55,7 +55,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var loggedInContext = new PlayerLoggedInContext(player1);
+            var loggedInContext = new LoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(1)));
             var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(2)));
@@ -71,7 +71,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var loggedInContext = new PlayerLoggedInContext(player1);
+            var loggedInContext = new LoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(3)));
             var updateResourcesResponse = await gameServer.TryExecuteAsync(new UpdateResourcesCommand(loggedInContext, resourceType, new ResourceValue(-2)));
@@ -88,8 +88,8 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
             var player2 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
-            var player2Context = new PlayerLoggedInContext(player2);
+            var player1Context = new LoggedInContext(player1);
+            var player2Context = new LoggedInContext(player2);
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player2Context, resourceType, new ResourceValue(10)));
 
@@ -114,7 +114,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
             var player2 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
+            var player1Context = new LoggedInContext(player1);
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
 
             var sendGiftResponse = await gameServer.TryExecuteAsync(new SendGiftCommand(player1Context, player2, resourceType, new ResourceValue(11)));
@@ -130,7 +130,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
+            var player1Context = new LoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, resourceType, new ResourceValue(10)));
 
@@ -146,7 +146,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
             var player2Connection = new ClientConnection();
             var player2 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()), player2Connection)).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
+            var player1Context = new LoggedInContext(player1);
 
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, ResourceType.Coin, new ResourceValue(2)));
             await gameServer.ExecuteAsync(new SendGiftCommand(player1Context, player2, ResourceType.Coin, new ResourceValue(1)));
@@ -165,7 +165,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
             var player2Connection = new ClientConnection();
             var player2 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()), player2Connection)).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
+            var player1Context = new LoggedInContext(player1);
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, ResourceType.Coin, new ResourceValue(2)));
 
             player2Connection.RemoveConnection();
@@ -181,8 +181,8 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
             var player2Connection = new ClientConnection();
             var player2 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()), player2Connection)).PlayerId;
-            var player1Context = new PlayerLoggedInContext(player1);
-            var player2Context = new PlayerLoggedInContext(player2);
+            var player1Context = new LoggedInContext(player1);
+            var player2Context = new LoggedInContext(player2);
             await gameServer.ExecuteAsync(new UpdateResourcesCommand(player1Context, ResourceType.Coin, new ResourceValue(2)));
 
             await gameServer.ExecuteAsync(new LogoutCommand(player2Context), player2Connection);

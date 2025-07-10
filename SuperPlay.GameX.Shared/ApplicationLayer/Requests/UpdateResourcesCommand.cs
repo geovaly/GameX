@@ -8,7 +8,7 @@ namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
     {
     }
 
-    public record UpdateResourcesCommand(PlayerLoggedInContext Context, ResourceType ResourceType, ResourceValue DeltaResourceValue)
+    public record UpdateResourcesCommand(LoggedInContext Context, ResourceType ResourceType, ResourceValue DeltaResourceValue)
         : LoggedInCommand<UpdateResourcesResult>(Context)
     {
         public override void Accept(IRequestVisitor visitor) => visitor.Visit<UpdateResourcesCommand, UpdateResourcesResult>(this);

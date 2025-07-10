@@ -2,6 +2,6 @@
 {
     public interface ILoggedInRequest
     {
-        PlayerLoggedInContext Context { get; }
+        LoggedInContext Context { get; }
     }
 }
