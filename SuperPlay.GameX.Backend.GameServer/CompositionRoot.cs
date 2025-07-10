@@ -86,6 +86,7 @@ namespace SuperPlay.GameX.Backend.GameServer
             {
                 Request = request;
                 ServiceScope = serviceScope;
+                ClientConnection = clientConnection;
                 var clientConnectionProvider = (ClientConnectionProviderImpl)ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
                 clientConnectionProvider.ClientConnection = clientConnection;
                 RequestHandler = ServiceScope.ServiceProvider.GetRequiredService<IRequestHandler<TRequest, TResult>>();
@@ -93,6 +94,7 @@ namespace SuperPlay.GameX.Backend.GameServer
             }
             public ValueTask DisposeAsync() => ServiceScope.DisposeAsync();
             public TRequest Request { get; }
+            public IClientConnection? ClientConnection { get; }
             private AsyncServiceScope ServiceScope { get; }
             public IRequestHandler<TRequest, TResult> RequestHandler { get; }
             public IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
