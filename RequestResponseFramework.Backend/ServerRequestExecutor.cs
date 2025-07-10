@@ -4,13 +4,13 @@ namespace RequestResponseFramework.Backend
 {
 
     public class ServerRequestExecutor(
-        IRequestScopeFactory requestScopeFactory, IEnumerable<Type> middlewareExecutorTypes) : IServerRequestExecutor
+        IRequestScopeFactory requestScopeFactory, IEnumerable<Type> orderedMiddlewareExecutorTypes) : IServerRequestExecutor
     {
-        public IReadOnlyList<Type> MiddlewareExecutorTypes { get; } = middlewareExecutorTypes.ToList();
+        public IReadOnlyList<Type> OrderedMiddlewareExecutorTypes { get; } = orderedMiddlewareExecutorTypes.ToList();
 
         public async Task<Response> TryExecuteAsync(Request request, IClientConnection? clientConnection = null)
         {
-            var visitor = new RequestVisitor(requestScopeFactory, MiddlewareExecutorTypes, clientConnection);
+            var visitor = new RequestVisitor(requestScopeFactory, OrderedMiddlewareExecutorTypes, clientConnection);
             request.Accept(visitor);
             var response = await visitor.GetResponseTask();
             return response;
@@ -41,7 +41,7 @@ namespace RequestResponseFramework.Backend
                     requestScope.SetClientConnection(clientConnection);
                 }
                 var requestHandler = requestScope.RequestHandler;
-                var middlewareExecutors = GetOrderedMiddlewareExecutors(requestScope);
+                var middlewareExecutors = ComputeOrderedMiddlewareExecutors(requestScope);
 
                 MiddlewareNextTryExecuteAsync<TRequest, TResult> currentTryExecuteAsync = requestHandler.HandleAsync;
 
@@ -55,7 +55,7 @@ namespace RequestResponseFramework.Backend
                 return response;
             }
 
-            private List<IMiddlewareExecutor> GetOrderedMiddlewareExecutors<TRequest, TResult>(IRequestScope<TRequest, TResult> requestScope) where TResult : RequestResult
+            private List<IMiddlewareExecutor> ComputeOrderedMiddlewareExecutors<TRequest, TResult>(IRequestScope<TRequest, TResult> requestScope) where TResult : RequestResult
                 where TRequest : Request<TResult>
             {
                 var middlewareExecutorsByType = requestScope.MiddlewareExecutors.ToDictionary(x => x.GetType(), x => x);

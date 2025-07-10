@@ -8,10 +8,10 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
 {
     internal class GameServer(IRequestScopeFactory requestScopeFactory) : IGameServer
     {
-        private static readonly IReadOnlyList<Type> InOrderMiddlewareExecutorTypes = [
+        private static readonly IReadOnlyList<Type> OrderedMiddlewareExecutorTypes = [
             typeof(HandleSystemExceptionMiddlewareExecutor), typeof(UnitOfWorkConcurrencyMiddlewareExecutor), typeof(EnsurePlayerIsLoggedInMiddlewareExecutor)];
 
-        private readonly IServerRequestExecutor _serverRequestExecutor = new ServerRequestExecutor(requestScopeFactory, InOrderMiddlewareExecutorTypes);
+        private readonly IServerRequestExecutor _serverRequestExecutor = new ServerRequestExecutor(requestScopeFactory, OrderedMiddlewareExecutorTypes);
 
         public bool IsRunning { get; private set; }
 
