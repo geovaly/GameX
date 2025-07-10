@@ -71,33 +71,26 @@ namespace SuperPlay.GameX.Backend.GameServer
 
         private class RequestScopeFactory(IServiceProvider serviceProvider) : IRequestScopeFactory
         {
-            public IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
+            public IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request, IClientConnection? clientConnection) where TRequest : Request<TResult> where TResult : RequestResult
             {
-                return new RequestScopeImpl<TRequest, TResult>(request, serviceProvider.CreateAsyncScope());
+                return new RequestScopeImpl<TRequest, TResult>(request, clientConnection, serviceProvider.CreateAsyncScope());
             }
         }
 
         private record RequestScopeImpl<TRequest, TResult> : IRequestScope<TRequest, TResult> where TRequest : Request<TResult> where TResult : RequestResult
         {
-
-            public RequestScopeImpl(TRequest request, AsyncServiceScope serviceScope)
+            public RequestScopeImpl(TRequest request, IClientConnection? clientConnection, AsyncServiceScope serviceScope)
             {
                 Request = request;
                 ServiceScope = serviceScope;
+                var clientConnectionProvider = (ClientConnectionProviderImpl)ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
+                clientConnectionProvider.ClientConnection = clientConnection;
                 RequestHandler = ServiceScope.ServiceProvider.GetRequiredService<IRequestHandler<TRequest, TResult>>();
-                ClientConnectionProvider = ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
                 MiddlewareExecutors = ServiceScope.ServiceProvider.GetRequiredService<IEnumerable<IMiddlewareExecutor>>();
-
             }
             public ValueTask DisposeAsync() => ServiceScope.DisposeAsync();
             public TRequest Request { get; }
             private AsyncServiceScope ServiceScope { get; }
-            public void SetClientConnection(IClientConnection clientConnection)
-            {
-                ((ClientConnectionProviderImpl)ClientConnectionProvider).ClientConnection = clientConnection;
-            }
-
-            public IClientConnectionProvider ClientConnectionProvider { get; }
             public IRequestHandler<TRequest, TResult> RequestHandler { get; }
             public IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
         }

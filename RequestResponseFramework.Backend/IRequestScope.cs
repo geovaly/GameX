@@ -6,10 +6,6 @@ public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequ
 {
     TRequest Request { get; }
 
-    void SetClientConnection(IClientConnection clientConnection);
-
-    IClientConnectionProvider ClientConnectionProvider { get; }
-
     IRequestHandler<TRequest, TResult> RequestHandler { get; }
 
     IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
@@ -18,5 +14,5 @@ public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequ
 
 public interface IRequestScopeFactory
 {
-    IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult;
+    IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request, IClientConnection? clientConnection) where TRequest : Request<TResult> where TResult : RequestResult;
 }

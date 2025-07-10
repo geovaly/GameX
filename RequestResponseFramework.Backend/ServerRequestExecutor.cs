@@ -35,11 +35,7 @@ namespace RequestResponseFramework.Backend
 
             private async Task<Response> HandleRequestAsync<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
             {
-                await using var requestScope = requestScopeFactory.Create<TRequest, TResult>(request);
-                if (clientConnection != null)
-                {
-                    requestScope.SetClientConnection(clientConnection);
-                }
+                await using var requestScope = requestScopeFactory.Create<TRequest, TResult>(request, clientConnection);
                 var requestHandler = requestScope.RequestHandler;
                 var middlewareExecutors = ComputeOrderedMiddlewareExecutors(requestScope);
 
