@@ -22,7 +22,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
 
 
         [Fact]
-        public async Task LoginCommand_ReturnNotOkWithAlreadyConnectedCheckedException()
+        public async Task LoginCommand_ReturnNotOkWithAlreadyConnectedException()
         {
             var gameServer = await StartGameServer();
             await gameServer.TryExecuteAsync(new LoginCommand(new DeviceId("device1")));
@@ -35,7 +35,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
 
 
         [Fact]
-        public async Task UpdateResourcesCommand_ReturnNotOkWithPlayerNotConnectedCheckedException()
+        public async Task UpdateResourcesCommand_ReturnNotOkWithPlayerNotConnectedException()
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
@@ -109,7 +109,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         [Theory]
         [InlineData(ResourceType.Coin)]
         [InlineData(ResourceType.Roll)]
-        public async Task SendGiftCommand_ReturnNotEnoughResourcesCheckedException(ResourceType resourceType)
+        public async Task SendGiftCommand_ReturnNotEnoughResourcesException(ResourceType resourceType)
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
@@ -126,7 +126,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
         [Theory]
         [InlineData(ResourceType.Coin)]
         [InlineData(ResourceType.Roll)]
-        public async Task SendGiftCommand_ReturnGenericUncheckedException_WhenSendingToHimself(ResourceType resourceType)
+        public async Task SendGiftCommand_ReturnGenericRequestException_WhenSendingToHimself(ResourceType resourceType)
         {
             var gameServer = await StartGameServer();
             var player1 = (await gameServer.ExecuteAsync(new LoginCommand(DeviceId.GenerateNew()))).PlayerId;
