@@ -90,7 +90,7 @@ public class WebSocketServer(
                         var requestJson = JsonSerializer.Serialize(request, jsonSerializerOptions);
                         logger.Debug("[Server] Received Request: {RequestJson}", requestJson);
                         var result = await serverRequestExecutor.TryExecuteAsync(request, clientConnection);
-                        var resultData = result.ToData();
+                        var resultData = ResponseData.FromResponse(result);
                         var responseMsg = JsonSerializer.Serialize(
                             RequestResponseMessage.CreateResponse(resultData, message.RequestId, jsonSerializerOptions),
                             jsonSerializerOptions);

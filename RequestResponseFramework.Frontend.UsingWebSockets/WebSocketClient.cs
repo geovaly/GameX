@@ -1,4 +1,5 @@
 ﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.ClientServer;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;
@@ -89,8 +90,8 @@ public class WebSocketClient(
                             JsonSerializer.Deserialize<ResponseData>(message.Data, jsonSerializerOptions)!;
                         if (!_waitingRequests.TryRemove(message.RequestId, out var waitingRequest))
                             throw new InvalidOperationException("No waiting request found for received response.");
-                        var response = Response.FromData(waitingRequest.Request, responseData);
-                        var responseJson = JsonSerializer.Serialize(response.ToData(), jsonSerializerOptions);
+                        var response = ResponseData.ToResponse(waitingRequest.Request, responseData);
+                        var responseJson = JsonSerializer.Serialize(responseData, jsonSerializerOptions);
                         logger.Debug("[Client] Received Response: {ResponseJson}", responseJson);
                         waitingRequest.TaskCompletionSource.SetResult(response);
                         break;

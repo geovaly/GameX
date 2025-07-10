@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace RequestResponseFramework.Shared
+namespace RequestResponseFramework.Shared.ClientServer
 {
     public record RequestResponseMessage(string Type, string Data, string RequestId)
     {

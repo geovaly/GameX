@@ -9,41 +9,6 @@
         public abstract RequestResult GetResult();
         public abstract RequestException GetException();
 
-        public ResponseData ToData()
-        {
-            if (GetIsOk())
-            {
-                return new OkData(GetResult());
-            }
-            if (GetIsNotOk())
-            {
-                return new NotOkData(GetException());
-            }
-
-            throw new ArgumentException();
-        }
-
-        public static Response FromData(Request request, ResponseData data)
-        {
-            var visitor = new FromDataRequestVisitor(data);
-            request.Accept(visitor);
-            return visitor.Response!;
-        }
-
-        private class FromDataRequestVisitor(ResponseData data) : IRequestVisitor
-        {
-            public Response? Response { get; private set; }
-
-            public void Visit<TRequest, TResult>(TRequest request) where TRequest : Request<TResult> where TResult : RequestResult
-            {
-                Response = data switch
-                {
-                    OkData okData => new Ok<TResult>((TResult)okData.Result),
-                    NotOkData notOkData => new NotOk<TResult>(notOkData.Exception),
-                    _ => throw new ArgumentException()
-                };
-            }
-        }
     }
 
     public abstract record Response<T> : Response where T : RequestResult
