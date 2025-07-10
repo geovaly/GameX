@@ -16,8 +16,8 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
         private Response<LogoutResult> Handle(LogoutCommand command)
         {
             var playerId = command.Context.PlayerId;
-            gameService.RemoveOnlinePlayer(playerId);
-            return CreateOk(new LogoutResult());
+            var playerWasLoggedIn = gameService.RemoveOnlinePlayer(playerId);
+            return CreateOk(new LogoutResult(playerWasLoggedIn));
         }
     }
 }

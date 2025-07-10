@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutor
         public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync)
             where TRequest : Request<TResult> where TResult : RequestResult
         {
-            if (request is LoginCommand) return await nextTryExecuteAsync(request);
+            if (request is LoginCommand or LogoutCommand) return await nextTryExecuteAsync(request);
             var loggedInRequest = (ILoggedInRequest)request;
             var playerId = loggedInRequest.Context.PlayerId;
 
