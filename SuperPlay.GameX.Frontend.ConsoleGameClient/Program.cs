@@ -1,6 +1,7 @@
 ﻿using RequestResponseFramework.Shared;
 using Serilog;
 using SuperPlay.GameX.Frontend.GameClient.ApiLayer.UsingWebSockets;
+using SuperPlay.GameX.Shared.ApiLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 using SuperPlay.GameX.Shared.GenericLayer.Logging.UsingSerilog;
 using Log = SuperPlay.GameX.Shared.GenericLayer.Logging.Log;
@@ -12,13 +13,13 @@ public class Program
     public static async Task Main()
     {
         await using var logging = InitLogging();
-        await using var client = new WebSocketGameClient();
+        await using IGameClient client = new WebSocketGameClient();
         if (!await TryStartAsync(client)) return;
         DisposeOnAppExiting(client);
         await new GameProgram(client).Run();
     }
 
-    private static async Task<bool> TryStartAsync(WebSocketGameClient client)
+    private static async Task<bool> TryStartAsync(IGameClient client)
     {
         try
         {
@@ -44,7 +45,7 @@ public class Program
         return new DelegateAsyncDisposable(Log.CloseAndFlushAsync);
     }
 
-    private static void DisposeOnAppExiting(WebSocketGameClient client)
+    private static void DisposeOnAppExiting(IGameClient client)
     {
         Console.CancelKeyPress += (_, e) =>
         {
@@ -56,7 +57,7 @@ public class Program
         AppDomain.CurrentDomain.ProcessExit += (_, _) => OnAppExiting(client);
     }
 
-    private static void OnAppExiting(WebSocketGameClient client)
+    private static void OnAppExiting(IGameClient client)
     {
         if (!client.IsRunning) return;
         Console.WriteLine("Exiting ...");
