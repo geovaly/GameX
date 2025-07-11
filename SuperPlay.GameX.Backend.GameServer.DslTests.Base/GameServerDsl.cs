@@ -50,7 +50,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         public async Task LoginShouldThrow<TRequestException>(PlayerDsl playerDsl) where TRequestException : RequestException
         {
             var result = await TryExecuteAsync(new LoginCommand(playerDsl.DeviceId), playerDsl.Connection);
-            Assert.True(result.IsNotOk);
+            Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
@@ -63,7 +63,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl playerDsl, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
         {
             var result = await TryExecuteAsync(new UpdateResourcesCommand(playerDsl.GetContext(), resourceType, deltaValue), playerDsl.Connection);
-            Assert.True(result.IsNotOk);
+            Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
@@ -75,7 +75,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         public async Task SendGiftShouldThrow<TRequestException>(PlayerDsl playerDsl, PlayerDsl friend, ResourceType resourceType, ResourceValue value) where TRequestException : RequestException
         {
             var result = await TryExecuteAsync(new SendGiftCommand(playerDsl.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), playerDsl.Connection);
-            Assert.True(result.IsNotOk);
+            Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
