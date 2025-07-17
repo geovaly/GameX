@@ -7,7 +7,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class LoginCommandHandler(GameService gameService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<LoginCommand, LoginResult>
+    internal class LoginCommandHandler(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<LoginCommand, LoginResult>
     {
         public override async Task<Response<LoginResult>> HandleAsync(LoginCommand command)
         {
@@ -21,7 +21,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 
             var clientConnection = clientConnectionProvider.ClientConnection;
             var onlinePlayer = new OnlinePlayer(player.PlayerId, clientConnection);
-            if (!gameService.TryAddOnlinePlayer(onlinePlayer))
+            if (!onlinePlayerService.TryAddOnlinePlayer(onlinePlayer))
             {
                 return CreateNotOk(new AlreadyConnectedException());
             }

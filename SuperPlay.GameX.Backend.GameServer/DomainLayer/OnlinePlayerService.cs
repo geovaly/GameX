@@ -15,7 +15,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DomainLayer
         }
     }
 
-    internal class GameService
+    internal class OnlinePlayerService
     {
         private readonly Dictionary<PlayerId, OnlinePlayer> _onlinePlayersById = new();
         private readonly Dictionary<IClientConnection, OnlinePlayer> _onlinePlayersByConnection = new(ReferenceEqualityComparer.Instance);

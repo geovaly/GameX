@@ -6,7 +6,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
 
-    internal class LogoutCommandHandler(GameService gameService) : CommandHandler<LogoutCommand, LogoutResult>
+    internal class LogoutCommandHandler(OnlinePlayerService onlinePlayerService) : CommandHandler<LogoutCommand, LogoutResult>
     {
         public override Task<Response<LogoutResult>> HandleAsync(LogoutCommand command)
         {
@@ -16,7 +16,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
         private Response<LogoutResult> Handle(LogoutCommand command)
         {
             var playerId = command.Context.PlayerId;
-            var playerWasLoggedIn = gameService.RemoveOnlinePlayer(playerId);
+            var playerWasLoggedIn = onlinePlayerService.RemoveOnlinePlayer(playerId);
             return CreateOk(new LogoutResult(playerWasLoggedIn));
         }
     }

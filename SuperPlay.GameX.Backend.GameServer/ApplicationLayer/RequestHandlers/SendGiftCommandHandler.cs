@@ -9,7 +9,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
 
-    internal class SendGiftCommandHandler(GameService gameService, IUnitOfWork unitOfWork) : CommandHandler<SendGiftCommand, SendGiftResult>
+    internal class SendGiftCommandHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGiftCommand, SendGiftResult>
     {
         public override async Task<Response<SendGiftResult>> HandleAsync(SendGiftCommand command)
         {
@@ -41,7 +41,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             friendPlayer.UpdateResourceValue(command.ResourceType, command.ResourceValue);
             await unitOfWork.SaveChangesAsync();
 
-            gameService.SendClientRequest(friendPlayer.PlayerId,
+            onlinePlayerService.SendClientRequest(friendPlayer.PlayerId,
                 new GiftEvent(player.PlayerId, friendPlayer.PlayerId, command.ResourceType, command.ResourceValue));
 
             return CreateOk(new SendGiftResult(player.GetResourceValue(command.ResourceType)));

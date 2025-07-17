@@ -46,7 +46,7 @@ namespace SuperPlay.GameX.Backend.GameServer
                 .AddSingleton<IServerRequestExecutor>(x =>
                     (ApplicationLayer.GameServer)x.GetRequiredService<IGameServer>())
                 .AddSingleton<WebSocketGameServer>()
-                .AddSingleton<GameService>()
+                .AddSingleton<OnlinePlayerService>()
                 .AddSingleton<IRequestResponseLogger>(_ => new RequestResponseLoggerAdapter(Log.Logger))
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()

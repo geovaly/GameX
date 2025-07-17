@@ -7,7 +7,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors
 {
-    internal class EnsurePlayerIsLoggedInMiddlewareExecutor(GameService gameService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : IMiddlewareExecutor
+    internal class EnsurePlayerIsLoggedInMiddlewareExecutor(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : IMiddlewareExecutor
     {
         public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync)
             where TRequest : Request<TResult> where TResult : RequestResult
@@ -16,7 +16,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutor
             var loggedInRequest = (ILoggedInRequest)request;
             var playerId = loggedInRequest.Context.PlayerId;
 
-            var onlinePlayer = gameService.GetOnlinePlayer(playerId);
+            var onlinePlayer = onlinePlayerService.GetOnlinePlayer(playerId);
             if (onlinePlayer == null)
             {
                 return new NotOk<TResult>(new PlayerNotConnectedException());
