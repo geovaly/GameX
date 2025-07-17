@@ -71,5 +71,3 @@ Domain-specifc language tests leverage the business domain language directly, re
 # Conclusion
 
 Software development is inherently subjective, with multiple valid approaches to solving the same problems. The solution presented reflects my best judgment in the absence of predefined team agreements.
-
-Thank you for reviewing my work. I look forward to your feedback and I want to know you! :)
