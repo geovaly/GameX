@@ -1,10 +1,6 @@
 # GameX
 Solution to a technical exercise for a job application. 
 
-Dear Reviewer,
-
-I’m impressed by the person who created this exercise. That's why my goal was to create the best solution you had and you'll ever review: clean, creative, flexible, and decoupled in both code and architecture. I hope you enjoy reviewing it as much as I enjoyed building it!
-
 # Framework
 
 No SignalR, no MediatR, no external libraries? No problem! I built my own amazing framework named RequestResponseFramework. 
