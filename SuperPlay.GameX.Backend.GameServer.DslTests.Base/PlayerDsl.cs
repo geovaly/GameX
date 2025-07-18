@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 using Xunit;
@@ -12,7 +12,7 @@ public class PlayerDsl
 
     internal ClientConnection Connection { get; } = new();
 
-    public IReadOnlyList<Request> ReceivedRequests => Connection.ReceivedRequests;
+    public IReadOnlyList<IRequest> ReceivedRequests => Connection.ReceivedRequests;
 
     public PlayerId? PlayerIdMaybe { get; internal set; }
     public DeviceId DeviceId { get; internal init; }
@@ -61,12 +61,12 @@ public class PlayerDsl
 
 internal class ClientConnection : IClientConnection
 {
-    private readonly List<Request> _receivedRequests = new();
-    public IReadOnlyList<Request> ReceivedRequests => _receivedRequests;
+    private readonly List<IRequest> _receivedRequests = new();
+    public IReadOnlyList<IRequest> ReceivedRequests => _receivedRequests;
 
     public event ConnectionRemovedHandler? ConnectionRemoved;
 
-    public void SendClientRequest(Request request)
+    public void SendClientRequest(IRequest request)
     {
         _receivedRequests.Add(request);
     }

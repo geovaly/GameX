@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestResponseFramework.Frontend.UsingWebSockets\RequestResponseFramework.Frontend.UsingWebSockets.csproj" />
-    <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
+    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Client.WebSockets\RequestResponseFramework.Client.WebSockets.csproj" />
+    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Client\RequestResponseFramework.Client.csproj" />
     <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 

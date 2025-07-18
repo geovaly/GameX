@@ -1,16 +1,16 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
-using SuperPlay.GameX.Shared.GenericLayer.Logging;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
+using Serilog;
 using System.Diagnostics;
 
 namespace SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecutors
 {
-    internal class UnitOfWorkConcurrencyMiddlewareExecutor(IUnitOfWork unitOfWork) : IMiddlewareExecutor
+    internal class RetryOnConcurrencyExceptionMiddlewareExecutor(IUnitOfWork unitOfWork) : IMiddlewareExecutor
     {
         private const int RetryMaxCount = 10;
 
         public async Task<Response<TResult>> TryExecuteAsync<TRequest, TResult>(TRequest request, MiddlewareNextTryExecuteAsync<TRequest, TResult> nextTryExecuteAsync)
-            where TRequest : Request<TResult> where TResult : RequestResult
+            where TRequest : Request<TResult>
         {
             for (var i = 0; i <= RetryMaxCount; i++)
             {
@@ -20,7 +20,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareEx
                 }
                 catch (UnitOfWorkConcurrencyException e)
                 {
-                    Log.Error(e, "UnitOfWorkConcurrencyMiddlewareExecutor Catch UnitOfWorkConcurrencyException");
+                    Log.Error(e, "RetryOnConcurrencyExceptionMiddlewareExecutor Catch UnitOfWorkConcurrencyException");
                     if (i == RetryMaxCount)
                     {
                         throw;

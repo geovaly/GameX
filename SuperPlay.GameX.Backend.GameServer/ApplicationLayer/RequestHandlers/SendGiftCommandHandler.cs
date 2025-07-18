@@ -1,26 +1,28 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.RequestExceptions;
+using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
+using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
 
-    internal class SendGiftCommandHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGiftCommand, SendGiftResult>
+    internal class SendGiftCommandHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGiftCommand, ResourceValue>
     {
-        public override async Task<Response<SendGiftResult>> HandleAsync(SendGiftCommand command)
+        public override async Task<Response<ResourceValue>> HandleAsync(SendGiftCommand command)
         {
             if (command.Context.PlayerId == command.FriendPlayerId)
             {
-                return CreateNotOk(new GenericRequestException("You cannot send gift to yourself"));
+                return CreateNotOk(new BadRequestException("You cannot send gift to yourself"));
             }
 
             if (command.ResourceValue <= 0)
             {
-                return CreateNotOk(new GenericRequestException("Resource value should be greater than zero"));
+                return CreateNotOk(new BadRequestException("Resource value should be greater than zero"));
             }
 
             var player = await unitOfWork.PlayerRepository.LoadAsync(command.Context.PlayerId);
@@ -44,7 +46,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             onlinePlayerService.SendClientRequest(friendPlayer.PlayerId,
                 new GiftEvent(player.PlayerId, friendPlayer.PlayerId, command.ResourceType, command.ResourceValue));
 
-            return CreateOk(new SendGiftResult(player.GetResourceValue(command.ResourceType)));
+            return CreateOk(player.GetResourceValue(command.ResourceType));
         }
     }
 }

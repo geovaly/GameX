@@ -1,15 +1,16 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.Data;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
+using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class LoginCommandHandler(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<LoginCommand, LoginResult>
+    internal class LoginCommandHandler(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<LoginCommand, PlayerId>
     {
-        public override async Task<Response<LoginResult>> HandleAsync(LoginCommand command)
+        public override async Task<Response<PlayerId>> HandleAsync(LoginCommand command)
         {
             var player = await unitOfWork.PlayerRepository.LoadMaybeByDeviceIdAsync(command.DeviceId);
             if (player == null)
@@ -26,7 +27,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
                 return CreateNotOk(new AlreadyConnectedException());
             }
 
-            return CreateOk(new LoginResult(player.PlayerId));
+            return CreateOk(player.PlayerId);
         }
 
         private static Player CreateNewPlayer(LoginCommand command)

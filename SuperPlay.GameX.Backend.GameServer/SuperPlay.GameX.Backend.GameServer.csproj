@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestResponseFramework.Backend.UsingWebSockets\RequestResponseFramework.Backend.UsingWebSockets.csproj" />
-    <ProjectReference Include="..\RequestResponseFramework.Backend\RequestResponseFramework.Backend.csproj" />
-    <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
+    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Server.WebSockets\RequestResponseFramework.Server.WebSockets.csproj" />
+    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Server\RequestResponseFramework.Server.csproj" />
+    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework\RequestResponseFramework.csproj" />
     <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 
@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
     <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
   </ItemGroup>
 

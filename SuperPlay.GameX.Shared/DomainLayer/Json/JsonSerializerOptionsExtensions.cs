@@ -4,9 +4,9 @@ using System.Text.Json;
 
 namespace SuperPlay.GameX.Shared.DomainLayer.Json
 {
-    public class DomainJsonSerializerOptions
+    public static class JsonSerializerOptionsExtensions
     {
-        public static void Build(JsonSerializerOptions options)
+        public static void SetForDomainData(this JsonSerializerOptions options)
         {
             options.Converters.Add(
                 new IntWrapperConverter<PlayerId>(

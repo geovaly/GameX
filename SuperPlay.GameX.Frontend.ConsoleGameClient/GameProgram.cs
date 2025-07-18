@@ -1,6 +1,6 @@
-﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Shared.Requests;
-using RequestResponseFramework.Shared.SystemExceptions;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Requests;
+using RequestResponseFramework.SystemExceptions;
 using SuperPlay.GameX.Shared.ApiLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
@@ -67,7 +67,10 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             var deviceId = ReadDeviceId();
             var result = await client.TryExecuteAsync(new LoginCommand(deviceId));
             WriteLineRequestResult(result);
-            SetLoggedInContext(result);
+            if (result.IsOk())
+            {
+                _loggedInContext = new LoggedInContext(result.GetResult());
+            }
         }
 
         private async Task Logout()
@@ -75,7 +78,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             if (EnsurePlayerIsLoggedIn()) return;
             var result = await client.TryExecuteAsync(new LogoutCommand(GetLoggedInContext()));
             WriteLineRequestResult(result);
-            SetLoggedInContext(result);
+            _loggedInContext = null;
         }
 
         private async Task GetMyPlayer()
@@ -111,18 +114,6 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             Console.WriteLine($"Event Received: {e}");
         }
 
-        private void SetLoggedInContext(Response result)
-        {
-            if (result is Ok<LoginResult> okLogin)
-            {
-                _loggedInContext = new LoggedInContext(okLogin.Result.PlayerId);
-            }
-            else if (result is Ok<LogoutResult>)
-            {
-                _loggedInContext = null;
-            }
-
-        }
 
         private bool EnsurePlayerIsLoggedIn()
         {
@@ -205,7 +196,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             }
         }
 
-        private static void WriteLineRequestResult(Response result)
+        private static void WriteLineRequestResult(IResponse result)
         {
             Console.WriteLine($"Response: {result}");
         }

@@ -1,7 +1,6 @@
 ﻿
 using Serilog;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
-using SuperPlay.GameX.Shared.GenericLayer.Logging.UsingSerilog;
 using Log = SuperPlay.GameX.Shared.GenericLayer.Logging.Log;
 
 namespace SuperPlay.GameX.Backend.GameServer;

@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
@@ -36,8 +36,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         {
             _loggedInPlayers.Add(playerDsl);
             playerDsl.IsLoggedIn = true;
-            var response = await ExecuteAsync(new LoginCommand(playerDsl.DeviceId), playerDsl.Connection);
-            playerDsl.PlayerIdMaybe = response.PlayerId;
+            playerDsl.PlayerIdMaybe = await ExecuteAsync(new LoginCommand(playerDsl.DeviceId), playerDsl.Connection);
         }
 
         public async Task Logout(PlayerDsl playerDsl)
@@ -83,9 +82,9 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         {
             if (!playerDsl.IsLoggedIn) return;
             if (!playerDsl.PlayerIdMaybe.HasValue) return;
-            var response = await _gameServer!.ExecuteAsync(new GetMyPlayerQuery(playerDsl.GetContext()));
-            playerDsl.Coins = response.PlayerData.Coins;
-            playerDsl.Rolls = response.PlayerData.Rolls;
+            var playerData = await _gameServer!.ExecuteAsync(new GetMyPlayerQuery(playerDsl.GetContext()));
+            playerDsl.Coins = playerData.Coins;
+            playerDsl.Rolls = playerData.Rolls;
         }
 
         private async Task RefreshPlayers()
@@ -96,14 +95,14 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
             }
         }
 
-        private async Task<TResult> ExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection) where TResult : RequestResult
+        private async Task<TResult> ExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection)
         {
             var response = await _gameServer!.ExecuteAsync(request, clientConnection);
             await RefreshPlayers();
             return response;
         }
 
-        private async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection) where TResult : RequestResult
+        private async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection clientConnection)
         {
             var response = await _gameServer!.TryExecuteAsync(request, clientConnection);
             await RefreshPlayers();

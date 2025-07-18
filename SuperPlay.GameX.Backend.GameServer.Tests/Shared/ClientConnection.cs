@@ -1,17 +1,17 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
 
 namespace SuperPlay.GameX.Backend.GameServer.Tests.Shared
 {
 
     public class ClientConnection : IClientConnection
     {
-        private readonly List<Request> _receivedRequests = new();
-        public IReadOnlyList<Request> ReceivedRequests => _receivedRequests;
+        private readonly List<IRequest> _receivedRequests = new();
+        public IReadOnlyList<IRequest> ReceivedRequests => _receivedRequests;
 
         public event ConnectionRemovedHandler? ConnectionRemoved;
 
-        public void SendClientRequest(Request request)
+        public void SendClientRequest(IRequest request)
         {
             _receivedRequests.Add(request);
         }

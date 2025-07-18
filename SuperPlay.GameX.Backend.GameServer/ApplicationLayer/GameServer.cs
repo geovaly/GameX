@@ -1,21 +1,15 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Backend.MiddlewareExecutors;
-using RequestResponseFramework.Shared;
-using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors;
-using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecutors;
+﻿using RequestResponseFramework;
+
+using RequestResponseFramework.Server;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
 {
-    internal class GameServer(IRequestScopeFactory requestScopeFactory) : IGameServer
+    internal class GameServer(IServerRequestExecutor serverRequestExecutor) : IGameServer
     {
-        private static readonly IReadOnlyList<Type> OrderedMiddlewareExecutorTypes = [
-            typeof(HandleSystemExceptionMiddlewareExecutor), typeof(UnitOfWorkConcurrencyMiddlewareExecutor), typeof(EnsurePlayerIsLoggedInMiddlewareExecutor)];
-
-        private readonly IServerRequestExecutor _serverRequestExecutor = new ServerRequestExecutor(requestScopeFactory, OrderedMiddlewareExecutorTypes);
 
         public bool IsRunning { get; private set; }
 
-        public async Task<Response> TryExecuteAsync(Request request, IClientConnection? clientConnection = null)
+        public async Task<IResponse> TryExecuteAsync(IRequest request, IClientConnection? clientConnection = null)
         {
             if (!IsRunning)
             {
@@ -23,13 +17,13 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer
             }
 
 
-            var result = await _serverRequestExecutor.TryExecuteAsync(request, clientConnection);
+            var result = await serverRequestExecutor.TryExecuteAsync(request, clientConnection);
             return result;
         }
 
-        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection? clientConnection = null) where TResult : RequestResult
+        public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request, IClientConnection? clientConnection = null)
         {
-            return (await TryExecuteAsync(request as Request, clientConnection) as Response<TResult>)!;
+            return (await TryExecuteAsync(request as IRequest, clientConnection) as Response<TResult>)!;
         }
 
         public Task StartAsync()

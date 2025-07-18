@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.Data;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
@@ -8,9 +8,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class GetMyPlayerQueryHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayerQuery, GetMyPlayerResult>
+    internal class GetMyPlayerQueryHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayerQuery, PlayerData>
     {
-        public override async Task<Response<GetMyPlayerResult>> HandleAsync(GetMyPlayerQuery query)
+        public override async Task<Response<PlayerData>> HandleAsync(GetMyPlayerQuery query)
         {
             var player = await unitOfWork.PlayerRepository.LoadMaybeAsync(query.Context.PlayerId);
             if (player == null)
@@ -19,7 +19,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             }
 
             var playerData = ToPlayerData(player);
-            return CreateOk(new GetMyPlayerResult(playerData));
+            return CreateOk(playerData);
         }
 
         public static PlayerData ToPlayerData(Player player)

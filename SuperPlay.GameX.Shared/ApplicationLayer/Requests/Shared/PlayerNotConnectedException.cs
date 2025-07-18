@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
 
 namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared
 {

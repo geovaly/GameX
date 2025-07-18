@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Shared.Requests;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Requests;
 
 namespace SuperPlay.GameX.Shared.ApiLayer
 {

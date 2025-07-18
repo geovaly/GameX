@@ -1,7 +1,7 @@
-﻿using RequestResponseFramework.Backend;
-using RequestResponseFramework.Shared;
+﻿using RequestResponseFramework;
+using RequestResponseFramework.Server;
+using Serilog;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
-using SuperPlay.GameX.Shared.GenericLayer.Logging;
 
 namespace SuperPlay.GameX.Backend.GameServer.DomainLayer
 {
@@ -71,7 +71,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DomainLayer
             }
         }
 
-        public void SendClientRequest(PlayerId playerId, Request request)
+        public void SendClientRequest(PlayerId playerId, IRequest request)
         {
             var onlinePlayer = GetOnlinePlayer(playerId);
             onlinePlayer?.ClientConnection?.SendClientRequest(request);

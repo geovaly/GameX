@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework.Backend;
+﻿using RequestResponseFramework.Server;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 
