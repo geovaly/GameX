@@ -3,11 +3,9 @@ using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApiLayer
 {
-    //private const string Prefix = "http://localhost:5000/ws/";
 
     public class WebSocketsGameServer(IGameServer gameServer, WebSocketsRequestServer webSocketsRequestServer)
     {
-        private const string Prefix = "http://localhost:5000/ws/";
 
         public bool IsRunning => webSocketsRequestServer.IsRunning;
 

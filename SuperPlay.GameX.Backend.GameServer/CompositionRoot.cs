@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.MiddlewareExecutors;
+using RequestResponseFramework.Server.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Backend.GameServer.ApiLayer;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
@@ -21,10 +22,10 @@ namespace SuperPlay.GameX.Backend.GameServer
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly string _databaseName = Guid.NewGuid().ToString();
-
-        public CompositionRoot()
+        private WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
+        public CompositionRoot(WebSocketsRequestServerSettings webSocketsRequestServerSettings)
         {
-
+            _webSocketsRequestServerSettings = webSocketsRequestServerSettings;
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -61,7 +62,9 @@ namespace SuperPlay.GameX.Backend.GameServer
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
                 .AddSingleton<IServerRequestExecutor>(x =>
                     (ApplicationLayer.GameServer)x.GetRequiredService<IGameServer>())
+                .AddSingleton<WebSocketsRequestServer>()
                 .AddSingleton<WebSocketsGameServer>()
+                .AddSingleton<WebSocketsRequestServerSettings>(_ => _webSocketsRequestServerSettings)
                 .AddSingleton<OnlinePlayerService>()
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()
