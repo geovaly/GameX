@@ -22,7 +22,8 @@ namespace SuperPlay.GameX.Backend.GameServer
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly string _databaseName = Guid.NewGuid().ToString();
-        private WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
+        private readonly WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
+
         public CompositionRoot(WebSocketsRequestServerSettings webSocketsRequestServerSettings)
         {
             _webSocketsRequestServerSettings = webSocketsRequestServerSettings;
@@ -60,8 +61,6 @@ namespace SuperPlay.GameX.Backend.GameServer
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
-                .AddSingleton<IServerRequestExecutor>(x =>
-                    (ApplicationLayer.GameServer)x.GetRequiredService<IGameServer>())
                 .AddSingleton<WebSocketsRequestServer>()
                 .AddSingleton<WebSocketsGameServer>()
                 .AddSingleton<WebSocketsRequestServerSettings>(_ => _webSocketsRequestServerSettings)
