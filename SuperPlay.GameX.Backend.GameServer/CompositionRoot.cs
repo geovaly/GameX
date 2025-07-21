@@ -15,6 +15,7 @@ using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecut
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFrameworkCore;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
+using SuperPlay.GameX.Shared.DomainLayer.Json;
 
 namespace SuperPlay.GameX.Backend.GameServer
 {
@@ -58,6 +59,7 @@ namespace SuperPlay.GameX.Backend.GameServer
                         cfg.AddMiddlewareExecutor<HandleSystemExceptionMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<EnsurePlayerIsLoggedInMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<RetryOnConcurrencyExceptionMiddlewareExecutor>();
+                        cfg.ConfigureJsonSerializerOptions(options => options.InitDomainData());
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()

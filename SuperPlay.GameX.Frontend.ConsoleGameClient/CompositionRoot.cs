@@ -5,6 +5,7 @@ using RequestResponseFramework.Client.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
+using SuperPlay.GameX.Shared.DomainLayer.Json;
 
 namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 {
@@ -39,6 +40,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                 .AddRequestResponseFramework(cfg =>
                 {
                     cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
+                    cfg.ConfigureJsonSerializerOptions(options => options.InitDomainData());
                 })
                 .AddSingleton<WebSocketsRequestClientSettings>(_ => _webSocketsRequestClientSettings)
                 .AddSingleton<WebSocketsRequestClient>()
