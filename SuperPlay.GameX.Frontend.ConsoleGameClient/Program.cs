@@ -1,7 +1,7 @@
-﻿using RequestResponseFramework.SystemExceptions;
+﻿using RequestResponseFramework.Client.WebSockets;
+using RequestResponseFramework.SystemExceptions;
 using Serilog;
 using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
-using SuperPlay.GameX.Shared.ApiLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
 
@@ -9,10 +9,13 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient;
 
 public class Program
 {
+    private static readonly Uri ServerUri = new("ws://localhost:5000/ws/");
+
     public static async Task Main()
     {
         await using var logging = InitLogging();
-        await using IGameClient client = new WebSocketsGameClient();
+        var compositeRoot = new CompositionRoot(new WebSocketsRequestClientSettings(ServerUri));
+        await using var client = compositeRoot.GetGameClient();
         if (!await TryStartAsync(client)) return;
         DisposeOnAppExiting(client);
         await new GameProgram(client).Run();
@@ -36,7 +39,7 @@ public class Program
 
     private static IAsyncDisposable InitLogging()
     {
-        Serilog.Log.Logger = new LoggerConfiguration()
+        Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console()
             .CreateLogger();

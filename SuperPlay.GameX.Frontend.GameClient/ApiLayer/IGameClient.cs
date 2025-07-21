@@ -1,11 +1,11 @@
 ﻿using RequestResponseFramework;
-using RequestResponseFramework.Requests;
+using RequestResponseFramework.Client;
 
-namespace SuperPlay.GameX.Shared.ApiLayer
+namespace SuperPlay.GameX.Frontend.GameClient.ApiLayer
 {
     public interface IGameClient : IRequestExecutor, IAsyncDisposable
     {
-        event EventHandler<Event>? EventsReceived;
+        void SetClientRequestExecutor(IClientRequestExecutor clientRequestExecutor);
         public Task StartAsync();
         bool IsRunning { get; }
     }

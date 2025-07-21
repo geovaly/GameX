@@ -1,7 +1,8 @@
 ﻿using RequestResponseFramework;
+using RequestResponseFramework.Client;
 using RequestResponseFramework.Requests;
 using RequestResponseFramework.SystemExceptions;
-using SuperPlay.GameX.Shared.ApiLayer;
+using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
@@ -14,7 +15,9 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 
         public async Task Run()
         {
-            client.EventsReceived += EventsReceived;
+            var clientRequestExecutor = new EventHandlerClientRequestExecutor();
+            clientRequestExecutor.EventsReceived += EventsReceived;
+            client.SetClientRequestExecutor(clientRequestExecutor);
             while (client.IsRunning)
             {
                 try

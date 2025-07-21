@@ -7,10 +7,12 @@ namespace SuperPlay.GameX.Backend.GameServer;
 
 public class Program
 {
+    private const string UriPrefix = "http://localhost:5000/ws/";
+
     public static async Task Main(string[] args)
     {
         await using var logging = InitLogging();
-        var server = new CompositionRoot(new WebSocketsRequestServerSettings(UriPrefix: "http://localhost:5000/ws/")).GetWebSocketGameServer();
+        var server = new CompositionRoot(new WebSocketsRequestServerSettings(UriPrefix)).GetWebSocketGameServer();
         await server.StartAsync();
     }
 
