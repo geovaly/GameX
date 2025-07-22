@@ -6,7 +6,7 @@ namespace SuperPlay.GameX.Shared.DomainLayer.Json
 {
     public static class JsonSerializerOptionsExtensions
     {
-        public static void InitDomainData(this JsonSerializerOptions options)
+        public static void ConfigureDomainData(this JsonSerializerOptions options)
         {
             options.Converters.Add(
                 new IntWrapperConverter<PlayerId>(

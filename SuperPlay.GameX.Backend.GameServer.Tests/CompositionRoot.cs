@@ -51,7 +51,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
                         cfg.AddMiddlewareExecutor<HandleSystemExceptionMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<EnsurePlayerIsLoggedInMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<RetryOnConcurrencyExceptionMiddlewareExecutor>();
-                        cfg.ConfigureJsonSerializerOptions(options => options.InitDomainData());
+                        cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
