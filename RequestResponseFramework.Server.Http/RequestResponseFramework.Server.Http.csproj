@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RequestResponseFramework.Server\RequestResponseFramework.Server.csproj" />
     <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
-    <ProjectReference Include="..\SuperPlay.GameX.Backend.GameServer\SuperPlay.GameX.Backend.GameServer.csproj" />
-    <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 
 </Project>

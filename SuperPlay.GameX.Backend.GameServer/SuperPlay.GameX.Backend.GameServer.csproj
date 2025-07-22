@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Server.WebSockets\RequestResponseFramework.Server.WebSockets.csproj" />
-    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework.Server\RequestResponseFramework.Server.csproj" />
-    <ProjectReference Include="..\..\RequestResponseFramework\RequestResponseFramework\RequestResponseFramework.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework.Server.WebSockets\RequestResponseFramework.Server.WebSockets.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework.Server\RequestResponseFramework.Server.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
     <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 

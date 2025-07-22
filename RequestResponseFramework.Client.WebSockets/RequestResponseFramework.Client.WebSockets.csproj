@@ -1,21 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestResponseFramework.Client.WebSockets\RequestResponseFramework.Client.WebSockets.csproj" />
     <ProjectReference Include="..\RequestResponseFramework.Client\RequestResponseFramework.Client.csproj" />
     <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
-    <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 
 </Project>

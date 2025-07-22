@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RequestResponseFramework.Server\RequestResponseFramework.Server.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
     <ProjectReference Include="..\SuperPlay.GameX.Backend.GameServer\SuperPlay.GameX.Backend.GameServer.csproj" />
+    <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

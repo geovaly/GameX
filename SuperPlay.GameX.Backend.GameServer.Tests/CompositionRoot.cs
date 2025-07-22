@@ -3,9 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.MiddlewareExecutors;
-using RequestResponseFramework.Server.WebSockets;
 using Serilog;
-using SuperPlay.GameX.Backend.GameServer.ApiLayer;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers;
@@ -17,27 +15,25 @@ using SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFrameworkCo
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
-namespace SuperPlay.GameX.Backend.GameServer
+namespace SuperPlay.GameX.Backend.GameServer.Tests
 {
     public class CompositionRoot
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly string _databaseName = Guid.NewGuid().ToString();
-        private readonly WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
 
-        public CompositionRoot(WebSocketsRequestServerSettings webSocketsRequestServerSettings)
+        public CompositionRoot()
         {
-            _webSocketsRequestServerSettings = webSocketsRequestServerSettings;
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-
-        public WebSocketsGameServer GetWebSocketGameServer()
+        public IGameServer GetGameServer()
         {
-            return _serviceProvider.GetRequiredService<WebSocketsGameServer>();
+            return _serviceProvider.GetRequiredService<IGameServer>();
         }
+
 
         private void ConfigureServices(IServiceCollection serviceCollection)
         {
@@ -59,9 +55,6 @@ namespace SuperPlay.GameX.Backend.GameServer
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
-                .AddSingleton<WebSocketsRequestServer>()
-                .AddSingleton<WebSocketsGameServer>()
-                .AddSingleton<WebSocketsRequestServerSettings>(_ => _webSocketsRequestServerSettings)
                 .AddSingleton<OnlinePlayerService>()
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()

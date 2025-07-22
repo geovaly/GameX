@@ -1,0 +1,38 @@
+﻿using Microsoft.Extensions.Logging;
+using RequestResponseFramework.Json;
+using System.Text;
+using System.Text.Json;
+
+namespace RequestResponseFramework.Client.Http;
+
+public class HttpRequestResponseClient(
+    ILogger<HttpRequestResponseClient> logger,
+    IRequestResponseClientSettingsProvider clientSettingsProvider,
+    IJsonSerializerOptionsProvider jsonSerializerOptionsProvider) : IDisposable, IRequestExecutor
+{
+    private readonly HttpClient _httpClient = new();
+
+    private RequestResponseClientSettings ClientSettings { get; } = clientSettingsProvider.ClientSettings;
+
+    private JsonSerializerOptions JsonSerializerOptions { get; } = jsonSerializerOptionsProvider.Options;
+
+    public async Task<IResponse> TryExecuteAsync(IRequest request)
+    {
+        var requestJson = JsonSerializer.Serialize(request, JsonSerializerOptions);
+        logger.LogInformation("[Client] Sending IRequest: {RequestJson}", requestJson);
+        var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
+        var responseMessage = await _httpClient.PostAsync(ClientSettings.Uri, content);
+        var responseJson = await responseMessage.Content.ReadAsStringAsync();
+        var response = request.ResponseFromJson(responseJson, JsonSerializerOptions);
+        logger.LogInformation("[Client] Received IResponse: {ResponseJson}", responseJson);
+        return response;
+    }
+
+    public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request)
+        => (await TryExecuteAsync(request as IRequest) as Response<TResult>)!;
+
+    public void Dispose()
+    {
+        _httpClient.Dispose();
+    }
+}
