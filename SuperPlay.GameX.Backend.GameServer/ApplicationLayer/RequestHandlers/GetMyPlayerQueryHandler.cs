@@ -22,7 +22,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             return CreateOk(playerData);
         }
 
-        public static Player ToPlayer(PlayerEntity player)
+        public static Player ToPlayer(MutablePlayer player)
         {
             return new Player(PlayerId: player.PlayerId, Coins: player.Coins, Rolls: player.Rolls);
         }
