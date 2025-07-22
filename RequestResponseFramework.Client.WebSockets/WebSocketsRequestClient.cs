@@ -11,7 +11,6 @@ namespace RequestResponseFramework.Client.WebSockets;
 public record WebSocketsRequestClientSettings(Uri ServerUri);
 
 
-
 public class WebSocketsRequestClient(
 
     ILogger<WebSocketsRequestClient> logger,

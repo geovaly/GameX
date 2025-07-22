@@ -5,14 +5,13 @@ using System.Text.Json;
 
 namespace RequestResponseFramework.Client.Http;
 
-public class HttpRequestResponseClient(
-    ILogger<HttpRequestResponseClient> logger,
-    IHttpRequestClientSettingsProvider clientSettingsProvider,
+public class HttpRequestClient(
+    ILogger<HttpRequestClient> logger,
+    HttpRequestClientSettings clientSettings,
     IJsonSerializerOptionsProvider jsonSerializerOptionsProvider) : IDisposable, IRequestExecutor
 {
     private readonly HttpClient _httpClient = new();
 
-    private HttpRequestClientSettings ClientSettings { get; } = clientSettingsProvider.ClientSettings;
 
     private JsonSerializerOptions JsonSerializerOptions { get; } = jsonSerializerOptionsProvider.Options;
 
@@ -21,7 +20,7 @@ public class HttpRequestResponseClient(
         var requestJson = JsonSerializer.Serialize(request, JsonSerializerOptions);
         logger.LogInformation("[Client] Sending IRequest: {RequestJson}", requestJson);
         var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
-        var responseMessage = await _httpClient.PostAsync(ClientSettings.Uri, content);
+        var responseMessage = await _httpClient.PostAsync(clientSettings.Uri, content);
         var responseJson = await responseMessage.Content.ReadAsStringAsync();
         var response = request.ResponseFromJson(responseJson, JsonSerializerOptions);
         logger.LogInformation("[Client] Received IResponse: {ResponseJson}", responseJson);

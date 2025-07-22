@@ -7,16 +7,9 @@ namespace RequestResponseFramework.Client.Http
     {
         public static IServiceCollection AddHttpRequestResponseClient(this IServiceCollection services, HttpRequestClientSettings clientSettings)
         {
-            services.AddTransient<IRequestExecutor, HttpRequestResponseClient>();
-            services.AddSingleton<IHttpRequestClientSettingsProvider>((_) => new HttpRequestClientSettingsProviderImpl(clientSettings));
+            services.AddSingleton<HttpRequestClient>();
+            services.AddSingleton<HttpRequestClientSettings>((_) => clientSettings);
             return services;
         }
-
-        private class HttpRequestClientSettingsProviderImpl(HttpRequestClientSettings clientSettings) : IHttpRequestClientSettingsProvider
-        {
-            public HttpRequestClientSettings ClientSettings { get; } = clientSettings;
-        }
-
-
     }
 }
