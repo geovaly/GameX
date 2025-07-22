@@ -45,12 +45,12 @@ public class PlayerDsl
         Assert.Equal(value, Rolls);
     }
 
-    public void ReceivedEventsShouldBeEmpty()
+    public void ReceivedRequestsShouldBeEmpty()
     {
         Assert.Empty(Connection.ReceivedRequests);
     }
 
-    public void ReceivedEventsLastShouldBe<T>(T requestEvent)
+    public void ReceivedRequestsLastShouldBe<T>(T requestEvent)
     {
         Assert.NotEmpty(Connection.ReceivedRequests);
         var lastEvent = Connection.ReceivedRequests.Last();
