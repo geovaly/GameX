@@ -40,7 +40,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                 .AddRequestResponseFramework(cfg =>
                 {
                     cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
-                    cfg.ConfigureJsonSerializerOptions(options => options.InitDomainData());
+                    cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                 })
                 .AddWebSocketsRequestClient(_webSocketsRequestClientSettings)
                 .AddSingleton<IGameClient, WebSocketsGameClient>();
