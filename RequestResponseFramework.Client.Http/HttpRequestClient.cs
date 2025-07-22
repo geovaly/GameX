@@ -18,12 +18,12 @@ public class HttpRequestClient(
     public async Task<IResponse> TryExecuteAsync(IRequest request)
     {
         var requestJson = JsonSerializer.Serialize(request, JsonSerializerOptions);
-        logger.LogInformation("[Client] Sending IRequest: {RequestJson}", requestJson);
+        logger.LogInformation("[Client] Sending Request: {RequestJson}", requestJson);
         var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
         var responseMessage = await _httpClient.PostAsync(clientSettings.Uri, content);
         var responseJson = await responseMessage.Content.ReadAsStringAsync();
         var response = request.ResponseFromJson(responseJson, JsonSerializerOptions);
-        logger.LogInformation("[Client] Received IResponse: {ResponseJson}", responseJson);
+        logger.LogInformation("[Client] Received Response: {ResponseJson}", responseJson);
         return response;
     }
 
