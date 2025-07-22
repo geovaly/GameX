@@ -30,9 +30,9 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             return CreateOk(player.PlayerId);
         }
 
-        private static Player CreateNewPlayer(LoginCommand command)
+        private static MutablePlayer CreateNewPlayer(LoginCommand command)
         {
-            return Player.CreateNewPlayer(command.DeviceId);
+            return MutablePlayer.CreateNewPlayer(command.DeviceId);
         }
     }
 }

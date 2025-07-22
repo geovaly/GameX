@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SuperPlay.GameX.Backend.GameServer.DomainLayer.Data
 {
 
-    public class Player
+    public class MutablePlayer
     {
         private static readonly ResourceValue DefaultCoins = new(0);
         private static readonly ResourceValue DefaultRolls = new(0);
@@ -18,9 +18,9 @@ namespace SuperPlay.GameX.Backend.GameServer.DomainLayer.Data
         public byte[]? RowVersion { get; set; }
 
 
-        public static Player CreateNewPlayer(DeviceId deviceId)
+        public static MutablePlayer CreateNewPlayer(DeviceId deviceId)
         {
-            return new Player
+            return new MutablePlayer
             {
                 PlayerId = PlayerId.Empty,
                 DeviceId = deviceId,

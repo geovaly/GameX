@@ -1,6 +1,6 @@
 ﻿namespace SuperPlay.GameX.Shared.DomainLayer.Data
 {
-    public record PlayerData(PlayerId PlayerId, ResourceValue Coins, ResourceValue Rolls)
+    public record Player(PlayerId PlayerId, ResourceValue Coins, ResourceValue Rolls)
     {
         public ResourceValue GetResourceValue(ResourceType resourceType)
         {

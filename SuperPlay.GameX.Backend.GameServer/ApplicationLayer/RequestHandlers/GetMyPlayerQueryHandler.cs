@@ -8,9 +8,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class GetMyPlayerQueryHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayerQuery, PlayerData>
+    internal class GetMyPlayerQueryHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayerQuery, Player>
     {
-        public override async Task<Response<PlayerData>> HandleAsync(GetMyPlayerQuery query)
+        public override async Task<Response<Player>> HandleAsync(GetMyPlayerQuery query)
         {
             var player = await unitOfWork.PlayerRepository.LoadMaybeAsync(query.Context.PlayerId);
             if (player == null)
@@ -18,13 +18,13 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
                 return CreateNotOk(new PlayerNotFoundException(query.Context.PlayerId));
             }
 
-            var playerData = ToPlayerData(player);
+            var playerData = ToPlayer(player);
             return CreateOk(playerData);
         }
 
-        public static PlayerData ToPlayerData(Player player)
+        public static Player ToPlayer(PlayerEntity player)
         {
-            return new PlayerData(PlayerId: player.PlayerId, Coins: player.Coins, Rolls: player.Rolls);
+            return new Player(PlayerId: player.PlayerId, Coins: player.Coins, Rolls: player.Rolls);
         }
 
 

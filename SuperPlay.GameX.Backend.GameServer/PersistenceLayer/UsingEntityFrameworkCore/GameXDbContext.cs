@@ -10,7 +10,7 @@ namespace SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFramewo
     {
         internal GameXDbContext(DbContextOptions<GameXDbContext> options) : base(options) { }
 
-        public DbSet<Player> Players { get; set; }
+        public DbSet<MutablePlayer> Players { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFramewo
                 id => new ResourceValue(id.Value)
             );
 
-            modelBuilder.Entity<Player>(b =>
+            modelBuilder.Entity<MutablePlayer>(b =>
             {
                 b.HasKey(e => e.PlayerId);
 

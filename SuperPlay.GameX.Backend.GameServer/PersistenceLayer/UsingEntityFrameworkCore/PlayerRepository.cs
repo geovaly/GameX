@@ -7,19 +7,19 @@ namespace SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFramewo
 {
     internal class PlayerRepository(GameXDbContext dbContext) : IPlayerRepository
     {
-        public Task<Player?> LoadMaybeAsync(PlayerId playerId)
+        public Task<MutablePlayer?> LoadMaybeAsync(PlayerId playerId)
         {
             return dbContext.Players.SingleOrDefaultAsync(x => x.PlayerId == playerId);
         }
 
-        public Task<Player?> LoadMaybeByDeviceIdAsync(DeviceId deviceId)
+        public Task<MutablePlayer?> LoadMaybeByDeviceIdAsync(DeviceId deviceId)
         {
             return dbContext.Players.SingleOrDefaultAsync(x => x.DeviceId == deviceId);
         }
 
-        public void AddOnSaveChanges(Player player)
+        public void AddOnSaveChanges(MutablePlayer mutablePlayer)
         {
-            dbContext.Players.Add(player);
+            dbContext.Players.Add(mutablePlayer);
         }
     }
 }
