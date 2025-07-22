@@ -5,16 +5,16 @@ namespace RequestResponseFramework.Client.Http
 
     public static class RequestResponseFrameworkServiceCollectionExtensions
     {
-        public static IServiceCollection AddHttpRequestResponseClient(this IServiceCollection services, RequestResponseClientSettings clientSettings)
+        public static IServiceCollection AddHttpRequestResponseClient(this IServiceCollection services, HttpRequestClientSettings clientSettings)
         {
             services.AddTransient<IRequestExecutor, HttpRequestResponseClient>();
-            services.AddSingleton<IRequestResponseClientSettingsProvider>((_) => new RequestResponseClientSettingsProviderImpl(clientSettings));
+            services.AddSingleton<IHttpRequestClientSettingsProvider>((_) => new HttpRequestClientSettingsProviderImpl(clientSettings));
             return services;
         }
 
-        private class RequestResponseClientSettingsProviderImpl(RequestResponseClientSettings clientSettings) : IRequestResponseClientSettingsProvider
+        private class HttpRequestClientSettingsProviderImpl(HttpRequestClientSettings clientSettings) : IHttpRequestClientSettingsProvider
         {
-            public RequestResponseClientSettings ClientSettings { get; } = clientSettings;
+            public HttpRequestClientSettings ClientSettings { get; } = clientSettings;
         }
 
 

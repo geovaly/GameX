@@ -7,12 +7,12 @@ namespace RequestResponseFramework.Client.Http;
 
 public class HttpRequestResponseClient(
     ILogger<HttpRequestResponseClient> logger,
-    IRequestResponseClientSettingsProvider clientSettingsProvider,
+    IHttpRequestClientSettingsProvider clientSettingsProvider,
     IJsonSerializerOptionsProvider jsonSerializerOptionsProvider) : IDisposable, IRequestExecutor
 {
     private readonly HttpClient _httpClient = new();
 
-    private RequestResponseClientSettings ClientSettings { get; } = clientSettingsProvider.ClientSettings;
+    private HttpRequestClientSettings ClientSettings { get; } = clientSettingsProvider.ClientSettings;
 
     private JsonSerializerOptions JsonSerializerOptions { get; } = jsonSerializerOptionsProvider.Options;
 
