@@ -43,11 +43,11 @@ namespace RequestResponseFramework.Client
             var options = new RequestResponseFrameworkFeatureOptions(services);
             configure(options);
             options.PolymorphicJsonConverterFactory.AddContracts(options.ContractsAssembliesToScan);
-            services.AddSingleton<IJsonSerializerOptionsProvider>((_) => new JsonSerializerOptionsProviderImpl(options.JsonSerializerOptions));
+            services.AddSingleton<IJsonSerializerOptionsProvider>((_) => new JsonSerializerOptionsProvider(options.JsonSerializerOptions));
             return services;
         }
 
-        private class JsonSerializerOptionsProviderImpl(JsonSerializerOptions options) : IJsonSerializerOptionsProvider
+        private class JsonSerializerOptionsProvider(JsonSerializerOptions options) : IJsonSerializerOptionsProvider
         {
             public JsonSerializerOptions Options { get; } = options;
         }

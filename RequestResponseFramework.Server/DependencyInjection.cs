@@ -64,13 +64,13 @@ namespace RequestResponseFramework.Server
             options.PolymorphicJsonConverterFactory.AddContracts(options.ContractsAssembliesToScan);
 
             services.AddSingleton<IRequestScopeFactory, RequestScopeFactory>();
-            services.AddSingleton<IJsonSerializerOptionsProvider>((_) => new JsonSerializerOptionsProviderImpl(options.JsonSerializerOptions));
-            services.AddScoped<IClientConnectionProvider, ClientConnectionProviderImpl>();
+            services.AddSingleton<IJsonSerializerOptionsProvider>((_) => new JsonSerializerOptionsProvider(options.JsonSerializerOptions));
+            services.AddScoped<IClientConnectionProvider, ClientConnectionProvider>();
             services.AddSingleton<IServerRequestExecutor, ServerRequestExecutor>();
             return services;
         }
 
-        private class JsonSerializerOptionsProviderImpl(JsonSerializerOptions options) : IJsonSerializerOptionsProvider
+        private class JsonSerializerOptionsProvider(JsonSerializerOptions options) : IJsonSerializerOptionsProvider
         {
             public JsonSerializerOptions Options { get; } = options;
         }
@@ -79,18 +79,18 @@ namespace RequestResponseFramework.Server
         {
             public IRequestScope<TRequest, TResult> Create<TRequest, TResult>(TRequest request, IClientConnection? clientConnection) where TRequest : Request<TResult>
             {
-                return new RequestScopeImpl<TRequest, TResult>(request, clientConnection, serviceProvider.CreateAsyncScope());
+                return new RequestScope<TRequest, TResult>(request, clientConnection, serviceProvider.CreateAsyncScope());
             }
         }
 
-        private record RequestScopeImpl<TRequest, TResult> : IRequestScope<TRequest, TResult> where TRequest : Request<TResult>
+        private record RequestScope<TRequest, TResult> : IRequestScope<TRequest, TResult> where TRequest : Request<TResult>
         {
-            public RequestScopeImpl(TRequest request, IClientConnection? clientConnection, AsyncServiceScope serviceScope)
+            public RequestScope(TRequest request, IClientConnection? clientConnection, AsyncServiceScope serviceScope)
             {
                 Request = request;
                 ServiceScope = serviceScope;
                 ClientConnection = clientConnection;
-                var clientConnectionProvider = (ClientConnectionProviderImpl)ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
+                var clientConnectionProvider = (ClientConnectionProvider)ServiceScope.ServiceProvider.GetRequiredService<IClientConnectionProvider>();
                 clientConnectionProvider.ClientConnection = clientConnection;
                 RequestHandler = ServiceScope.ServiceProvider.GetRequiredService<IRequestHandler<TRequest, TResult>>();
                 MiddlewareExecutors = ServiceScope.ServiceProvider.GetRequiredService<IEnumerable<IMiddlewareExecutor>>();
@@ -103,7 +103,7 @@ namespace RequestResponseFramework.Server
             public IEnumerable<IMiddlewareExecutor> MiddlewareExecutors { get; }
         }
 
-        private class ClientConnectionProviderImpl : IClientConnectionProvider
+        private class ClientConnectionProvider : IClientConnectionProvider
         {
             public IClientConnection? ClientConnection { get; set; }
         }
