@@ -7,13 +7,13 @@ using System.Text.Json;
 
 namespace RequestResponseFramework.Server.Http
 {
-    public class RequestResponseControllerBase
+    public class RequestControllerBase
         : ControllerBase
     {
         private readonly IServerRequestExecutor _serverRequestExecutor;
         private readonly ILogger _logger;
 
-        protected RequestResponseControllerBase(ILogger logger, IServerRequestExecutor serverRequestExecutor,
+        protected RequestControllerBase(ILogger logger, IServerRequestExecutor serverRequestExecutor,
             IJsonSerializerOptionsProvider jsonSerializerOptionsProvider)
         {
             _logger = logger;
@@ -23,7 +23,7 @@ namespace RequestResponseFramework.Server.Http
 
         private JsonSerializerOptions JsonSerializerOptions { get; }
 
-        protected async Task<ContentResult> BaseExecute(IRequest request)
+        protected async Task<ContentResult> Execute(IRequest request)
         {
             _logger.LogInformation("[Server] Received Request: {RequestJson}", JsonSerializer.Serialize(request, JsonSerializerOptions));
             var response = await _serverRequestExecutor.TryExecuteAsync(request);
@@ -36,10 +36,10 @@ namespace RequestResponseFramework.Server.Http
                 StatusCode = (int)MapStatusCode(response)
             };
         }
-        protected Task<ContentResult> BaseExecute(JsonElement body)
+        protected Task<ContentResult> Execute(JsonElement body)
         {
             var request = body.Deserialize<IRequest>(JsonSerializerOptions)!;
-            return BaseExecute(request);
+            return Execute(request);
         }
 
         protected HttpStatusCode MapStatusCode(IResponse response)
