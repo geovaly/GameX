@@ -13,11 +13,10 @@ public class Program
     {
         await using var logging = InitLogging();
         var compositeRoot = new CompositionRoot(new WebSocketsRequestClientSettings(ServerUri));
-        await using var gameProgram = compositeRoot.GetGameProgram();
-        DisposeOnAppExiting(gameProgram);
-        await gameProgram.Run();
+        await using var consoleGame = compositeRoot.GetConsoleGame();
+        DisposeOnAppExiting(consoleGame);
+        await consoleGame.Run();
     }
-
 
     private static IAsyncDisposable InitLogging()
     {
@@ -28,23 +27,23 @@ public class Program
         return new DelegateAsyncDisposable(Log.CloseAndFlushAsync);
     }
 
-    private static void DisposeOnAppExiting(GameProgram gameProgram)
+    private static void DisposeOnAppExiting(ConsoleGame consoleGame)
     {
         Console.CancelKeyPress += (_, e) =>
         {
-            OnAppExiting(gameProgram);
+            OnAppExiting(consoleGame);
             e.Cancel = true;
         };
 
 
-        AppDomain.CurrentDomain.ProcessExit += (_, _) => OnAppExiting(gameProgram);
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => OnAppExiting(consoleGame);
     }
 
-    private static void OnAppExiting(GameProgram gameProgram)
+    private static void OnAppExiting(ConsoleGame consoleGame)
     {
-        if (!gameProgram.IsRunning) return;
+        if (!consoleGame.IsRunning) return;
         Console.WriteLine("Exiting ...");
-        gameProgram.DisposeAsync().GetAwaiter().GetResult();
+        consoleGame.DisposeAsync().GetAwaiter().GetResult();
     }
 
 

@@ -9,7 +9,7 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 {
-    public class GameProgram(IGameClient client) : IAsyncDisposable
+    public class ConsoleGame(IGameClient client) : IAsyncDisposable
     {
         private LoggedInContext? _loggedInContext;
 

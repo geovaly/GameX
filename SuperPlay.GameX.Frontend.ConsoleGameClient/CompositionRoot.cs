@@ -22,9 +22,9 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public GameProgram GetGameProgram()
+        public ConsoleGame GetConsoleGame()
         {
-            return _serviceProvider.GetRequiredService<GameProgram>();
+            return _serviceProvider.GetRequiredService<ConsoleGame>();
         }
 
 
@@ -44,7 +44,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                 })
                 .AddWebSocketsRequestClient(_webSocketsRequestClientSettings)
                 .AddSingleton<IGameClient, WebSocketsGameClient>()
-                .AddSingleton<GameProgram>();
+                .AddSingleton<ConsoleGame>();
         }
 
     }
