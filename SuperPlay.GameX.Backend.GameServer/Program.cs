@@ -12,7 +12,8 @@ public class Program
     public static async Task Main(string[] args)
     {
         await using var logging = InitLogging();
-        var server = new CompositionRoot(new WebSocketsRequestServerSettings(UriPrefix)).GetWebSocketGameServer();
+        var compositeRoot = new CompositionRoot(new WebSocketsRequestServerSettings(UriPrefix));
+        var server = compositeRoot.GetWebSocketGameServer();
         await server.StartAsync();
     }
 
