@@ -32,59 +32,66 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         }
 
 
-        public async Task Login(PlayerDsl playerDsl)
+        public void RemoveConnection(PlayerDsl player)
         {
-            _loggedInPlayers.Add(playerDsl);
-            playerDsl.IsLoggedIn = true;
-            playerDsl.PlayerIdMaybe = await ExecuteAsync(new LoginCommand(playerDsl.DeviceId), playerDsl.Connection);
+            _loggedInPlayers.RemoveAll(x => x == player);
+            player.IsLoggedIn = false;
+            player.RemoveConnection();
         }
 
-        public async Task Logout(PlayerDsl playerDsl)
+        public async Task Login(PlayerDsl player)
         {
-            _loggedInPlayers.RemoveAll(x => x == playerDsl);
-            playerDsl.IsLoggedIn = false;
-            await ExecuteAsync(new LogoutCommand(playerDsl.GetContext()), playerDsl.Connection);
+            _loggedInPlayers.Add(player);
+            player.IsLoggedIn = true;
+            player.PlayerIdMaybe = await ExecuteAsync(new LoginCommand(player.DeviceId), player.Connection);
         }
 
-        public async Task LoginShouldThrow<TRequestException>(PlayerDsl playerDsl) where TRequestException : RequestException
+        public async Task Logout(PlayerDsl player)
         {
-            var result = await TryExecuteAsync(new LoginCommand(playerDsl.DeviceId), playerDsl.Connection);
+            _loggedInPlayers.RemoveAll(x => x == player);
+            player.IsLoggedIn = false;
+            await ExecuteAsync(new LogoutCommand(player.GetContext()), player.Connection);
+        }
+
+        public async Task LoginShouldThrow<TRequestException>(PlayerDsl player) where TRequestException : RequestException
+        {
+            var result = await TryExecuteAsync(new LoginCommand(player.DeviceId), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
 
-        public async Task UpdateResources(PlayerDsl playerDsl, ResourceType resourceType, ResourceValue deltaValue)
+        public async Task UpdateResources(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue)
         {
-            await ExecuteAsync(new UpdateResourcesCommand(playerDsl.GetContext(), resourceType, deltaValue), playerDsl.Connection);
+            await ExecuteAsync(new UpdateResourcesCommand(player.GetContext(), resourceType, deltaValue), player.Connection);
         }
 
-        public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl playerDsl, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
+        public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new UpdateResourcesCommand(playerDsl.GetContext(), resourceType, deltaValue), playerDsl.Connection);
+            var result = await TryExecuteAsync(new UpdateResourcesCommand(player.GetContext(), resourceType, deltaValue), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
-        public async Task SendGift(PlayerDsl playerDsl, PlayerDsl friend, ResourceType resourceType, ResourceValue value)
+        public async Task SendGift(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value)
         {
-            await ExecuteAsync(new SendGiftCommand(playerDsl.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), playerDsl.Connection);
+            await ExecuteAsync(new SendGiftCommand(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
         }
 
-        public async Task SendGiftShouldThrow<TRequestException>(PlayerDsl playerDsl, PlayerDsl friend, ResourceType resourceType, ResourceValue value) where TRequestException : RequestException
+        public async Task SendGiftShouldThrow<TRequestException>(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new SendGiftCommand(playerDsl.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), playerDsl.Connection);
+            var result = await TryExecuteAsync(new SendGiftCommand(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
-        private async Task RefreshPlayer(PlayerDsl playerDsl)
+        private async Task RefreshPlayer(PlayerDsl player)
         {
-            if (!playerDsl.IsLoggedIn) return;
-            if (!playerDsl.PlayerIdMaybe.HasValue) return;
-            var playerData = await _gameServer!.ExecuteAsync(new GetMyPlayerQuery(playerDsl.GetContext()));
-            playerDsl.Coins = playerData.Coins;
-            playerDsl.Rolls = playerData.Rolls;
+            if (!player.IsLoggedIn) return;
+            if (!player.PlayerIdMaybe.HasValue) return;
+            var playerData = await _gameServer!.ExecuteAsync(new GetMyPlayerQuery(player.GetContext()));
+            player.Coins = playerData.Coins;
+            player.Rolls = playerData.Rolls;
         }
 
         private async Task RefreshPlayers()

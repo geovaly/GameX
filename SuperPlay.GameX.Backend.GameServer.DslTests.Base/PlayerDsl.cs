@@ -56,6 +56,8 @@ public class PlayerDsl
         var lastEvent = ReceivedRequests.Last();
         Assert.Equal<object>(requestEvent, lastEvent);
     }
+
+    internal void RemoveConnection() => Connection.RemoveConnection();
 }
 
 

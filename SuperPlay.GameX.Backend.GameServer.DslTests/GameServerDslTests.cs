@@ -126,9 +126,24 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);
-
             await UpdateResources(player1, ResourceType.Coin, 1);
 
+            await SendGift(player1, player2, ResourceType.Coin, 1);
+
+            player2.ReceivedRequestsShouldBeEmpty();
+        }
+
+        [Fact]
+        public async Task SendGift_IfFriendIsOfflineWithConnectionRemovedThenDoNotSendAGiftEvent__()
+        {
+            await GivenGameServer();
+            var player1 = await GivenOldPlayer();
+            var player2 = await GivenOldPlayer();
+            await Login(player1);
+            await Login(player2);
+            await UpdateResources(player1, ResourceType.Coin, 1);
+
+            RemoveConnection(player2);
             await SendGift(player1, player2, ResourceType.Coin, 1);
 
             player2.ReceivedRequestsShouldBeEmpty();
