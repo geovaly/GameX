@@ -12,7 +12,7 @@ public class PlayerDsl
 
     internal ClientConnection Connection { get; } = new();
 
-    public IReadOnlyList<IRequest> ReceivedRequests => Connection.ReceivedRequests;
+    internal IReadOnlyList<IRequest> ReceivedRequests => Connection.ReceivedRequests;
 
     public PlayerId? PlayerIdMaybe { get; internal set; }
     public DeviceId DeviceId { get; internal init; }
@@ -47,13 +47,13 @@ public class PlayerDsl
 
     public void ReceivedRequestsShouldBeEmpty()
     {
-        Assert.Empty(Connection.ReceivedRequests);
+        Assert.Empty(ReceivedRequests);
     }
 
     public void ReceivedRequestsLastShouldBe<T>(T requestEvent)
     {
-        Assert.NotEmpty(Connection.ReceivedRequests);
-        var lastEvent = Connection.ReceivedRequests.Last();
+        Assert.NotEmpty(ReceivedRequests);
+        var lastEvent = ReceivedRequests.Last();
         Assert.Equal<object>(requestEvent, lastEvent);
     }
 }
