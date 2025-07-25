@@ -21,7 +21,6 @@ namespace SuperPlay.GameX.Backend.GameServer
     public class CompositionRoot
     {
         private readonly ServiceProvider _serviceProvider;
-        private readonly string _databaseName = Guid.NewGuid().ToString();
         private readonly WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
 
         public CompositionRoot(WebSocketsRequestServerSettings webSocketsRequestServerSettings)
@@ -68,7 +67,7 @@ namespace SuperPlay.GameX.Backend.GameServer
         private GameXDbContext CreateInMemoryDbContext()
         {
             var options = new DbContextOptionsBuilder<GameXDbContext>()
-                .UseInMemoryDatabase(_databaseName)
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             return new GameXDbContext(options);
         }
