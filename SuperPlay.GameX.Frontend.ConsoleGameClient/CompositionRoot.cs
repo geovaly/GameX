@@ -22,9 +22,9 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public IGameClient GetGameClient()
+        public GameProgram GetGameProgram()
         {
-            return _serviceProvider.GetRequiredService<IGameClient>();
+            return _serviceProvider.GetRequiredService<GameProgram>();
         }
 
 
@@ -43,7 +43,8 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                     cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                 })
                 .AddWebSocketsRequestClient(_webSocketsRequestClientSettings)
-                .AddSingleton<IGameClient, WebSocketsGameClient>();
+                .AddSingleton<IGameClient, WebSocketsGameClient>()
+                .AddSingleton<GameProgram>();
         }
 
     }

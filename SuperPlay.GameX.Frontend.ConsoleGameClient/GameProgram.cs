@@ -9,29 +9,55 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 {
-    public class GameProgram(IGameClient client)
+    public class GameProgram(IGameClient client) : IAsyncDisposable
     {
         private LoggedInContext? _loggedInContext;
 
+        public bool IsRunning => client.IsRunning;
+
         public async Task Run()
         {
+            if (!await TryStartAsync(client)) return;
             var clientRequestExecutor = new EventHandlerClientRequestExecutor();
             clientRequestExecutor.EventsReceived += EventsReceived;
             client.SetClientRequestExecutor(clientRequestExecutor);
             while (client.IsRunning)
             {
-                try
-                {
-                    await ExecuteNextAction();
-                }
-                catch (NetworkSystemException)
-                {
-                    Console.WriteLine("Network Error. Press any key to exit.");
-                    Console.ReadKey();
-                    return;
-                }
+                if (!await TryExecuteNextAction()) return;
             }
         }
+
+        private static async Task<bool> TryStartAsync(IGameClient client)
+        {
+            try
+            {
+                await client.StartAsync();
+                return true;
+            }
+            catch (NetworkSystemException)
+            {
+                Console.WriteLine("[Client] Cannot connect to server. Press any key to exit.");
+                Console.ReadKey();
+                return false;
+            }
+        }
+
+        private async Task<bool> TryExecuteNextAction()
+        {
+            try
+            {
+                await ExecuteNextAction();
+                return true;
+            }
+            catch (NetworkSystemException)
+            {
+                Console.WriteLine("Network Error. Press any key to exit.");
+                Console.ReadKey();
+                return false;
+            }
+        }
+
+
 
         private async Task ExecuteNextAction()
         {
@@ -202,6 +228,11 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         private static void WriteLineRequestResult(IResponse result)
         {
             Console.WriteLine($"Response: {result}");
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await client.DisposeAsync();
         }
     }
 }

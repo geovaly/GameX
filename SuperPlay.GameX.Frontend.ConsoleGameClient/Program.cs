@@ -1,7 +1,5 @@
 ﻿using RequestResponseFramework.Client.WebSockets;
-using RequestResponseFramework.SystemExceptions;
 using Serilog;
-using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
 
@@ -15,25 +13,9 @@ public class Program
     {
         await using var logging = InitLogging();
         var compositeRoot = new CompositionRoot(new WebSocketsRequestClientSettings(ServerUri));
-        await using var client = compositeRoot.GetGameClient();
-        if (!await TryStartAsync(client)) return;
-        DisposeOnAppExiting(client);
-        await new GameProgram(client).Run();
-    }
-
-    private static async Task<bool> TryStartAsync(IGameClient client)
-    {
-        try
-        {
-            await client.StartAsync();
-            return true;
-        }
-        catch (NetworkSystemException)
-        {
-            Console.WriteLine("[Client] Cannot connect to server. Press any key to exit.");
-            Console.ReadKey();
-            return false;
-        }
+        await using var gameProgram = compositeRoot.GetGameProgram();
+        DisposeOnAppExiting(gameProgram);
+        await gameProgram.Run();
     }
 
 
@@ -46,23 +28,23 @@ public class Program
         return new DelegateAsyncDisposable(Log.CloseAndFlushAsync);
     }
 
-    private static void DisposeOnAppExiting(IGameClient client)
+    private static void DisposeOnAppExiting(GameProgram gameProgram)
     {
         Console.CancelKeyPress += (_, e) =>
         {
-            OnAppExiting(client);
+            OnAppExiting(gameProgram);
             e.Cancel = true;
         };
 
 
-        AppDomain.CurrentDomain.ProcessExit += (_, _) => OnAppExiting(client);
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => OnAppExiting(gameProgram);
     }
 
-    private static void OnAppExiting(IGameClient client)
+    private static void OnAppExiting(GameProgram gameProgram)
     {
-        if (!client.IsRunning) return;
+        if (!gameProgram.IsRunning) return;
         Console.WriteLine("Exiting ...");
-        client.DisposeAsync().GetAwaiter().GetResult();
+        gameProgram.DisposeAsync().GetAwaiter().GetResult();
     }
 
 
