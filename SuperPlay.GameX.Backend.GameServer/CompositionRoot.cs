@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Server;
-using RequestResponseFramework.Server.MiddlewareExecutors;
 using RequestResponseFramework.Server.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Backend.GameServer.ApiLayer;
@@ -11,11 +10,11 @@ using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.MiddlewareExecutors;
 using SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork;
-using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.MiddlewareExecutors;
 using SuperPlay.GameX.Backend.GameServer.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFrameworkCore;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
+using SuperPlay.GameX.Shared.GenericLayer.Enumerable;
 
 namespace SuperPlay.GameX.Backend.GameServer
 {
@@ -52,9 +51,7 @@ namespace SuperPlay.GameX.Backend.GameServer
                     {
                         cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
                         cfg.RegisterHandlersFromAssemblyContaining<LoginCommandHandler>();
-                        cfg.AddMiddlewareExecutor<HandleSystemExceptionMiddlewareExecutor>();
-                        cfg.AddMiddlewareExecutor<EnsurePlayerIsLoggedInMiddlewareExecutor>();
-                        cfg.AddMiddlewareExecutor<RetryOnConcurrencyExceptionMiddlewareExecutor>();
+                        MiddlewareExecutorTypesProvider.OrderedTypes.ForEach(cfg.AddMiddlewareExecutor);
                         cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()

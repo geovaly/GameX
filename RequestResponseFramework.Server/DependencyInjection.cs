@@ -47,6 +47,11 @@ namespace RequestResponseFramework.Server
         {
             _services.AddTransient<IMiddlewareExecutor, T>();
         }
+
+        public void AddMiddlewareExecutor(Type type)
+        {
+            _services.AddTransient(typeof(IMiddlewareExecutor), type);
+        }
     }
 
 
