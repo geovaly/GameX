@@ -83,12 +83,17 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                     await Logout();
                     break;
                 case "6":
-                    await client.DisposeAsync();
+                    await Exit();
                     break;
                 default:
                     Console.WriteLine("Unknown choice.");
                     break;
             }
+        }
+
+        private ValueTask Exit()
+        {
+            return client.DisposeAsync();
         }
 
         private async Task Login()
