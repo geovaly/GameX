@@ -134,7 +134,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
         }
 
         [Fact]
-        public async Task SendGift_IfFriendIsOfflineWithConnectionRemovedThenDoNotSendAGiftEvent__()
+        public async Task SendGift_IfFriendIsOfflineWithConnectionRemovedThenDoNotSendAGiftEvent()
         {
             await GivenGameServer();
             var player1 = await GivenOldPlayer();
