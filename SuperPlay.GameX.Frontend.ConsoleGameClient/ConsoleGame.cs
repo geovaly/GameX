@@ -15,7 +15,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
 
         public bool IsRunning => client.IsRunning;
 
-        public async Task Run()
+        public async Task RunAsync()
         {
             if (!await TryStartAsync(client)) return;
             var clientRequestExecutor = new EventHandlerClientRequestExecutor();

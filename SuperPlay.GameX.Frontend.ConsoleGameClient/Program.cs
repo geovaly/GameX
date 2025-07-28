@@ -15,7 +15,7 @@ public class Program
         var compositeRoot = new CompositionRoot(new WebSocketsRequestClientSettings(ServerUri));
         await using var consoleGame = compositeRoot.GetConsoleGame();
         DisposeOnAppExiting(consoleGame);
-        await consoleGame.Run();
+        await consoleGame.RunAsync();
     }
 
     private static IAsyncDisposable InitLogging()
