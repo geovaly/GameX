@@ -3,7 +3,7 @@ using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.MiddlewareExecutors;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://localhost:5222");
+//builder.WebHost.UseUrls("http://localhost:5222");
 
 // Add services to the container.
 
