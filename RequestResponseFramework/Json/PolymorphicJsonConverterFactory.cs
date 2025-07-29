@@ -6,7 +6,7 @@ namespace RequestResponseFramework.Json;
 
 public class PolymorphicJsonConverterFactory : JsonConverterFactory
 {
-    const string DefaultDiscriminatorProperty = "$type";
+    const string DefaultDiscriminatorProperty = "$Type";
 
     private readonly Dictionary<Type, TypeMapping> _typeMappings = new();
 
