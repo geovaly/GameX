@@ -11,9 +11,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
 
-    internal class SendGiftCommandHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGiftCommand, ResourceValue>
+    internal class SendGiftHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGift, ResourceValue>
     {
-        public override async Task<Response<ResourceValue>> HandleAsync(SendGiftCommand command)
+        public override async Task<Response<ResourceValue>> HandleAsync(SendGift command)
         {
             if (command.Context.PlayerId == command.FriendPlayerId)
             {

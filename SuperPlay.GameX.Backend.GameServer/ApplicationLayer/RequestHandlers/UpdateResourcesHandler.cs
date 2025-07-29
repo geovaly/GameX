@@ -7,9 +7,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class UpdateResourcesCommandHandler(IUnitOfWork unitOfWork) : CommandHandler<UpdateResourcesCommand, ResourceValue>
+    internal class UpdateResourcesHandler(IUnitOfWork unitOfWork) : CommandHandler<UpdateResources, ResourceValue>
     {
-        public override async Task<Response<ResourceValue>> HandleAsync(UpdateResourcesCommand command)
+        public override async Task<Response<ResourceValue>> HandleAsync(UpdateResources command)
         {
             var player = await unitOfWork.PlayerRepository.LoadAsync(command.Context.PlayerId);
             player.UpdateResourceValue(command.ResourceType, command.DeltaResourceValue);

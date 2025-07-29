@@ -49,8 +49,8 @@ namespace SuperPlay.GameX.Backend.GameServer
                 })
                 .AddRequestResponseFramework(cfg =>
                     {
-                        cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
-                        cfg.RegisterHandlersFromAssemblyContaining<LoginCommandHandler>();
+                        cfg.RegisterContractsFromAssemblyContaining<Login>();
+                        cfg.RegisterHandlersFromAssemblyContaining<LoginHandler>();
                         MiddlewareExecutorTypesProvider.OrderedTypes.ForEach(cfg.AddMiddlewareExecutor);
                         cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                     })

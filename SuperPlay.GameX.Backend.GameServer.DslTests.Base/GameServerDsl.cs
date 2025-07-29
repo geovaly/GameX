@@ -43,19 +43,19 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         {
             _loggedInPlayers.Add(player);
             player.IsLoggedIn = true;
-            player.PlayerIdMaybe = await ExecuteAsync(new LoginCommand(player.DeviceId), player.Connection);
+            player.PlayerIdMaybe = await ExecuteAsync(new Login(player.DeviceId), player.Connection);
         }
 
         public async Task Logout(PlayerDsl player)
         {
             _loggedInPlayers.RemoveAll(x => x == player);
             player.IsLoggedIn = false;
-            await ExecuteAsync(new LogoutCommand(player.GetContext()), player.Connection);
+            await ExecuteAsync(new Logout(player.GetContext()), player.Connection);
         }
 
         public async Task LoginShouldThrow<TRequestException>(PlayerDsl player) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new LoginCommand(player.DeviceId), player.Connection);
+            var result = await TryExecuteAsync(new Login(player.DeviceId), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
@@ -63,24 +63,24 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
 
         public async Task UpdateResources(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue)
         {
-            await ExecuteAsync(new UpdateResourcesCommand(player.GetContext(), resourceType, deltaValue), player.Connection);
+            await ExecuteAsync(new UpdateResources(player.GetContext(), resourceType, deltaValue), player.Connection);
         }
 
         public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new UpdateResourcesCommand(player.GetContext(), resourceType, deltaValue), player.Connection);
+            var result = await TryExecuteAsync(new UpdateResources(player.GetContext(), resourceType, deltaValue), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
 
         public async Task SendGift(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value)
         {
-            await ExecuteAsync(new SendGiftCommand(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
+            await ExecuteAsync(new SendGift(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
         }
 
         public async Task SendGiftShouldThrow<TRequestException>(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new SendGiftCommand(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
+            var result = await TryExecuteAsync(new SendGift(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }
@@ -89,7 +89,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base
         {
             if (!player.IsLoggedIn) return;
             if (!player.PlayerIdMaybe.HasValue) return;
-            var playerData = await _gameServer!.ExecuteAsync(new GetMyPlayerQuery(player.GetContext()));
+            var playerData = await _gameServer!.ExecuteAsync(new GetMyPlayer(player.GetContext()));
             player.Coins = playerData.Coins;
             player.Rolls = playerData.Rolls;
         }

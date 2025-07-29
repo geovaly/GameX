@@ -8,9 +8,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class GetMyPlayerQueryHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayerQuery, Player>
+    internal class GetMyPlayerHandler(IUnitOfWork unitOfWork) : QueryHandler<GetMyPlayer, Player>
     {
-        public override async Task<Response<Player>> HandleAsync(GetMyPlayerQuery query)
+        public override async Task<Response<Player>> HandleAsync(GetMyPlayer query)
         {
             var player = await unitOfWork.PlayerRepository.LoadMaybeAsync(query.Context.PlayerId);
             if (player == null)

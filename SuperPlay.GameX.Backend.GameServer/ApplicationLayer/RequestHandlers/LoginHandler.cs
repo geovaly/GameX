@@ -8,9 +8,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
-    internal class LoginCommandHandler(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<LoginCommand, PlayerId>
+    internal class LoginHandler(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : CommandHandler<Login, PlayerId>
     {
-        public override async Task<Response<PlayerId>> HandleAsync(LoginCommand command)
+        public override async Task<Response<PlayerId>> HandleAsync(Login command)
         {
             var player = await unitOfWork.PlayerRepository.LoadMaybeByDeviceIdAsync(command.DeviceId);
             if (player == null)
@@ -30,7 +30,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
             return CreateOk(player.PlayerId);
         }
 
-        private static MutablePlayer CreateNewPlayer(LoginCommand command)
+        private static MutablePlayer CreateNewPlayer(Login command)
         {
             return MutablePlayer.CreateNewPlayer(command.DeviceId);
         }

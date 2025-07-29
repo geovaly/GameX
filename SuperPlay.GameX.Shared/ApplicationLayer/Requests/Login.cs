@@ -7,5 +7,5 @@ namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
 
     public record AlreadyConnectedException : RequestException;
 
-    public record LoginCommand(DeviceId DeviceId) : CommandBase<LoginCommand, PlayerId>;
+    public record Login(DeviceId DeviceId) : CommandBase<Login, PlayerId>;
 }

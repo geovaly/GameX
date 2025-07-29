@@ -99,7 +99,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         private async Task Login()
         {
             var deviceId = ReadDeviceId();
-            var result = await client.TryExecuteAsync(new LoginCommand(deviceId));
+            var result = await client.TryExecuteAsync(new Login(deviceId));
             WriteLineRequestResult(result);
             if (result.IsOk())
             {
@@ -110,7 +110,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         private async Task Logout()
         {
             if (EnsurePlayerIsLoggedIn()) return;
-            var result = await client.TryExecuteAsync(new LogoutCommand(GetLoggedInContext()));
+            var result = await client.TryExecuteAsync(new Logout(GetLoggedInContext()));
             WriteLineRequestResult(result);
             _loggedInContext = null;
         }
@@ -118,7 +118,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
         private async Task GetMyPlayer()
         {
             if (EnsurePlayerIsLoggedIn()) return;
-            var result = await client.TryExecuteAsync(new GetMyPlayerQuery(GetLoggedInContext()));
+            var result = await client.TryExecuteAsync(new GetMyPlayer(GetLoggedInContext()));
             WriteLineRequestResult(result);
         }
 
@@ -127,7 +127,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             if (EnsurePlayerIsLoggedIn()) return;
             var resourceType = ReadResourceType();
             var resourceValue = ReadResourceValue();
-            var result = await client.TryExecuteAsync(new UpdateResourcesCommand(GetLoggedInContext(), resourceType, resourceValue));
+            var result = await client.TryExecuteAsync(new UpdateResources(GetLoggedInContext(), resourceType, resourceValue));
             WriteLineRequestResult(result);
         }
 
@@ -137,7 +137,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             var friendPlayerId = ReadFriendPlayerId();
             var resourceType = ReadResourceType();
             var resourceValue = ReadResourceValue();
-            var result = await client.TryExecuteAsync(new SendGiftCommand(GetLoggedInContext(), friendPlayerId, resourceType, resourceValue));
+            var result = await client.TryExecuteAsync(new SendGift(GetLoggedInContext(), friendPlayerId, resourceType, resourceValue));
             WriteLineRequestResult(result);
         }
 

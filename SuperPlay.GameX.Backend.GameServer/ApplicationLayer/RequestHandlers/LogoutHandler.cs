@@ -6,14 +6,14 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 namespace SuperPlay.GameX.Backend.GameServer.ApplicationLayer.RequestHandlers
 {
 
-    internal class LogoutCommandHandler(OnlinePlayerService onlinePlayerService) : CommandHandler<LogoutCommand, bool>
+    internal class LogoutHandler(OnlinePlayerService onlinePlayerService) : CommandHandler<Logout, bool>
     {
-        public override Task<Response<bool>> HandleAsync(LogoutCommand command)
+        public override Task<Response<bool>> HandleAsync(Logout command)
         {
             return Task.FromResult(Handle(command));
         }
 
-        private Response<bool> Handle(LogoutCommand command)
+        private Response<bool> Handle(Logout command)
         {
             var playerId = command.Context.PlayerId;
             var playerWasLoggedIn = onlinePlayerService.RemoveOnlinePlayer(playerId);

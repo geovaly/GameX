@@ -4,9 +4,9 @@ using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
 {
-    public record UpdateResourcesCommand(
+    public record UpdateResources(
         LoggedInContext Context,
         ResourceType ResourceType,
         ResourceValue DeltaResourceValue)
-        : CommandBase<UpdateResourcesCommand, ResourceValue>, ILoggedInRequest;
+        : CommandBase<UpdateResources, ResourceValue>, ILoggedInRequest;
 }

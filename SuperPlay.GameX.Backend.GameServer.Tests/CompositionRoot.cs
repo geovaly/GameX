@@ -46,8 +46,8 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
                 })
                 .AddRequestResponseFramework(cfg =>
                     {
-                        cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
-                        cfg.RegisterHandlersFromAssemblyContaining<LoginCommandHandler>();
+                        cfg.RegisterContractsFromAssemblyContaining<Login>();
+                        cfg.RegisterHandlersFromAssemblyContaining<LoginHandler>();
                         cfg.AddMiddlewareExecutor<HandleSystemExceptionMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<EnsurePlayerIsLoggedInMiddlewareExecutor>();
                         cfg.AddMiddlewareExecutor<RetryOnConcurrencyExceptionMiddlewareExecutor>();

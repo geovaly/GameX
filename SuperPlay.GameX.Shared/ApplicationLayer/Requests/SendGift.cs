@@ -9,10 +9,10 @@ namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests
     public record NotEnoughResourcesException() : RequestException;
 
 
-    public record SendGiftCommand(
+    public record SendGift(
         LoggedInContext Context,
         PlayerId FriendPlayerId,
         ResourceType ResourceType,
         ResourceValue ResourceValue)
-        : CommandBase<SendGiftCommand, ResourceValue>, ILoggedInRequest;
+        : CommandBase<SendGift, ResourceValue>, ILoggedInRequest;
 }
