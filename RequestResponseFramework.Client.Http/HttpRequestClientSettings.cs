@@ -1,3 +1,3 @@
 ﻿namespace RequestResponseFramework.Client.Http;
 
-public record HttpRequestClientSettings(string Uri);
+public record HttpRequestClientSettings(Uri Uri);

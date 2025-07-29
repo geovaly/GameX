@@ -3,6 +3,7 @@ using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.MiddlewareExecutors;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://localhost:5222");
 
 // Add services to the container.
 
@@ -16,6 +17,7 @@ builder.Services.AddRequestResponseFramework(cfg =>
     cfg.RegisterContractsFromAssemblyContaining<ListWeatherForecast>();
     cfg.AddMiddlewareExecutor<HandleSystemExceptionMiddlewareExecutor>();
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

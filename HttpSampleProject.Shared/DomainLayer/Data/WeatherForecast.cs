@@ -1,6 +1,6 @@
 namespace HttpSampleProject.Shared.DomainLayer.Data
 {
-    public class WeatherForecast
+    public record WeatherForecast
     {
         public DateOnly Date { get; init; }
 

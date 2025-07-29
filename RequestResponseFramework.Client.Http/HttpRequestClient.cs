@@ -10,7 +10,7 @@ public class HttpRequestClient(
     HttpRequestClientSettings clientSettings,
     IJsonSerializerOptionsProvider jsonSerializerOptionsProvider) : IDisposable, IRequestExecutor
 {
-    private readonly HttpClient _httpClient = new();
+    private readonly HttpClient _httpClient = new() { BaseAddress = clientSettings.Uri };
 
 
     private JsonSerializerOptions JsonSerializerOptions { get; } = jsonSerializerOptionsProvider.Options;
@@ -20,7 +20,7 @@ public class HttpRequestClient(
         var requestJson = JsonSerializer.Serialize(request, JsonSerializerOptions);
         logger.LogInformation("[Client] Sending Request: {RequestJson}", requestJson);
         var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
-        var responseMessage = await _httpClient.PostAsync(clientSettings.Uri, content);
+        var responseMessage = await _httpClient.PostAsync("/rpc", content);
         var responseJson = await responseMessage.Content.ReadAsStringAsync();
         var response = request.ResponseFromJson(responseJson, JsonSerializerOptions);
         logger.LogInformation("[Client] Received Response: {ResponseJson}", responseJson);
