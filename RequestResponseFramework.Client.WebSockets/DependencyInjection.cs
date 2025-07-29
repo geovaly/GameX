@@ -5,10 +5,10 @@ namespace RequestResponseFramework.Client.WebSockets
 
     public static class RequestResponseFrameworkServiceCollectionExtensions
     {
-        public static IServiceCollection AddWebSocketsRequestClient(this IServiceCollection services, WebSocketsRequestClientSettings clientSettings)
+        public static IServiceCollection AddWebSocketsRequestClient(this IServiceCollection services, WebSocketRequestClientSettings clientSettings)
         {
-            services.AddSingleton<WebSocketsRequestClient>();
-            services.AddSingleton<WebSocketsRequestClientSettings>((_) => clientSettings);
+            services.AddSingleton<WebSocketRequestClient>();
+            services.AddSingleton<WebSocketRequestClientSettings>((_) => clientSettings);
             return services;
         }
     }

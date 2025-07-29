@@ -12,11 +12,11 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
     public class CompositionRoot
     {
         private readonly ServiceProvider _serviceProvider;
-        private readonly WebSocketsRequestClientSettings _webSocketsRequestClientSettings;
+        private readonly WebSocketRequestClientSettings _webSocketRequestClientSettings;
 
-        public CompositionRoot(WebSocketsRequestClientSettings webSocketsRequestClientSettings)
+        public CompositionRoot(WebSocketRequestClientSettings webSocketRequestClientSettings)
         {
-            _webSocketsRequestClientSettings = webSocketsRequestClientSettings;
+            _webSocketRequestClientSettings = webSocketRequestClientSettings;
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -42,8 +42,8 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
                     cfg.RegisterContractsFromAssemblyContaining<LoginCommand>();
                     cfg.ConfigureJsonSerializerOptions(options => options.ConfigureDomainData());
                 })
-                .AddWebSocketsRequestClient(_webSocketsRequestClientSettings)
-                .AddSingleton<IGameClient, WebSocketsGameClient>()
+                .AddWebSocketsRequestClient(_webSocketRequestClientSettings)
+                .AddSingleton<IGameClient, WebSocketGameClient>()
                 .AddSingleton<ConsoleGame>();
         }
 

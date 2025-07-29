@@ -8,13 +8,13 @@ using System.Text.Json;
 
 namespace RequestResponseFramework.Client.WebSockets;
 
-public record WebSocketsRequestClientSettings(Uri ServerUri);
+public record WebSocketRequestClientSettings(Uri ServerUri);
 
 
-public class WebSocketsRequestClient(
+public class WebSocketRequestClient(
 
-    ILogger<WebSocketsRequestClient> logger,
-    WebSocketsRequestClientSettings settings,
+    ILogger<WebSocketRequestClient> logger,
+    WebSocketRequestClientSettings settings,
     IJsonSerializerOptionsProvider jsonSerializerOptionsProvider) : IRequestExecutor
 {
     private const int BufferSize = 1024 * 4;

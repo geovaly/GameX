@@ -12,7 +12,7 @@ public class Program
     public static async Task Main()
     {
         await using var logging = InitLogging();
-        var compositeRoot = new CompositionRoot(new WebSocketsRequestClientSettings(ServerUri));
+        var compositeRoot = new CompositionRoot(new WebSocketRequestClientSettings(ServerUri));
         await using var consoleGame = compositeRoot.GetConsoleGame();
         DisposeOnAppExiting(consoleGame);
         await consoleGame.RunAsync();

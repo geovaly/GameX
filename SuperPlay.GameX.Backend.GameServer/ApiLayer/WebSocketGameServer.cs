@@ -4,10 +4,10 @@ using SuperPlay.GameX.Backend.GameServer.ApplicationLayer;
 namespace SuperPlay.GameX.Backend.GameServer.ApiLayer
 {
 
-    public class WebSocketsGameServer(IGameServer gameServer, WebSocketsRequestServer webSocketsRequestServer)
+    public class WebSocketGameServer(IGameServer gameServer, WebSocketRequestServer webSocketRequestServer)
     {
 
-        public bool IsRunning => webSocketsRequestServer.IsRunning;
+        public bool IsRunning => webSocketRequestServer.IsRunning;
 
         public async Task StartAsync()
         {
@@ -16,7 +16,7 @@ namespace SuperPlay.GameX.Backend.GameServer.ApiLayer
                 await gameServer.StartAsync();
             }
 
-            await webSocketsRequestServer.StartAsync();
+            await webSocketRequestServer.StartAsync();
         }
 
     }

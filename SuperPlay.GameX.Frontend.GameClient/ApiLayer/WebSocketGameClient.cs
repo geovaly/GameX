@@ -4,7 +4,7 @@ using RequestResponseFramework.Client.WebSockets;
 
 namespace SuperPlay.GameX.Frontend.GameClient.ApiLayer;
 
-public class WebSocketsGameClient(WebSocketsRequestClient client) : IGameClient
+public class WebSocketGameClient(WebSocketRequestClient client) : IGameClient
 {
 
     public bool IsRunning => client.IsRunning;

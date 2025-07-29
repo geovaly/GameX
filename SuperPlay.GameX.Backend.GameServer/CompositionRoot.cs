@@ -22,20 +22,20 @@ namespace SuperPlay.GameX.Backend.GameServer
     {
         private readonly ServiceProvider _serviceProvider;
         private readonly string _databaseName = Guid.NewGuid().ToString();
-        private readonly WebSocketsRequestServerSettings _webSocketsRequestServerSettings;
+        private readonly WebSocketRequestServerSettings _webSocketRequestServerSettings;
 
-        public CompositionRoot(WebSocketsRequestServerSettings webSocketsRequestServerSettings)
+        public CompositionRoot(WebSocketRequestServerSettings webSocketRequestServerSettings)
         {
-            _webSocketsRequestServerSettings = webSocketsRequestServerSettings;
+            _webSocketRequestServerSettings = webSocketRequestServerSettings;
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
 
-        public WebSocketsGameServer GetWebSocketGameServer()
+        public WebSocketGameServer GetWebSocketGameServer()
         {
-            return _serviceProvider.GetRequiredService<WebSocketsGameServer>();
+            return _serviceProvider.GetRequiredService<WebSocketGameServer>();
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection)
@@ -56,9 +56,9 @@ namespace SuperPlay.GameX.Backend.GameServer
                     })
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
-                .AddSingleton<WebSocketsRequestServer>()
-                .AddSingleton<WebSocketsGameServer>()
-                .AddSingleton<WebSocketsRequestServerSettings>(_ => _webSocketsRequestServerSettings)
+                .AddSingleton<WebSocketRequestServer>()
+                .AddSingleton<WebSocketGameServer>()
+                .AddSingleton<WebSocketRequestServerSettings>(_ => _webSocketRequestServerSettings)
                 .AddSingleton<OnlinePlayerService>()
                 .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()

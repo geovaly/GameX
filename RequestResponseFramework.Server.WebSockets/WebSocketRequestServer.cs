@@ -8,15 +8,15 @@ using System.Text.Json;
 
 namespace RequestResponseFramework.Server.WebSockets;
 
-public record WebSocketsRequestServerSettings(string UriPrefix)
+public record WebSocketRequestServerSettings(string UriPrefix)
 {
 }
 
-public class WebSocketsRequestServer(
-    ILogger<WebSocketsRequestServer> logger,
+public class WebSocketRequestServer(
+    ILogger<WebSocketRequestServer> logger,
     IServerRequestExecutor serverRequestExecutor,
     IJsonSerializerOptionsProvider jsonSerializerOptionsProvider,
-    WebSocketsRequestServerSettings settings)
+    WebSocketRequestServerSettings settings)
 {
     private const int BufferSize = 1024 * 4;
     public bool IsRunning { get; private set; }
@@ -168,7 +168,7 @@ public class WebSocketsRequestServer(
 
     }
 
-    private class ClientConnection(ILogger<WebSocketsRequestServer> logger, WebSocket webSocket, SemaphoreSlim sendLock, JsonSerializerOptions jsonSerializerOptions)
+    private class ClientConnection(ILogger<WebSocketRequestServer> logger, WebSocket webSocket, SemaphoreSlim sendLock, JsonSerializerOptions jsonSerializerOptions)
         : IClientConnection
     {
         public event ConnectionRemovedHandler? ConnectionRemoved;
