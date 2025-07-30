@@ -25,17 +25,26 @@ namespace RequestResponseFramework.Server.Http
 
         protected async Task<ContentResult> Execute(IRequest request)
         {
-            _logger.LogInformation("[Server] Received Request: {RequestJson}", JsonSerializer.Serialize(request, JsonSerializerOptions));
-            var response = await _serverRequestExecutor.TryExecuteAsync(request);
-            var responseJson = request.ResponseToJson(response, JsonSerializerOptions);
-            _logger.LogInformation("[Server] Sent Response: {ResponseJson}", responseJson);
-            return new ContentResult
+            try
             {
-                Content = responseJson,
-                ContentType = "application/json",
-                StatusCode = (int)MapStatusCode(response)
-            };
+                _logger.LogInformation("[Server] Received Request: {RequestJson}", JsonSerializer.Serialize(request, JsonSerializerOptions));
+                var response = await _serverRequestExecutor.TryExecuteAsync(request);
+                var responseJson = request.ResponseToJson(response, JsonSerializerOptions);
+                _logger.LogInformation("[Server] Sent Response: {ResponseJson}", responseJson);
+                return new ContentResult
+                {
+                    Content = responseJson,
+                    ContentType = "application/json",
+                    StatusCode = (int)MapStatusCode(response)
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Execute Error");
+                throw;
+            }
         }
+
         protected Task<ContentResult> Execute(JsonElement body)
         {
             var request = body.Deserialize<IRequest>(JsonSerializerOptions)!;

@@ -6,7 +6,7 @@ using RequestResponseFramework;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.Http;
 
-var clientSettings = new HttpRequestClientSettings(new Uri("http://localhost:7139"));
+var clientSettings = new HttpRequestClientSettings(new Uri("https://localhost:7139"));
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>
