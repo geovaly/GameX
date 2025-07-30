@@ -1,6 +1,4 @@
-﻿using RequestResponseFramework;
-using RequestResponseFramework.Server;
-using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
+﻿using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 using Xunit;
 
@@ -8,11 +6,16 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests.Base;
 
 public class PlayerDsl
 {
+    internal PlayerDsl()
+    {
+        ReceivedRequests = new ReceivedRequestsDsl(Connection);
+    }
+
     public bool IsLoggedIn { get; internal set; }
 
     internal ClientConnection Connection { get; } = new();
 
-    internal IReadOnlyList<IRequest> ReceivedRequests => Connection.ReceivedRequests;
+    public ReceivedRequestsDsl ReceivedRequests { get; }
 
     public PlayerId? PlayerIdMaybe { get; internal set; }
     public DeviceId DeviceId { get; internal init; }
@@ -45,36 +48,7 @@ public class PlayerDsl
         Assert.Equal(value, Rolls);
     }
 
-    public void ReceivedRequestsShouldBeEmpty()
-    {
-        Assert.Empty(ReceivedRequests);
-    }
 
-    public void ReceivedRequestsLastShouldBe<T>(T requestEvent)
-    {
-        Assert.NotEmpty(ReceivedRequests);
-        var lastEvent = ReceivedRequests.Last();
-        Assert.Equal<object>(requestEvent, lastEvent);
-    }
 
     internal void RemoveConnection() => Connection.RemoveConnection();
-}
-
-
-internal class ClientConnection : IClientConnection
-{
-    private readonly List<IRequest> _receivedRequests = new();
-    public IReadOnlyList<IRequest> ReceivedRequests => _receivedRequests;
-
-    public event ConnectionRemovedHandler? ConnectionRemoved;
-
-    public void SendClientRequest(IRequest request)
-    {
-        _receivedRequests.Add(request);
-    }
-
-    public void RemoveConnection()
-    {
-        ConnectionRemoved?.Invoke();
-    }
 }

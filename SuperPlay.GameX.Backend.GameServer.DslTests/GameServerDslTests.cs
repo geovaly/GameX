@@ -113,7 +113,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
 
             await SendGift(player1, player2, ResourceType.Coin, 1);
 
-            player2.ReceivedRequestsLastShouldBe(new GiftEvent(
+            player2.ReceivedRequests.LastShouldBe(new GiftEvent(
                 SenderId: player1.PlayerId,
                 ReceiverId: player2.PlayerId, ResourceType.Coin, 1));
         }
@@ -130,7 +130,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
 
             await SendGift(player1, player2, ResourceType.Coin, 1);
 
-            player2.ReceivedRequestsShouldBeEmpty();
+            player2.ReceivedRequests.ShouldBeEmpty();
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
             RemoveConnection(player2);
             await SendGift(player1, player2, ResourceType.Coin, 1);
 
-            player2.ReceivedRequestsShouldBeEmpty();
+            player2.ReceivedRequests.ShouldBeEmpty();
         }
 
     }
