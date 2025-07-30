@@ -15,7 +15,7 @@ using SuperPlay.GameX.Backend.GameServer.PersistenceLayer.UsingEntityFrameworkCo
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
-namespace SuperPlay.GameX.Backend.GameServer.Tests
+namespace SuperPlay.GameX.Backend.GameServer.Tests.Shared
 {
     public class CompositionRoot
     {
@@ -56,7 +56,7 @@ namespace SuperPlay.GameX.Backend.GameServer.Tests
                 .AddSingleton<ApplicationLayer.GameServer>()
                 .AddSingleton<IGameServer, ApplicationLayer.GameServer>()
                 .AddSingleton<OnlinePlayerService>()
-                .AddScoped<GameXDbContext>(_ => CreateInMemoryDbContext())
+                .AddScoped(_ => CreateInMemoryDbContext())
                 .AddScoped<IPlayerRepository, PlayerRepository>()
                 .AddScoped<IUnitOfWork, UnitOfWork>();
         }
