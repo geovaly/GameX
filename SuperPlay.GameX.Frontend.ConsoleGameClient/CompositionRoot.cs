@@ -3,7 +3,9 @@ using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.WebSockets;
 using Serilog;
+using SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer;
 using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
+using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 

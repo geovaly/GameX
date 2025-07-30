@@ -1,5 +1,6 @@
 ﻿using RequestResponseFramework.Client.WebSockets;
 using Serilog;
+using SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
 

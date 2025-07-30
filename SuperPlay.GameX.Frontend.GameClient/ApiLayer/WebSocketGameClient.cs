@@ -1,6 +1,7 @@
 ﻿using RequestResponseFramework;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.WebSockets;
+using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;
 
 namespace SuperPlay.GameX.Frontend.GameClient.ApiLayer;
 

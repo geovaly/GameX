@@ -2,12 +2,12 @@
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Requests;
 using RequestResponseFramework.SystemExceptions;
-using SuperPlay.GameX.Frontend.GameClient.ApiLayer;
+using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Frontend.ConsoleGameClient
+namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 {
     public class ConsoleGame(IGameClient client) : IAsyncDisposable
     {
@@ -160,7 +160,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient
             return false;
         }
 
-        private static PlayerId ReadPlayerId(String msg = "PlayerId: ")
+        private static PlayerId ReadPlayerId(string msg = "PlayerId: ")
         {
             Console.WriteLine(msg);
             while (true)
