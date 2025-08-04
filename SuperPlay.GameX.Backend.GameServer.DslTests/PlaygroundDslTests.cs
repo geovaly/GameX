@@ -30,10 +30,10 @@ namespace SuperPlay.GameX.Backend.GameServer.DslTests
             await SendGift(player1, player2, ResourceType.Coin, 1);
             await SendGift(player1, player3, ResourceType.Coin, 1);
 
-            player2.ReceivedRequestsLastShouldBe(new GiftEvent(
+            player2.ReceivedRequests.LastShouldBe(new GiftEvent(
                 SenderId: player1.PlayerId,
                 ReceiverId: player2.PlayerId, ResourceType.Coin, 1));
-            player3.ReceivedRequestsShouldBeEmpty();
+            player3.ReceivedRequests.ShouldBeEmpty();
 
             await Login(player3);
             player1.ShouldHaveCoins(8);
