@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperPlay.GameX.Backend.DomainLayer.Data;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;
+using SuperPlay.GameX.Server.DomainLayer.Data;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.PersistenceLayer.UsingEntityFrameworkCore
+namespace SuperPlay.GameX.Server.PersistenceLayer.UsingEntityFrameworkCore
 {
     internal class PlayerRepository(GameXDbContext dbContext) : IPlayerRepository
     {

@@ -1,6 +1,6 @@
-@HttpSampleProject.Backend_HostAddress = http://localhost:5041
+@HttpSampleProject.Server_HostAddress = http://localhost:5041
 
-GET {{HttpSampleProject.Backend_HostAddress}}/weatherforecast/
+GET {{HttpSampleProject.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

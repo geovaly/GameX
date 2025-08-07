@@ -1,12 +1,12 @@
 using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.RequestExceptions;
 using RequestResponseFramework.Server;
-using SuperPlay.GameX.Backend.Tests.Shared;
+using SuperPlay.GameX.Server.Tests.Shared;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.Tests
+namespace SuperPlay.GameX.Server.Tests
 {
     public class GameServerTests : GameServerTestsBase
     {

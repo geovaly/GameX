@@ -1,7 +1,7 @@
-﻿using SuperPlay.GameX.Backend.DomainLayer.Data;
+﻿using SuperPlay.GameX.Server.DomainLayer.Data;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories
+namespace SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories
 {
     internal interface IPlayerRepository
     {

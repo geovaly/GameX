@@ -1,7 +1,7 @@
 ﻿using SuperPlay.GameX.Shared.DomainLayer.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace SuperPlay.GameX.Backend.DomainLayer.Data
+namespace SuperPlay.GameX.Server.DomainLayer.Data
 {
 
     public class MutablePlayer

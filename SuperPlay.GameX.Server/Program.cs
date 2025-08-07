@@ -3,7 +3,7 @@ using RequestResponseFramework.Server.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
-namespace SuperPlay.GameX.Backend;
+namespace SuperPlay.GameX.Server;
 
 public class Program
 {

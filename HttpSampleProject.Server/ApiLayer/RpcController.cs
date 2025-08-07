@@ -1,13 +1,13 @@
 ﻿using RequestResponseFramework.Server.Http;
 
-namespace HttpSampleProject.Backend.ApiLayer
+namespace HttpSampleProject.Server.ApiLayer
 {
     using Microsoft.AspNetCore.Mvc;
     using RequestResponseFramework.Shared.Json;
     using RequestResponseFramework.Server;
     using System.Text.Json;
 
-    namespace ScreeningTest.Backend.ApiLayer.Controllers
+    namespace ScreeningTest.Server.ApiLayer.Controllers
     {
 
         [ApiController]

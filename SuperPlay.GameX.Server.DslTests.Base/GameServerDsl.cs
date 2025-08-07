@@ -1,11 +1,11 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Server;
-using SuperPlay.GameX.Backend.ApplicationLayer;
+using SuperPlay.GameX.Server.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 using Xunit;
 
-namespace SuperPlay.GameX.Backend.DslTests.Base
+namespace SuperPlay.GameX.Server.DslTests.Base
 {
     public class GameServerDsl : IDisposable
     {

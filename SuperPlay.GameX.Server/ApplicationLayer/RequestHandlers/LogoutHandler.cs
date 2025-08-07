@@ -1,9 +1,9 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Server;
-using SuperPlay.GameX.Backend.DomainLayer;
+using SuperPlay.GameX.Server.DomainLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 
-namespace SuperPlay.GameX.Backend.ApplicationLayer.RequestHandlers
+namespace SuperPlay.GameX.Server.ApplicationLayer.RequestHandlers
 {
 
     internal class LogoutHandler(OnlinePlayerService onlinePlayerService) : CommandHandler<Logout, bool>

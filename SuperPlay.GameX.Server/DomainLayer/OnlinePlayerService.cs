@@ -3,7 +3,7 @@ using RequestResponseFramework.Server;
 using Serilog;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.DomainLayer
+namespace SuperPlay.GameX.Server.DomainLayer
 {
 
     internal record OnlinePlayer(PlayerId PlayerId, IClientConnection? ClientConnection)

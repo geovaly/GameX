@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 
-namespace SuperPlay.GameX.Backend.PersistenceLayer.UsingEntityFrameworkCore
+namespace SuperPlay.GameX.Server.PersistenceLayer.UsingEntityFrameworkCore
 {
     internal class UnitOfWork(GameXDbContext dbContext, IPlayerRepository playerRepository) : IUnitOfWork
     {

@@ -4,18 +4,18 @@ using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.MiddlewareExecutors;
 using Serilog;
-using SuperPlay.GameX.Backend.ApplicationLayer;
-using SuperPlay.GameX.Backend.ApplicationLayer.MiddlewareExecutors;
-using SuperPlay.GameX.Backend.ApplicationLayer.RequestHandlers;
-using SuperPlay.GameX.Backend.DomainLayer;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.MiddlewareExecutors;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;
-using SuperPlay.GameX.Backend.PersistenceLayer.UsingEntityFrameworkCore;
+using SuperPlay.GameX.Server.ApplicationLayer;
+using SuperPlay.GameX.Server.ApplicationLayer.MiddlewareExecutors;
+using SuperPlay.GameX.Server.ApplicationLayer.RequestHandlers;
+using SuperPlay.GameX.Server.DomainLayer;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.MiddlewareExecutors;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
+using SuperPlay.GameX.Server.PersistenceLayer.UsingEntityFrameworkCore;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
-namespace SuperPlay.GameX.Backend.Tests.Shared
+namespace SuperPlay.GameX.Server.Tests.Shared
 {
     public class CompositionRoot
     {

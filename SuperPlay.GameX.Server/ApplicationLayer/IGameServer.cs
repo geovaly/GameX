@@ -1,6 +1,6 @@
 ﻿using RequestResponseFramework.Server;
 
-namespace SuperPlay.GameX.Backend.ApplicationLayer;
+namespace SuperPlay.GameX.Server.ApplicationLayer;
 
 public interface IGameServer : IServerRequestExecutor
 {

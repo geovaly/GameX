@@ -1,10 +1,10 @@
-using SuperPlay.GameX.Backend.DslTests.Base;
+using SuperPlay.GameX.Server.DslTests.Base;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 using Xunit;
 
-namespace SuperPlay.GameX.Backend.DslTests
+namespace SuperPlay.GameX.Server.DslTests
 {
     public class GameServerDslTests : GameServerDsl
     {

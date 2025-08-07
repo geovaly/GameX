@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SuperPlay.GameX.Backend.DomainLayer.Data;
+using SuperPlay.GameX.Server.DomainLayer.Data;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.PersistenceLayer.UsingEntityFrameworkCore
+namespace SuperPlay.GameX.Server.PersistenceLayer.UsingEntityFrameworkCore
 {
     internal class GameXDbContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Server;
 
-namespace SuperPlay.GameX.Backend.Tests.Shared
+namespace SuperPlay.GameX.Server.Tests.Shared
 {
 
     public class ClientConnection : IClientConnection

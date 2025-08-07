@@ -1,6 +1,6 @@
-﻿using SuperPlay.GameX.Backend.ApplicationLayer;
+﻿using SuperPlay.GameX.Server.ApplicationLayer;
 
-namespace SuperPlay.GameX.Backend.Tests.Shared
+namespace SuperPlay.GameX.Server.Tests.Shared
 {
     public class GameServerTestsBase
     {

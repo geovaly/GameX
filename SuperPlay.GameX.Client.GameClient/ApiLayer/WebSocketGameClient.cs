@@ -1,9 +1,9 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.WebSockets;
-using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;
+using SuperPlay.GameX.Client.GameClient.ApplicationLayer;
 
-namespace SuperPlay.GameX.Frontend.GameClient.ApiLayer;
+namespace SuperPlay.GameX.Client.GameClient.ApiLayer;
 
 public class WebSocketGameClient(WebSocketRequestClient client) : IGameClient
 {

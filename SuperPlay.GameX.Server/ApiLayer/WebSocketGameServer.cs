@@ -1,7 +1,7 @@
 ﻿using RequestResponseFramework.Server.WebSockets;
-using SuperPlay.GameX.Backend.ApplicationLayer;
+using SuperPlay.GameX.Server.ApplicationLayer;
 
-namespace SuperPlay.GameX.Backend.ApiLayer
+namespace SuperPlay.GameX.Server.ApiLayer
 {
 
     public class WebSocketGameServer(IGameServer gameServer, WebSocketRequestServer webSocketRequestServer)

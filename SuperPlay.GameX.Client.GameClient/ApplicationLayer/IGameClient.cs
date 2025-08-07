@@ -1,7 +1,7 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Client;
 
-namespace SuperPlay.GameX.Frontend.GameClient.ApplicationLayer
+namespace SuperPlay.GameX.Client.GameClient.ApplicationLayer
 {
     public interface IGameClient : IRequestExecutor, IAsyncDisposable
     {

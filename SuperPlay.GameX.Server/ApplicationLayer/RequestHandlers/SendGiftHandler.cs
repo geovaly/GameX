@@ -1,14 +1,14 @@
 ﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.RequestExceptions;
 using RequestResponseFramework.Server;
-using SuperPlay.GameX.Backend.DomainLayer;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;
+using SuperPlay.GameX.Server.DomainLayer;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Backend.ApplicationLayer.RequestHandlers
+namespace SuperPlay.GameX.Server.ApplicationLayer.RequestHandlers
 {
 
     internal class SendGiftHandler(OnlinePlayerService onlinePlayerService, IUnitOfWork unitOfWork) : CommandHandler<SendGift, ResourceValue>

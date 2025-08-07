@@ -3,7 +3,7 @@ using RequestResponseFramework.Server;
 using Serilog;
 using System.Diagnostics;
 
-namespace SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.MiddlewareExecutors
+namespace SuperPlay.GameX.Server.DomainLayer.UnitOfWork.MiddlewareExecutors
 {
     internal class RetryOnConcurrencyExceptionMiddlewareExecutor(IUnitOfWork unitOfWork) : IMiddlewareExecutor
     {

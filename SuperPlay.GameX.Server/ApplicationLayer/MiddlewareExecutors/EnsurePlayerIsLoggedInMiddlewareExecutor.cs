@@ -1,11 +1,11 @@
 ﻿using RequestResponseFramework.Server;
 using RequestResponseFramework.Shared;
-using SuperPlay.GameX.Backend.DomainLayer;
-using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
+using SuperPlay.GameX.Server.DomainLayer;
+using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 
-namespace SuperPlay.GameX.Backend.ApplicationLayer.MiddlewareExecutors
+namespace SuperPlay.GameX.Server.ApplicationLayer.MiddlewareExecutors
 {
     internal class EnsurePlayerIsLoggedInMiddlewareExecutor(OnlinePlayerService onlinePlayerService, IClientConnectionProvider clientConnectionProvider, IUnitOfWork unitOfWork) : IMiddlewareExecutor
     {

@@ -1,6 +1,6 @@
-﻿using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;
+﻿using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 
-namespace SuperPlay.GameX.Backend.DomainLayer.UnitOfWork
+namespace SuperPlay.GameX.Server.DomainLayer.UnitOfWork
 {
     internal interface IUnitOfWork : IAsyncDisposable
     {
