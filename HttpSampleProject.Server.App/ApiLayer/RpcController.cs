@@ -1,10 +1,10 @@
 ﻿using RequestResponseFramework.Server.Http;
 
-namespace HttpSampleProject.Server.ApiLayer
+namespace HttpSampleProject.Server.App.ApiLayer
 {
     using Microsoft.AspNetCore.Mvc;
-    using RequestResponseFramework.Shared.Json;
     using RequestResponseFramework.Server;
+    using RequestResponseFramework.Shared.Json;
     using System.Text.Json;
 
     namespace ScreeningTest.Server.ApiLayer.Controllers

@@ -6,7 +6,7 @@ using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.Http;
 using RequestResponseFramework.Shared.Json;
 
-namespace HttpSampleProject.Server.ApiLayer
+namespace HttpSampleProject.Server.App.ApiLayer
 {
     [ApiController]
     [Route("[controller]")]

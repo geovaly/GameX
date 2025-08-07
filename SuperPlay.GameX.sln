@@ -37,9 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpSampleProject", "HttpSa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Shared", "HttpSampleProject.Shared\HttpSampleProject.Shared.csproj", "{4D1B8BC4-5FF0-4822-BC40-C7C7EE9D4D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Server", "HttpSampleProject.Server\HttpSampleProject.Server.csproj", "{8E68A8EC-7A43-4466-BA70-1E0B212C3F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Server.App", "HttpSampleProject.Server.App\HttpSampleProject.Server.App.csproj", "{8E68A8EC-7A43-4466-BA70-1E0B212C3F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Client", "HttpSampleProject.Client\HttpSampleProject.Client.csproj", "{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Client.App", "HttpSampleProject.Client.App\HttpSampleProject.Client.App.csproj", "{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{88421BA1-E637-4623-888B-A28117505394}"
 EndProject
