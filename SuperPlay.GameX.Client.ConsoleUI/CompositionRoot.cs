@@ -5,7 +5,7 @@ using RequestResponseFramework.Client.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Client.ApiLayer;
 using SuperPlay.GameX.Client.ApplicationLayer;
-using SuperPlay.GameX.Client.ConsoleUI.ApplicationLayer;
+using SuperPlay.GameX.Client.ConsoleUI.UserInterfaceLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
@@ -24,9 +24,9 @@ namespace SuperPlay.GameX.Client.ConsoleUI
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public ConsoleGame GetConsoleGame()
+        public GameConsole GetGameConsole()
         {
-            return _serviceProvider.GetRequiredService<ConsoleGame>();
+            return _serviceProvider.GetRequiredService<GameConsole>();
         }
 
 
@@ -46,7 +46,7 @@ namespace SuperPlay.GameX.Client.ConsoleUI
                 })
                 .AddWebSocketsRequestClient(_webSocketRequestClientSettings)
                 .AddSingleton<IGameClient, WebSocketGameClient>()
-                .AddSingleton<ConsoleGame>();
+                .AddSingleton<GameConsole>();
         }
 
     }

@@ -7,9 +7,9 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Client.ConsoleUI.ApplicationLayer
+namespace SuperPlay.GameX.Client.ConsoleUI.UserInterfaceLayer
 {
-    public class ConsoleGame(IGameClient client) : IAsyncDisposable
+    public class GameConsole(IGameClient client) : IAsyncDisposable
     {
         private LoggedInContext? _loggedInContext;
 
