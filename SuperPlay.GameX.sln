@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.GameClient", "SuperPlay.GameX.Frontend.GameClient\SuperPlay.GameX.Frontend.GameClient.csproj", "{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.Console", "SuperPlay.GameX.Frontend.ConsoleGameClient\SuperPlay.GameX.Frontend.Console.csproj", "{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.Tests", "SuperPlay.GameX.Backend.Tests\SuperPlay.GameX.Backend.Tests.csproj", "{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.DslTests", "SuperPlay.GameX.Backend.DslTests\SuperPlay.GameX.Backend.DslTests.csproj", "{894BAD33-FCA0-44E6-9E87-D4DF0D39E85E}"
@@ -47,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{88421BA1-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSockets", "WebSockets", "{399CA4AD-4BB0-4D50-8ABE-B470CAFF50A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.ConsoleProgram", "SuperPlay.GameX.Frontend.ConsoleProgram\SuperPlay.GameX.Frontend.ConsoleProgram.csproj", "{6D681958-970B-94DD-BDE3-0D447080495B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,10 +65,6 @@ Global
 		{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,6 +117,10 @@ Global
 		{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D681958-970B-94DD-BDE3-0D447080495B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D681958-970B-94DD-BDE3-0D447080495B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D681958-970B-94DD-BDE3-0D447080495B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D681958-970B-94DD-BDE3-0D447080495B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
