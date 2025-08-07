@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using RequestResponseFramework.Json;
-using RequestResponseFramework.SystemExceptions;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.Json;
+using RequestResponseFramework.Shared.SystemExceptions;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;

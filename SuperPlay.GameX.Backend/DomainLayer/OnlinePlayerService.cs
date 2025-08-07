@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework;
+﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Server;
 using Serilog;
 using SuperPlay.GameX.Shared.DomainLayer.Data;

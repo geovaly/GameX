@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework.RequestExceptions;
+﻿using RequestResponseFramework.Shared.RequestExceptions;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared

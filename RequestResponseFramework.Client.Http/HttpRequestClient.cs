@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using RequestResponseFramework.Json;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.Json;
 using System.Text;
 using System.Text.Json;
 

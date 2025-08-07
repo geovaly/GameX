@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework;
+﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork.Repositories;

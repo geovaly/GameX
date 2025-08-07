@@ -1,4 +1,6 @@
-﻿namespace RequestResponseFramework.Server
+﻿using RequestResponseFramework.Shared;
+
+namespace RequestResponseFramework.Server
 {
     internal class ServerRequestExecutor(
         IRequestScopeFactory requestScopeFactory) : IServerRequestExecutor

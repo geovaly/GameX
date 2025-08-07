@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 
-namespace RequestResponseFramework.Json
+namespace RequestResponseFramework.Shared.Json
 {
     public static class ResponseJsonSerializer
     {

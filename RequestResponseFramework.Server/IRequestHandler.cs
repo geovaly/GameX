@@ -1,4 +1,5 @@
-﻿namespace RequestResponseFramework.Server;
+﻿using RequestResponseFramework.Shared;
+namespace RequestResponseFramework.Server;
 
 public interface IRequestHandler<in TRequest, TResult> where TRequest : Request<TResult>
 {

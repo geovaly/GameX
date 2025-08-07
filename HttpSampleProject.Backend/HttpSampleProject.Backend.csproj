@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HttpSampleProject.Shared\HttpSampleProject.Shared.csproj" />
     <ProjectReference Include="..\RequestResponseFramework.Server.Http\RequestResponseFramework.Server.Http.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,7 +16,7 @@
     <ProjectReference Include="..\HttpSampleProject.Shared\HttpSampleProject.Shared.csproj" />
     <ProjectReference Include="..\RequestResponseFramework.Client.Http\RequestResponseFramework.Client.Http.csproj" />
     <ProjectReference Include="..\RequestResponseFramework.Client\RequestResponseFramework.Client.csproj" />
-    <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
   </ItemGroup>
 
 </Project>

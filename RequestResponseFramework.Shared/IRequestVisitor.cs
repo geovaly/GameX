@@ -1,4 +1,4 @@
-﻿namespace RequestResponseFramework;
+﻿namespace RequestResponseFramework.Shared;
 
 public interface IRequestVisitor
 {

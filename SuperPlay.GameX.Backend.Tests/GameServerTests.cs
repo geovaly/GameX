@@ -1,5 +1,5 @@
-using RequestResponseFramework;
-using RequestResponseFramework.RequestExceptions;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.RequestExceptions;
 using RequestResponseFramework.Server;
 using SuperPlay.GameX.Backend.Tests.Shared;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;

@@ -1,7 +1,7 @@
-﻿using RequestResponseFramework;
-using RequestResponseFramework.Client;
-using RequestResponseFramework.Requests;
-using RequestResponseFramework.SystemExceptions;
+﻿using RequestResponseFramework.Client;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.Requests;
+using RequestResponseFramework.Shared.SystemExceptions;
 using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;

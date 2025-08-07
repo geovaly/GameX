@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RequestResponseFramework.Json;
+using RequestResponseFramework.Shared.Json;
 using System.Reflection;
 using System.Text.Json;
 

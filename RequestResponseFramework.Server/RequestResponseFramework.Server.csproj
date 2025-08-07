@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestResponseFramework\RequestResponseFramework.csproj" />
+    <ProjectReference Include="..\RequestResponseFramework.Shared\RequestResponseFramework.Shared.csproj" />
   </ItemGroup>
 
 </Project>

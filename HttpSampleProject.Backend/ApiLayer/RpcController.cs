@@ -3,7 +3,7 @@
 namespace HttpSampleProject.Backend.ApiLayer
 {
     using Microsoft.AspNetCore.Mvc;
-    using RequestResponseFramework.Json;
+    using RequestResponseFramework.Shared.Json;
     using RequestResponseFramework.Server;
     using System.Text.Json;
 

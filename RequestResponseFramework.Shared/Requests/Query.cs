@@ -1,4 +1,4 @@
-﻿namespace RequestResponseFramework.Requests
+﻿namespace RequestResponseFramework.Shared.Requests
 {
     public abstract record Query<TResult> : Request<TResult>
     {

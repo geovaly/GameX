@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework;
+﻿using RequestResponseFramework.Shared;
 using SuperPlay.GameX.Backend.DslTests.Base;
 using Xunit;
 

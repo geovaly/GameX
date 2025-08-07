@@ -1,7 +1,7 @@
 ﻿using HttpSampleProject.Shared.ApplicationLayer.Requests;
 using HttpSampleProject.Shared.DomainLayer.Data;
-using RequestResponseFramework;
 using RequestResponseFramework.Server;
+using RequestResponseFramework.Shared;
 
 namespace HttpSampleProject.Backend.ApplicationLayer.RequestHandlers
 {

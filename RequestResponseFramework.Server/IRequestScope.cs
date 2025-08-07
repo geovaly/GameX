@@ -1,4 +1,6 @@
-﻿namespace RequestResponseFramework.Server;
+﻿using RequestResponseFramework.Shared;
+
+namespace RequestResponseFramework.Server;
 
 public interface IRequestScope<TRequest, TResult> : IAsyncDisposable where TRequest : Request<TResult>
 {

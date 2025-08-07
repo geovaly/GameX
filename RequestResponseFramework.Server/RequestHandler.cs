@@ -1,4 +1,5 @@
-﻿using RequestResponseFramework.Requests;
+﻿using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.Requests;
 
 namespace RequestResponseFramework.Server
 {

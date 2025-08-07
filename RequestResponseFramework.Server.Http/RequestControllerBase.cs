@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RequestResponseFramework.Json;
-using RequestResponseFramework.RequestExceptions;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.Json;
+using RequestResponseFramework.Shared.RequestExceptions;
 using System.Net;
 using System.Text.Json;
 

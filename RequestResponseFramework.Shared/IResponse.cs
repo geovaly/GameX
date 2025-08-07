@@ -1,7 +1,7 @@
-﻿using RequestResponseFramework.SystemExceptions;
+﻿using RequestResponseFramework.Shared.SystemExceptions;
 using System.Diagnostics;
 
-namespace RequestResponseFramework
+namespace RequestResponseFramework.Shared
 {
     public interface IResponse
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using RequestResponseFramework.RequestExceptions;
-using RequestResponseFramework.SystemExceptions;
+using RequestResponseFramework.Shared;
+using RequestResponseFramework.Shared.RequestExceptions;
+using RequestResponseFramework.Shared.SystemExceptions;
 
 namespace RequestResponseFramework.Server.MiddlewareExecutors
 {

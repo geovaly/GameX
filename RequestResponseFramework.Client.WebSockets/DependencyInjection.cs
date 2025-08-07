@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RequestResponseFramework.Shared;
 
 namespace RequestResponseFramework.Client.WebSockets
 {

@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RequestResponseFramework;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.Http;
+using RequestResponseFramework.Shared;
 
 var clientSettings = new HttpRequestClientSettings(new Uri("https://localhost:7139"));
 

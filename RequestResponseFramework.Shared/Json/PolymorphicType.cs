@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
 
-namespace RequestResponseFramework.Json;
+namespace RequestResponseFramework.Shared.Json;
 
 public record PolymorphicType(Type BaseType, IReadOnlyCollection<Assembly> Assemblies);

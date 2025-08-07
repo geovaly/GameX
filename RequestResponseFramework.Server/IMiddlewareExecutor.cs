@@ -1,4 +1,6 @@
-﻿namespace RequestResponseFramework.Server
+﻿using RequestResponseFramework.Shared;
+
+namespace RequestResponseFramework.Server
 {
     public delegate Task<Response<TResult>> MiddlewareNextTryExecuteAsync<in TRequest, TResult>(TRequest request) where TRequest : Request<TResult>;
 

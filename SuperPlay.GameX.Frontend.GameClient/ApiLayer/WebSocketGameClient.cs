@@ -1,4 +1,4 @@
-﻿using RequestResponseFramework;
+﻿using RequestResponseFramework.Shared;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.WebSockets;
 using SuperPlay.GameX.Frontend.GameClient.ApplicationLayer;

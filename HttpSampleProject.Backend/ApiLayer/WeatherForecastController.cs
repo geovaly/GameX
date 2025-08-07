@@ -1,10 +1,10 @@
 using HttpSampleProject.Shared.ApplicationLayer.Requests;
 using HttpSampleProject.Shared.DomainLayer.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using RequestResponseFramework;
-using RequestResponseFramework.Json;
 using RequestResponseFramework.Server;
 using RequestResponseFramework.Server.Http;
+using RequestResponseFramework.Shared.Json;
 
 namespace HttpSampleProject.Backend.ApiLayer
 {

@@ -1,5 +1,5 @@
 ﻿using HttpSampleProject.Shared.DomainLayer.Data;
-using RequestResponseFramework.Requests;
+using RequestResponseFramework.Shared.Requests;
 
 namespace HttpSampleProject.Shared.ApplicationLayer.Requests
 {

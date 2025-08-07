@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework;
-using RequestResponseFramework.Server;
+﻿using RequestResponseFramework.Server;
+using RequestResponseFramework.Shared;
 using SuperPlay.GameX.Backend.DomainLayer;
 using SuperPlay.GameX.Backend.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;

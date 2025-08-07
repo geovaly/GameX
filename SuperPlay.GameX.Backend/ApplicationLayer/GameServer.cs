@@ -1,6 +1,5 @@
-﻿using RequestResponseFramework;
-
-using RequestResponseFramework.Server;
+﻿using RequestResponseFramework.Server;
+using RequestResponseFramework.Shared;
 
 namespace SuperPlay.GameX.Backend.ApplicationLayer
 {
