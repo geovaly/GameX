@@ -3,7 +3,7 @@ using HttpSampleProject.Shared.DomainLayer.Data;
 using RequestResponseFramework.Server;
 using RequestResponseFramework.Shared;
 
-namespace HttpSampleProject.Server.App.ApplicationLayer.RequestHandlers
+namespace HttpSampleProject.Server.ApplicationLayer.RequestHandlers
 {
     public class ListWeatherForecastHandler : QueryHandler<ListWeatherForecast, IList<WeatherForecast>>
     {

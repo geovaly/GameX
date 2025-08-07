@@ -1,6 +1,6 @@
 ﻿using RequestResponseFramework.Server.Http;
 
-namespace HttpSampleProject.Server.App.ApiLayer
+namespace HttpSampleProject.Server.ApiLayer
 {
     using Microsoft.AspNetCore.Mvc;
     using RequestResponseFramework.Server;
