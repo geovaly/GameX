@@ -5,15 +5,15 @@ VisualStudioVersion = 17.14.36119.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Shared", "SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj", "{1A062636-D51C-47D0-8381-D854B6254658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend", "SuperPlay.GameX.Backend\SuperPlay.GameX.Backend.csproj", "{0ADAE6A0-840F-4C18-A0E9-DB7E29E67B98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Server", "SuperPlay.GameX.Server\SuperPlay.GameX.Server.csproj", "{0ADAE6A0-840F-4C18-A0E9-DB7E29E67B98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.GameClient", "SuperPlay.GameX.Frontend.GameClient\SuperPlay.GameX.Frontend.GameClient.csproj", "{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Client.GameClient", "SuperPlay.GameX.Client.GameClient\SuperPlay.GameX.Client.GameClient.csproj", "{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.Tests", "SuperPlay.GameX.Backend.Tests\SuperPlay.GameX.Backend.Tests.csproj", "{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Server.Tests", "SuperPlay.GameX.Server.Tests\SuperPlay.GameX.Server.Tests.csproj", "{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.DslTests", "SuperPlay.GameX.Backend.DslTests\SuperPlay.GameX.Backend.DslTests.csproj", "{894BAD33-FCA0-44E6-9E87-D4DF0D39E85E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Server.DslTests", "SuperPlay.GameX.Server.DslTests\SuperPlay.GameX.Server.DslTests.csproj", "{894BAD33-FCA0-44E6-9E87-D4DF0D39E85E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.DslTests.Base", "SuperPlay.GameX.Backend.DslTests.Base\SuperPlay.GameX.Backend.DslTests.Base.csproj", "{7A771D97-9FC1-4E90-8F79-1A4086BBA898}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Server.DslTests.Base", "SuperPlay.GameX.Server.DslTests.Base\SuperPlay.GameX.Server.DslTests.Base.csproj", "{7A771D97-9FC1-4E90-8F79-1A4086BBA898}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF7A1BF3-116A-4BBE-A7A4-3DD79CD1DD61}"
 EndProject
@@ -37,15 +37,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HttpSampleProject", "HttpSa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Shared", "HttpSampleProject.Shared\HttpSampleProject.Shared.csproj", "{4D1B8BC4-5FF0-4822-BC40-C7C7EE9D4D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Backend", "HttpSampleProject.Backend\HttpSampleProject.Backend.csproj", "{8E68A8EC-7A43-4466-BA70-1E0B212C3F57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Server", "HttpSampleProject.Server\HttpSampleProject.Server.csproj", "{8E68A8EC-7A43-4466-BA70-1E0B212C3F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Frontend", "HttpSampleProject.Frontend\HttpSampleProject.Frontend.csproj", "{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSampleProject.Client", "HttpSampleProject.Client\HttpSampleProject.Client.csproj", "{2BD6D6EF-8832-4872-9F4C-B9A4D0FFA757}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{88421BA1-E637-4623-888B-A28117505394}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSockets", "WebSockets", "{399CA4AD-4BB0-4D50-8ABE-B470CAFF50A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.ConsoleProgram", "SuperPlay.GameX.Frontend.ConsoleProgram\SuperPlay.GameX.Frontend.ConsoleProgram.csproj", "{6D681958-970B-94DD-BDE3-0D447080495B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Client.ConsoleProgram", "SuperPlay.GameX.Client.ConsoleProgram\SuperPlay.GameX.Client.ConsoleProgram.csproj", "{6D681958-970B-94DD-BDE3-0D447080495B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

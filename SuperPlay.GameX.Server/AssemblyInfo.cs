@@ -17,5 +17,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("feb8346f-c7d3-4b03-af73-752f8530b74d")]
 
-[assembly: InternalsVisibleTo("SuperPlay.GameX.Backend.Tests")]
-[assembly: InternalsVisibleTo("SuperPlay.GameX.Backend.DslTests.Base")]
+[assembly: InternalsVisibleTo("SuperPlay.GameX.Server.Tests")]
+[assembly: InternalsVisibleTo("SuperPlay.GameX.Server.DslTests.Base")]

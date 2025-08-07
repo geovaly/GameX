@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuperPlay.GameX.Backend.DslTests.Base\SuperPlay.GameX.Backend.DslTests.Base.csproj" />
+    <ProjectReference Include="..\SuperPlay.GameX.Server.DslTests.Base\SuperPlay.GameX.Server.DslTests.Base.csproj" />
   </ItemGroup>
 
 </Project>
