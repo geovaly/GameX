@@ -1,9 +1,9 @@
 ﻿using RequestResponseFramework.Client.WebSockets;
 using Serilog;
-using SuperPlay.GameX.Client.ConsoleUI.UserInterfaceLayer;
+using SuperPlay.GameX.Client.ConsoleApp.UserInterfaceLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
-namespace SuperPlay.GameX.Client.ConsoleUI;
+namespace SuperPlay.GameX.Client.ConsoleApp;
 
 public class Program
 {

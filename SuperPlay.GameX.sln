@@ -45,7 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{88421BA1-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSockets", "WebSockets", "{399CA4AD-4BB0-4D50-8ABE-B470CAFF50A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Client.ConsoleUI", "SuperPlay.GameX.Client.ConsoleUI\SuperPlay.GameX.Client.ConsoleUI.csproj", "{6D681958-970B-94DD-BDE3-0D447080495B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Client.ConsoleApp", "SuperPlay.GameX.Client.ConsoleApp\SuperPlay.GameX.Client.ConsoleApp.csproj", "{6D681958-970B-94DD-BDE3-0D447080495B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
