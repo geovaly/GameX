@@ -2,12 +2,12 @@
 using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Requests;
 using RequestResponseFramework.Shared.SystemExceptions;
-using SuperPlay.GameX.Client.GameClient.ApplicationLayer;
+using SuperPlay.GameX.Client.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Client.ConsoleProgram.ApplicationLayer
+namespace SuperPlay.GameX.Client.ConsoleUI.ApplicationLayer
 {
     public class ConsoleGame(IGameClient client) : IAsyncDisposable
     {

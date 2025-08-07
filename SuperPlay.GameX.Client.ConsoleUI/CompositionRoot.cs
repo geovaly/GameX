@@ -3,13 +3,13 @@ using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Client;
 using RequestResponseFramework.Client.WebSockets;
 using Serilog;
-using SuperPlay.GameX.Client.ConsoleProgram.ApplicationLayer;
-using SuperPlay.GameX.Client.GameClient.ApiLayer;
-using SuperPlay.GameX.Client.GameClient.ApplicationLayer;
+using SuperPlay.GameX.Client.ApiLayer;
+using SuperPlay.GameX.Client.ApplicationLayer;
+using SuperPlay.GameX.Client.ConsoleUI.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
-namespace SuperPlay.GameX.Client.ConsoleProgram
+namespace SuperPlay.GameX.Client.ConsoleUI
 {
     public class CompositionRoot
     {

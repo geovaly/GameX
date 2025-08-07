@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuperPlay.GameX.Client.GameClient\SuperPlay.GameX.Client.GameClient.csproj" />
+    <ProjectReference Include="..\SuperPlay.GameX.Client\SuperPlay.GameX.Client.csproj" />
     <ProjectReference Include="..\SuperPlay.GameX.Shared\SuperPlay.GameX.Shared.csproj" />
   </ItemGroup>
 
