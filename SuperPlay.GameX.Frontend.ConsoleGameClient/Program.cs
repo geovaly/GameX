@@ -1,10 +1,9 @@
 ﻿using RequestResponseFramework.Client.WebSockets;
 using Serilog;
-using SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer;
+using SuperPlay.GameX.Frontend.Console.ApplicationLayer;
 using SuperPlay.GameX.Shared.GenericLayer.Disposable;
 
-
-namespace SuperPlay.GameX.Frontend.ConsoleGameClient;
+namespace SuperPlay.GameX.Frontend.Console;
 
 public class Program
 {
@@ -30,7 +29,7 @@ public class Program
 
     private static void DisposeOnAppExiting(ConsoleGame consoleGame)
     {
-        Console.CancelKeyPress += (_, e) =>
+        System.Console.CancelKeyPress += (_, e) =>
         {
             OnAppExiting(consoleGame);
             e.Cancel = true;
@@ -43,7 +42,7 @@ public class Program
     private static void OnAppExiting(ConsoleGame consoleGame)
     {
         if (!consoleGame.IsRunning) return;
-        Console.WriteLine("Exiting ...");
+        System.Console.WriteLine("Exiting ...");
         consoleGame.DisposeAsync().GetAwaiter().GetResult();
     }
 

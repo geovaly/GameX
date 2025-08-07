@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.GameClient", "SuperPlay.GameX.Frontend.GameClient\SuperPlay.GameX.Frontend.GameClient.csproj", "{501C13C7-26E8-4F7E-BCE8-D5EA24ADD6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.ConsoleGameClient", "SuperPlay.GameX.Frontend.ConsoleGameClient\SuperPlay.GameX.Frontend.ConsoleGameClient.csproj", "{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Frontend.Console", "SuperPlay.GameX.Frontend.ConsoleGameClient\SuperPlay.GameX.Frontend.Console.csproj", "{FCC0ABDE-838E-4048-B155-DF7BBC0C167B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperPlay.GameX.Backend.Tests", "SuperPlay.GameX.Backend.Tests\SuperPlay.GameX.Backend.Tests.csproj", "{CD62DFAE-997F-4F48-A293-CE3A7C5D6DA5}"
 EndProject

@@ -7,7 +7,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
+namespace SuperPlay.GameX.Frontend.Console.ApplicationLayer
 {
     public class ConsoleGame(IGameClient client) : IAsyncDisposable
     {
@@ -36,8 +36,8 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
             }
             catch (NetworkSystemException)
             {
-                Console.WriteLine("[Client] Cannot connect to server. Press any key to exit.");
-                Console.ReadKey();
+                System.Console.WriteLine("[Client] Cannot connect to server. Press any key to exit.");
+                System.Console.ReadKey();
                 return false;
             }
         }
@@ -51,8 +51,8 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
             }
             catch (NetworkSystemException)
             {
-                Console.WriteLine("Network Error. Press any key to exit.");
-                Console.ReadKey();
+                System.Console.WriteLine("Network Error. Press any key to exit.");
+                System.Console.ReadKey();
                 return false;
             }
         }
@@ -61,10 +61,10 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 
         private async Task ExecuteNextAction()
         {
-            Console.WriteLine();
-            Console.WriteLine(
+            System.Console.WriteLine();
+            System.Console.WriteLine(
                 "Choose action: [1]Login  [2]GetMyPlayer  [3]UpdateResources  [4]SendGift  [5]Logout  [6]Exit");
-            var choice = Console.ReadLine();
+            var choice = System.Console.ReadLine();
             switch (choice)
             {
                 case "1":
@@ -86,7 +86,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
                     await Exit();
                     break;
                 default:
-                    Console.WriteLine("Unknown choice.");
+                    System.Console.WriteLine("Unknown choice.");
                     break;
             }
         }
@@ -145,7 +145,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 
         private void EventsReceived(object? sender, Event e)
         {
-            Console.WriteLine($"Event Received: {e}");
+            System.Console.WriteLine($"Event Received: {e}");
         }
 
 
@@ -153,7 +153,7 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
         {
             if (_loggedInContext == null)
             {
-                Console.WriteLine("Error: Please login first");
+                System.Console.WriteLine("Error: Please login first");
                 return true;
             }
 
@@ -162,17 +162,17 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 
         private static PlayerId ReadPlayerId(string msg = "PlayerId: ")
         {
-            Console.WriteLine(msg);
+            System.Console.WriteLine(msg);
             while (true)
             {
-                var line = Console.ReadLine()!.Trim();
+                var line = System.Console.ReadLine()!.Trim();
                 if (int.TryParse(line, out var value))
                 {
                     return new PlayerId(value);
                 }
                 else
                 {
-                    Console.WriteLine("Invalid PlayerId. Try again. ");
+                    System.Console.WriteLine("Invalid PlayerId. Try again. ");
                 }
             }
 
@@ -182,32 +182,32 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 
         private static ResourceValue ReadResourceValue()
         {
-            Console.WriteLine("DeltaResourceValue (int): ");
+            System.Console.WriteLine("DeltaResourceValue (int): ");
             while (true)
             {
-                if (int.TryParse(Console.ReadLine()!.Trim(), out var value))
+                if (int.TryParse(System.Console.ReadLine()!.Trim(), out var value))
                 {
                     return new ResourceValue(value);
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Int. Try again. ");
+                    System.Console.WriteLine("Invalid Int. Try again. ");
                 }
             }
         }
 
         private static ResourceType ReadResourceType()
         {
-            Console.WriteLine("ResourceType (int): [1] Coins, [2] Rolls");
+            System.Console.WriteLine("ResourceType (int): [1] Coins, [2] Rolls");
             while (true)
             {
-                if (int.TryParse(Console.ReadLine()!.Trim(), out var value) && Enum.IsDefined(typeof(ResourceType), value))
+                if (int.TryParse(System.Console.ReadLine()!.Trim(), out var value) && Enum.IsDefined(typeof(ResourceType), value))
                 {
                     return (ResourceType)value;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Enum. Try again. ");
+                    System.Console.WriteLine("Invalid Enum. Try again. ");
                 }
             }
         }
@@ -215,24 +215,24 @@ namespace SuperPlay.GameX.Frontend.ConsoleGameClient.ApplicationLayer
 
         private static DeviceId ReadDeviceId()
         {
-            Console.WriteLine("Enter DeviceId: ");
+            System.Console.WriteLine("Enter DeviceId: ");
             while (true)
             {
-                var line = Console.ReadLine()!.Trim();
+                var line = System.Console.ReadLine()!.Trim();
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     return new DeviceId(line);
                 }
                 else
                 {
-                    Console.WriteLine("Invalid DeviceId. Try again. ");
+                    System.Console.WriteLine("Invalid DeviceId. Try again. ");
                 }
             }
         }
 
         private static void WriteLineRequestResult(IResponse result)
         {
-            Console.WriteLine($"Response: {result}");
+            System.Console.WriteLine($"Response: {result}");
         }
 
         public async ValueTask DisposeAsync()
