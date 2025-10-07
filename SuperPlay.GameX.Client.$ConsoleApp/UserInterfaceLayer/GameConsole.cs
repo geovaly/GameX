@@ -7,7 +7,7 @@ using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
-namespace SuperPlay.GameX.Client.ConsoleApp.UserInterfaceLayer
+namespace SuperPlay.GameX.Client.UserInterfaceLayer
 {
     public class GameConsole(IGameClient client) : IAsyncDisposable
     {

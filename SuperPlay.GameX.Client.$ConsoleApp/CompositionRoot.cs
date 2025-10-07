@@ -5,11 +5,11 @@ using RequestResponseFramework.Client.WebSockets;
 using Serilog;
 using SuperPlay.GameX.Client.ApiLayer;
 using SuperPlay.GameX.Client.ApplicationLayer;
-using SuperPlay.GameX.Client.ConsoleApp.UserInterfaceLayer;
+using SuperPlay.GameX.Client.UserInterfaceLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Json;
 
-namespace SuperPlay.GameX.Client.ConsoleApp
+namespace SuperPlay.GameX.Client
 {
     public class CompositionRoot
     {
