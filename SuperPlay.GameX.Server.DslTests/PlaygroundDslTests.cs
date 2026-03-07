@@ -20,15 +20,15 @@ namespace SuperPlay.GameX.Server.DslTests
             await Login(player2);
             await Login(player3);
 
-            await UpdateResources(player1, ResourceType.Coin, 20);
-            await UpdateResources(player1, ResourceType.Coin, -10);
+            await UpdateCoins(player1, 20);
+            await UpdateCoins(player1, -10);
             player1.ShouldHaveCoins(10);
             player2.ShouldHaveCoins(0);
             player3.ShouldHaveCoins(0);
 
             await Logout(player3);
-            await SendGift(player1, player2, ResourceType.Coin, 1);
-            await SendGift(player1, player3, ResourceType.Coin, 1);
+            await SendCoinsGift(player1, player2, 1);
+            await SendCoinsGift(player1, player3, 1);
 
             player2.ReceivedRequests.LastShouldBe(new GiftEvent(
                 SenderId: player1.PlayerId,

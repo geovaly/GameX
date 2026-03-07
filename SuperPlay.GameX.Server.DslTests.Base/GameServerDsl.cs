@@ -1,5 +1,5 @@
-﻿using RequestResponseFramework.Shared;
-using RequestResponseFramework.Server;
+﻿using RequestResponseFramework.Server;
+using RequestResponseFramework.Shared;
 using SuperPlay.GameX.Server.ApplicationLayer;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
@@ -61,9 +61,14 @@ namespace SuperPlay.GameX.Server.DslTests.Base
         }
 
 
-        public async Task UpdateResources(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue)
+        public async Task UpdateCoins(PlayerDsl player, ResourceValue deltaValue)
         {
-            await ExecuteAsync(new UpdateResources(player.GetContext(), resourceType, deltaValue), player.Connection);
+            await ExecuteAsync(new UpdateResources(player.GetContext(), ResourceType.Coin, deltaValue), player.Connection);
+        }
+
+        public async Task UpdateRolls(PlayerDsl player, ResourceValue deltaValue)
+        {
+            await ExecuteAsync(new UpdateResources(player.GetContext(), ResourceType.Roll, deltaValue), player.Connection);
         }
 
         public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
@@ -73,9 +78,14 @@ namespace SuperPlay.GameX.Server.DslTests.Base
             Assert.IsType<TRequestException>(result.GetException());
         }
 
-        public async Task SendGift(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value)
+        public async Task SendCoinsGift(PlayerDsl player, PlayerDsl friend, ResourceValue value)
         {
-            await ExecuteAsync(new SendGift(player.GetContext(), friend.PlayerIdMaybe!.Value, resourceType, value), player.Connection);
+            await ExecuteAsync(new SendGift(player.GetContext(), friend.PlayerIdMaybe!.Value, ResourceType.Coin, value), player.Connection);
+        }
+
+        public async Task SendRollsGift(PlayerDsl player, PlayerDsl friend, ResourceValue value)
+        {
+            await ExecuteAsync(new SendGift(player.GetContext(), friend.PlayerIdMaybe!.Value, ResourceType.Roll, value), player.Connection);
         }
 
         public async Task SendGiftShouldThrow<TRequestException>(PlayerDsl player, PlayerDsl friend, ResourceType resourceType, ResourceValue value) where TRequestException : RequestException

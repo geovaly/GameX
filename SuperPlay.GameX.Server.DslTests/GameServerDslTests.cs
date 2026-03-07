@@ -52,14 +52,14 @@ namespace SuperPlay.GameX.Server.DslTests
             await GivenGameServer();
             var player = await GivenOldPlayer();
             await Login(player);
-            await UpdateResources(player, ResourceType.Coin, 1);
-            await UpdateResources(player, ResourceType.Roll, 2);
+            await UpdateCoins(player, 1);
+            await UpdateRolls(player, 2);
 
             player.ShouldHaveCoins(1);
             player.ShouldHaveRolls(2);
 
-            await UpdateResources(player, ResourceType.Coin, -1);
-            await UpdateResources(player, ResourceType.Roll, -1);
+            await UpdateCoins(player, -1);
+            await UpdateRolls(player, -1);
 
             player.ShouldHaveCoins(0);
             player.ShouldHaveRolls(1);
@@ -75,8 +75,8 @@ namespace SuperPlay.GameX.Server.DslTests
             var player2 = await GivenOldPlayer();
             await Login(player1);
             await Login(player2);
-            await UpdateResources(player1, ResourceType.Coin, 10);
-            await SendGift(player1, player2, ResourceType.Coin, 3);
+            await UpdateCoins(player1, 10);
+            await SendCoinsGift(player1, player2, 3);
 
             player1.ShouldHaveCoins(7);
             player2.ShouldHaveCoins(3);
@@ -92,7 +92,7 @@ namespace SuperPlay.GameX.Server.DslTests
             await Login(player1);
             await Login(player2);
 
-            await UpdateResources(player1, ResourceType.Coin, 1);
+            await UpdateCoins(player1, 1);
 
             await SendGiftShouldThrow<NotEnoughResourcesException>(player1, player2, ResourceType.Coin, 2);
 
@@ -109,9 +109,9 @@ namespace SuperPlay.GameX.Server.DslTests
             await Login(player1);
             await Login(player2);
 
-            await UpdateResources(player1, ResourceType.Coin, 1);
+            await UpdateCoins(player1, 1);
 
-            await SendGift(player1, player2, ResourceType.Coin, 1);
+            await SendCoinsGift(player1, player2, 1);
 
             player2.ReceivedRequests.LastShouldBe(new GiftEvent(
                 SenderId: player1.PlayerId,
@@ -126,9 +126,9 @@ namespace SuperPlay.GameX.Server.DslTests
             var player1 = await GivenOldPlayer();
             var player2 = await GivenOldPlayer();
             await Login(player1);
-            await UpdateResources(player1, ResourceType.Coin, 1);
+            await UpdateCoins(player1, 1);
 
-            await SendGift(player1, player2, ResourceType.Coin, 1);
+            await SendCoinsGift(player1, player2, 1);
 
             player2.ReceivedRequests.ShouldBeEmpty();
         }
@@ -141,10 +141,10 @@ namespace SuperPlay.GameX.Server.DslTests
             var player2 = await GivenOldPlayer();
             await Login(player1);
             await Login(player2);
-            await UpdateResources(player1, ResourceType.Coin, 1);
+            await UpdateCoins(player1, 1);
 
             RemoveConnection(player2);
-            await SendGift(player1, player2, ResourceType.Coin, 1);
+            await SendCoinsGift(player1, player2, 1);
 
             player2.ReceivedRequests.ShouldBeEmpty();
         }
