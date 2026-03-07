@@ -2,11 +2,11 @@
 using RequestResponseFramework.Shared.RequestExceptions;
 using RequestResponseFramework.Server;
 using SuperPlay.GameX.Server.DomainLayer;
-using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
-using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
+using SuperPlay.GameX.Server.ApplicationLayer.UnitOfWork;
+using SuperPlay.GameX.Server.ApplicationLayer.UnitOfWork.Repositories;
 
 namespace SuperPlay.GameX.Server.ApplicationLayer.RequestHandlers
 {

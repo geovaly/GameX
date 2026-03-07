@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SuperPlay.GameX.Server.ApplicationLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Server.DomainLayer.Data;
-using SuperPlay.GameX.Server.DomainLayer.UnitOfWork.Repositories;
 using SuperPlay.GameX.Shared.DomainLayer.Data;
 
 namespace SuperPlay.GameX.Server.PersistenceLayer.UsingEntityFrameworkCore

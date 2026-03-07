@@ -1,7 +1,7 @@
 ﻿using RequestResponseFramework.Server;
 using RequestResponseFramework.Shared;
+using SuperPlay.GameX.Server.ApplicationLayer.UnitOfWork;
 using SuperPlay.GameX.Server.DomainLayer;
-using SuperPlay.GameX.Server.DomainLayer.UnitOfWork;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests;
 using SuperPlay.GameX.Shared.ApplicationLayer.Requests.Shared;
 
