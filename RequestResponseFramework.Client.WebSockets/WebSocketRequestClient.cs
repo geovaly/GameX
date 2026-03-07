@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Json;
+using RequestResponseFramework.Shared.Requests;
 using RequestResponseFramework.Shared.SystemExceptions;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
@@ -65,12 +66,27 @@ public class WebSocketRequestClient(
         var message = RequestResponseMessage.CreateRequest(request, JsonSerializerOptions);
         var messageJson = JsonSerializer.Serialize(message, JsonSerializerOptions);
         var requestBytes = Encoding.UTF8.GetBytes(messageJson);
-        var waitingRequest = new WaitingRequest(request, new TaskCompletionSource<IResponse>(TaskCreationOptions.RunContinuationsAsynchronously));
-        _waitingRequests.TryAdd(message.RequestId, waitingRequest);
+        WaitingRequest? waitingRequest = null;
+        if (request is not Event)
+        {
+            waitingRequest = new WaitingRequest(request, new TaskCompletionSource<IResponse>(TaskCreationOptions.RunContinuationsAsynchronously));
+            _waitingRequests.TryAdd(message.RequestId, waitingRequest);
+        }
+
         await SendAsync(_client, new ArraySegment<byte>(requestBytes), _sendLock);
         logger.LogDebug("[Client] Sent Request: {RequestJson}", JsonSerializer.Serialize(request, JsonSerializerOptions));
-        var result = await waitingRequest.TaskCompletionSource.Task;
-        return result;
+
+        if (request is Event)
+        {
+            return new Ok<VoidResult>(VoidResult.Instance);
+        }
+        else
+        {
+            var result = await waitingRequest!.TaskCompletionSource.Task;
+            return result;
+        }
+
+
     }
 
     public async Task<Response<TResult>> TryExecuteAsync<TResult>(Request<TResult> request)

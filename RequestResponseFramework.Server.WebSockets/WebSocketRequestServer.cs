@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using RequestResponseFramework.Shared;
 using RequestResponseFramework.Shared.Json;
+using RequestResponseFramework.Shared.Requests;
 using RequestResponseFramework.Shared.SystemExceptions;
 using System.Net;
 using System.Net.WebSockets;
@@ -99,14 +100,19 @@ public class WebSocketRequestServer(
                         var requestJson = JsonSerializer.Serialize(request, JsonSerializerOptions);
                         logger.LogInformation("[Server] Received Request: {RequestJson}", requestJson);
                         var response = await serverRequestExecutor.TryExecuteAsync(request, clientConnection);
-                        var responseMsg =
+                        if (request is not Event)
+                        {
+                            var responseMsg =
                             RequestResponseMessage.CreateResponse(response, request, message.RequestId, JsonSerializerOptions);
-                        var responseMsgJson = JsonSerializer.Serialize(
-                            responseMsg,
-                            JsonSerializerOptions);
-                        var responseBytes = Encoding.UTF8.GetBytes(responseMsgJson);
-                        await SendAsync(webSocket, new ArraySegment<byte>(responseBytes), sendLock);
-                        logger.LogInformation("[Server] Sent Response: {ResponseJson}", responseMsg.Data);
+
+                            var responseMsgJson = JsonSerializer.Serialize(
+                                responseMsg,
+                                JsonSerializerOptions);
+                            var responseBytes = Encoding.UTF8.GetBytes(responseMsgJson);
+                            await SendAsync(webSocket, new ArraySegment<byte>(responseBytes), sendLock);
+                            logger.LogInformation("[Server] Sent Response: {ResponseJson}", responseMsg.Data);
+                        }
+
                         break;
 
                     default:
