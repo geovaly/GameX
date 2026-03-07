@@ -71,9 +71,16 @@ namespace SuperPlay.GameX.Server.DslTests.Base
             await ExecuteAsync(new UpdateResources(player.GetContext(), ResourceType.Roll, deltaValue), player.Connection);
         }
 
-        public async Task UpdateResourcesShouldThrow<TRequestException>(PlayerDsl player, ResourceType resourceType, ResourceValue deltaValue) where TRequestException : RequestException
+        public async Task UpdateCoinsShouldThrow<TRequestException>(PlayerDsl player, ResourceValue deltaValue) where TRequestException : RequestException
         {
-            var result = await TryExecuteAsync(new UpdateResources(player.GetContext(), resourceType, deltaValue), player.Connection);
+            var result = await TryExecuteAsync(new UpdateResources(player.GetContext(), ResourceType.Coin, deltaValue), player.Connection);
+            Assert.True(result.IsNotOk());
+            Assert.IsType<TRequestException>(result.GetException());
+        }
+
+        public async Task UpdateRollsShouldThrow<TRequestException>(PlayerDsl player, ResourceValue deltaValue) where TRequestException : RequestException
+        {
+            var result = await TryExecuteAsync(new UpdateResources(player.GetContext(), ResourceType.Roll, deltaValue), player.Connection);
             Assert.True(result.IsNotOk());
             Assert.IsType<TRequestException>(result.GetException());
         }

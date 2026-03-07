@@ -43,7 +43,7 @@ namespace SuperPlay.GameX.Server.DslTests
         {
             await GivenGameServer();
             var player = await GivenPlayer();
-            await UpdateResourcesShouldThrow<PlayerNotConnectedException>(player, ResourceType.Coin, 1);
+            await UpdateCoinsShouldThrow<PlayerNotConnectedException>(player, 1);
         }
 
         [Fact]
