@@ -12,7 +12,7 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task Login_IsOk()
         {
             await GivenGameServer();
-            var player = await GivenNewPlayer();
+            var player = await GivenFirstTimePlayer();
             await Login(player);
         }
 
@@ -20,7 +20,7 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task CheckDefaultStateForNewPlayer()
         {
             await GivenGameServer();
-            var player = await GivenNewPlayer();
+            var player = await GivenFirstTimePlayer();
             await Login(player);
             player.ShouldHaveCoins(0);
             player.ShouldHaveRolls(0);
@@ -31,10 +31,10 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task Login_MakeSureThePlayerIsNotConnectedAlready()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
             await Login(player1);
 
-            var player2 = await GivenNewPlayer(player1.DeviceId);
+            var player2 = await GivenFirstTimePlayer(player1.DeviceId);
             await LoginShouldThrow<AlreadyConnectedException>(player2);
         }
 
@@ -42,7 +42,7 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task UpdateResources_MakeSureThePlayerIsConnected()
         {
             await GivenGameServer();
-            var player = await GivenOldPlayer();
+            var player = await GivenPlayer();
             await UpdateResourcesShouldThrow<PlayerNotConnectedException>(player, ResourceType.Coin, 1);
         }
 
@@ -50,7 +50,7 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task UpdateResources_IsOk()
         {
             await GivenGameServer();
-            var player = await GivenOldPlayer();
+            var player = await GivenPlayer();
             await Login(player);
             await UpdateCoins(player, 1);
             await UpdateRolls(player, 2);
@@ -71,8 +71,8 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task SendGift_IsOk()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
-            var player2 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
+            var player2 = await GivenPlayer();
             await Login(player1);
             await Login(player2);
             await UpdateCoins(player1, 10);
@@ -87,8 +87,8 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task SendGift_MakeSureThePlayerHasEnoughResources()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
-            var player2 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
+            var player2 = await GivenPlayer();
             await Login(player1);
             await Login(player2);
 
@@ -104,8 +104,8 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task SendGift_IfFriendIsOnlineThenSendAGiftEvent()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
-            var player2 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
+            var player2 = await GivenPlayer();
             await Login(player1);
             await Login(player2);
 
@@ -123,8 +123,8 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task SendGift_IfFriendIsOfflineThenDoNotSendAGiftEvent()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
-            var player2 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
+            var player2 = await GivenPlayer();
             await Login(player1);
             await UpdateCoins(player1, 1);
 
@@ -137,8 +137,8 @@ namespace SuperPlay.GameX.Server.DslTests
         public async Task SendGift_IfFriendIsOfflineWithConnectionRemovedThenDoNotSendAGiftEvent()
         {
             await GivenGameServer();
-            var player1 = await GivenOldPlayer();
-            var player2 = await GivenOldPlayer();
+            var player1 = await GivenPlayer();
+            var player2 = await GivenPlayer();
             await Login(player1);
             await Login(player2);
             await UpdateCoins(player1, 1);

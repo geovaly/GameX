@@ -18,14 +18,14 @@ namespace SuperPlay.GameX.Server.DslTests.Base
             await _gameServer.StartAsync();
         }
 
-        public Task<PlayerDsl> GivenNewPlayer(DeviceId? deviceId = null)
+        public Task<PlayerDsl> GivenFirstTimePlayer(DeviceId? deviceId = null)
         {
             var player = new PlayerDsl { DeviceId = deviceId ?? DeviceId.GenerateNew() };
             return Task.FromResult(player);
         }
-        public async Task<PlayerDsl> GivenOldPlayer(DeviceId? deviceId = null)
+        public async Task<PlayerDsl> GivenPlayer(DeviceId? deviceId = null)
         {
-            var player = await GivenNewPlayer(deviceId: deviceId);
+            var player = await GivenFirstTimePlayer(deviceId: deviceId);
             await Login(player);
             await Logout(player);
             return player;
